@@ -1,40 +1,7 @@
 <?php
-// Mulai sesi
-session_start();
 
-// Sertakan file koneksi
-include 'koneksi.php';
+include 'session.php';
 
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['email'])) {
-    // Jika pengguna telah login, dapatkan email pengguna dari sesi
-    $email_pengguna = $_SESSION['email'];
-
-    // Query untuk mendapatkan nama pengguna berdasarkan email pengguna
-    $query = "SELECT username_pengguna FROM pengguna WHERE email = '$email_pengguna'";
-
-    // Eksekusi query
-    $result = mysqli_query($conn, $query);
-
-    // Periksa apakah query mengembalikan hasil
-    if ($result && mysqli_num_rows($result) > 0) {
-        // Ambil nama pengguna dari hasil query
-        $row = mysqli_fetch_assoc($result);
-        $nama_pengguna = $row['username_pengguna'];
-
-        // Simpan nama pengguna dalam sesi
-        $_SESSION['nama_pengguna'] = $nama_pengguna;
-    } else {
-        // Jika query tidak mengembalikan hasil, beri nilai default pada nama pengguna
-        $nama_pengguna = "Nama Pengguna";
-    }
-} else {
-    // Jika pengguna belum login, beri nilai default pada nama pengguna
-    $nama_pengguna = "Nama Pengguna";
-}
-
-// Tutup koneksi database
-mysqli_close($conn);
 ?>
 
 
@@ -385,6 +352,7 @@ input {
     box-sizing: border-box; /* Memastikan padding dan border dihitung dalam lebar total */
     padding: 10px; /* Memberikan padding */
     border-radius: 4px; /* Membuat sudut melengkung */
+    
 }
 
 /* Mengatur panjang field dalam persentase relatif ke kontainer induknya */
@@ -521,18 +489,23 @@ label {
 
 /* Gaya untuk tombol */
 .submit-button {
-    width: 100%; /* Tombol selebar kontainer */
-    padding: 20px; /* Padding untuk kenyamanan */
+ 
+  
+    width: 900px; /* adjust the width to your liking */
+  height: 40px; /* adjust the height to your liking */
+ 
+  font-size: 16px; /* increase the font size to make the text more prominent */
     background: #0071CC; /* Warna latar */
     color: white; /* Warna teks putih */
     border: none; /* Menghilangkan batas */
     border-radius: 5px; /* Tepi melengkung */
     text-align: center; /* Menyelaraskan teks ke tengah */
     cursor: pointer; /* Kursor tangan saat hover */
-    margin-top: 20px; /* Ruang antara tombol dan elemen sebelumnya */
+
     align-self: flex-end; /* Memastikan tombol di ujung kanan jika dalam flexbox */
 
-    max-width: 500px; /* Batas lebar maksimum */
+
+
 }
 
 .submit-button:hover {
@@ -1171,6 +1144,7 @@ label {
     </form>
 </div>
 
+
 <div class="search-form" id="bus-form">
     <form action="caribus.php" method="POST">
         <h4>Booking Tiket Bus</h4>
@@ -1661,11 +1635,16 @@ label {
     <div class="waktu">
         <h6><img src="img/icon.svg">Waktu Keberangkatan</h6> <br>
     <label for="date">Tanggal Pergi</label>
-    <input class="form-control" type="date" id="date" name="date" required><br><br></div>
-
-    
-    
-    
+    <input class="form-control" type="date" id="date" name="date" required><br><br>  </div>
+    <div class="waktu">
+    <h6><img src="img/icon.svg">Pilih Kelas</h6> <br>
+    <label for="class">Kelas</label>
+  <select class="form-control" id="class" name="class"> <br>
+  <option  >Pilih Kelas</option>
+    <option  value="economy">Ekonomi</option>
+    <option  value="business">Bisnis</option>
+  </select><br>
+            </div>
     <button type="submit" class="submit-button">Cari Tiket</button>
     </form>
             </div>
@@ -2157,6 +2136,11 @@ label {
 
 </body>
 
-
+<script>
+$(document).ready(function(){
+    $("#pesawat-form").dialog("open");
+});
+</script>
 
 </html>
+
