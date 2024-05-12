@@ -21,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deskripsi_jadwal = $_POST['deskripsi_jadwal'];
     $id_vendorbus = $_POST['id_vendorbus'];
     $status_jadwal = $_POST['status_jadwal'];
-
+    $no_kendaraan=$_POST['no_kendaraan'];
     // Update data in the database
-    $query = "UPDATE jadwal_tiket_bus SET waktu_keberangkatan='$waktu_keberangkatan', waktu_kedatangan='$waktu_kedatangan', terminal_keberangkatan='$terminal_keberangkatan', terminal_kedatangan='$terminal_kedatangan', harga=$harga, kelas='$kelas', kapasitas_stok_tiket=$kapasitas_stok_tiket, deskripsi_jadwal='$deskripsi_jadwal', id_vendorbus='$id_vendorbus', status_jadwal='$status_jadwal' WHERE id_jadwaltiketbus=$id_jadwaltiketbus";
+    $query = "UPDATE jadwal_tiket_bus SET waktu_keberangkatan='$waktu_keberangkatan', waktu_kedatangan='$waktu_kedatangan', terminal_keberangkatan='$terminal_keberangkatan', terminal_kedatangan='$terminal_kedatangan', harga=$harga, kelas='$kelas', kapasitas_stok_tiket=$kapasitas_stok_tiket, deskripsi_jadwal='$deskripsi_jadwal', id_vendorbus='$id_vendorbus', status_jadwal='$status_jadwal', no_kendaraan='$no_kendaraan' WHERE id_jadwaltiketbus=$id_jadwaltiketbus";
 
     if (mysqli_query($conn, $query)) {
         header("Location: jadwalbus.php");

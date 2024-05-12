@@ -1,15 +1,18 @@
 <?php
 
+
+
 include 'session.php';
 
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -29,9 +32,8 @@ include 'session.php';
     <link rel="stylesheet" href="css/toastr.min.css">
     <title>PACK N GO</title>
     <style>
-
-        /* Styling untuk navbar */
-        body {
+   
+   body {
             font-family: Poppins;
             background-color: #F6F7F8;
         }
@@ -50,20 +52,7 @@ include 'session.php';
             height: 80px;
             width: 250px;
         }
-        .square {
-            width: 514px; /* Lebar persegi */
-            height: 283px; /* Tinggi persegi */
-            border-radius: 20px; /* Sudut melengkung */
-            background-color: #0071CC; /* Warna persegi */
-            display: inline-block; /* Pastikan bentuk persegi */
-            margin: 50px; /* Ruang antar-persegi */
-        }
 
-        /* Atur carousel item */
-        .carousel-item {
-            text-align: center; /* Menyelaraskan konten ke tengah */
-            padding: 20px; /* Memberikan ruang dalam */
-        }
         nav {
             display: flex;
             align-items: center;
@@ -76,7 +65,6 @@ include 'session.php';
             display: flex;
             gap: 30px;
         }
-
 
         nav a {
             text-decoration: none;
@@ -108,8 +96,7 @@ include 'session.php';
         .form-container {
             width: 50%; /* Menambah lebar formulir */
             padding: 20px;
-            position: relative; /* Mengatur konteks posisi untuk elemen di dalamnya */
-            padding-bottom: 40px;
+           
             margin-top: 0px; /* Tambah jarak antara kontainer dan heading */
         }
 
@@ -160,11 +147,31 @@ include 'session.php';
     margin: 0 auto;
 }
 
+nav ul li a.login {
+    background-color: #D9D9D9; 
+    color: #0C2E53; 
+    border-radius: 5px; 
+    padding: 10px;
+}
 
 
+nav ul li a.register {
+    background-color: #D9D9D9; 
+    color: #0C2E53; 
+    border-radius: 5px;
+    padding: 10px;
+}
 
+/* Hover effect untuk tautan "Login" dan "Daftar" */
+nav ul li a.login:hover,
+nav ul li a.register:hover {
+    background-color: #2980b9; /* Warna lebih gelap untuk "Login" saat di-hover */
+}
 
-
+/* Hover effect untuk "Daftar" */
+nav ul li a.register:hover {
+    background-color: #c0392b; /* Warna lebih gelap untuk "Daftar" saat di-hover */
+}
         @media (max-width: 768px) {
             .content {
                 flex-direction: column;
@@ -207,140 +214,93 @@ a {
     color: #333; /* Warna teks */
 }
 
-        h1 {
-            font-style: normal;
-            text-align: center;
-            color:black;
-        }
+.icon {
+    vertical-align: middle; /* Menyelaraskan ikon dengan teks */
+    margin-right: 5px; /* Memberikan sedikit ruang antara ikon dan teks */
+    width: 16px; /* Ukuran ikon lebih kecil */
+    height: 16px; /* Ukuran ikon lebih kecil */
+}
 
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
+/* Styling untuk tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
 
-        .page-header {
-    padding: 1.5rem;
+th, td {
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    padding: 12px; /* Sesuaikan padding untuk memperbaiki tata letak */
+    font-family: Arial, sans-serif; /* Font yang mudah dibaca */
+}
+
+th {
+    background-color: #f8f9fa; 
+    color: #333; 
+}
+
+td {
+    background-color: #ffffff; 
+    color: #555; 
 }
 
 
+tr:hover {
+    background-color: #f1f1f1; 
+}
 
-
-/* Steps Progress bar */
-
-
-
-
+nav ul li a.login:hover,
+nav ul li a.register:hover {
+    background-color: #2980b9; 
+}
 /* Tombol Beli */
 .button-beli {
     background-color: #007bff;
+    font-weight: bold;
+    font-size:20px;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 8px 8px;
     border: none;
+    margin-left:1000px;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+    display: inline-block; /* Menjadikan tombol sebagai elemen inline */
 }
 
 .button-beli:hover {
     background-color: #0056b3;
+    text-decoration: none;
 }
 
-.StrongPenerbanganPergi {
-  background-color: #0071CC;
-  color: #fff;
-  padding: 10px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-left: 50px; /* Menggeser ke kanan */
-  width: auto; /* Mengatur lebar otomatis sesuai dengan konten */
-}
-
-.keberangkatan {
-    display: flex;
-    justify-content: center;
-    background-color: #0071CC;
-    padding: 20px; /* Atur sesuai kebutuhan */
-    border-radius: 8px; /* Atur sesuai kebutuhan */
-}
-
-.DaftarKeberangkatan {
-    color: #DEE3E4;
-    font-size: 32px;
-    font-weight: 700;
-    font-family: 'Poppins', sans-serif;
-}
-table {
-  width: 80%; /* Sesuaikan dengan lebar yang diinginkan */
-  margin: 0 auto; /* Menggeser tabel ke tengah */
-  border-collapse: collapse;
-}
-
- td {
-  border: 1px solid #FFFFFF; /* Garis pembatas antar sel */
-  background-color: #FFFFFF; /* Latar belakang warna abu-abu */
-  padding: 19px; /* Ruang di dalam sel */
-  text-align: center; /* Penyusunan teks dalam sel */
-}
-
-th {
-  background-color: #FFFFFF; /* Latar belakang warna abu-abu */
-  color: #333; /* Warna teks */
-  border-bottom: 3px solid #0071CC; 
-  padding:15px;
- 
-  
-  text-align: center; /* Penyusunan teks dalam sel */
-
-}
-
-.waktu-keberangkatan {
-    font-size:25px;
-  color: #212529;
-  text-align: center; /* Penulisan yang benar adalah text-align, bukan text-allign */
-  font-family: "Poppins", sans-serif; /* Penulisan yang benar adalah font-family */
-}
-
-
-.terminal-keberangkatan {
-  color: #000000;
-  text-align: center;
-}
-td.centered {
-  text-align: center;
-}
-
-.durasi{
-    color: #000000;
-  text-align: center;
-  font-family: "Poppins" ;
-  font-size:18px; 
-}
-
-.kelas{
-    color:#DC3545;
-    font-family: "Poppins" ;
-  font-size:15px; 
-}
 nav ul li a.login {
     background-color: #D9D9D9; 
     color: #0C2E53; 
     border-radius: 5px; 
     padding: 10px;
 }
-/* Hover effect untuk tautan "Login" dan "Daftar" */
-nav ul li a.login:hover,
-nav ul li a.register:hover {
-    background-color: #2980b9; /* Warna lebih gelap untuk "Login" saat di-hover */
-}
-.route{
-    margin-left:140px;
-    color:#0C2F54;
-    font-size:18px;
+
+.keberangkatan {
+    display: flex;
+    justify-content: center;
+    background-color: #0071CC;
+    padding: 20px;
+    border-radius: 8px; 
+    max-width: 1296px; 
+    margin: 0 auto; 
 }
 
-main{
-    padding-bottom:140px;
+.DaftarKeberangkatan {
+    color: #DEE3E4;
+    margin-left:30px;
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
 }
+
+
     </style>
 </head>
 <body>
@@ -370,114 +330,84 @@ main{
             </ul>
         </nav>
 </header>
-<img src="img/section.png"> <br> <br> <br>
+<img src="img/pembayar.svg">
 
-  <div class="keberangkatan">
-    <div class="DaftarKeberangkatan">Daftar Keberangkatan</div> 
-  </div><br> 
 
 <main>
-    <?php
-// Periksa apakah permintaan adalah metode POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Periksa apakah semua field telah diisi
-    if (isset($_POST["terminal_keberangkatan"]) && isset($_POST["terminal_kedatangan"]) && isset($_POST["date"])&& isset($_POST["class"])) {
-        // Simpan data dari formulir
-        $terminal_keberangkatan = $_POST["terminal_keberangkatan"];
-        $terminal_kedatangan = $_POST["terminal_kedatangan"];
-        $tanggal_keberangkatan = $_POST["date"];
-       
-        $tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($tanggal_keberangkatan));
-        // Query untuk mencari data di tabel jadwal_tiket_bus berdasarkan input
-        $query = "SELECT j.*, v.nama_vendor, v.logo_vendor  
-        FROM jadwal_tiket_bus AS j 
-        JOIN vendor_bus AS v ON j.id_vendorbus = v.id_vendorbus 
-        WHERE j.terminal_keberangkatan = '$terminal_keberangkatan' 
-        AND j.terminal_kedatangan = '$terminal_kedatangan' 
-        AND DATE(j.waktu_keberangkatan) = '$tanggal_keberangkatan' 
-        AND j.status_jadwal = 'tersedia'; ";
 
-       
-        // Eksekusi query
-        $result = mysqli_query($conn, $query);
+<?php
+// Sertakan file koneksi
+include 'koneksi.php';
 
-        // Periksa apakah ada hasil dari pencarian
-        if (mysqli_num_rows($result) > 0) {
-            // Jika ada hasil, tampilkan rute di luar tabel
-            echo "<div class='StrongPenerbanganPergi'>" . $tanggal_keberangkatan_indonesia . "</div><br><br><br>";
+// Periksa apakah pengguna telah login
+if (isset($_SESSION['email'])) {
+    // Ambil informasi yang diperlukan dari URL
+    $id_pengguna = $_GET['id_pengguna'];
+    $jadwal_tiketbus = $_GET['id_jadwaltiketbus'];
+    $id_data_penumpang = $_GET['id_datapenumpang'];
+    
+    // Query untuk mendapatkan harga tiket berdasarkan id_jadwaltiketbus
+    $query_harga = "SELECT harga FROM jadwal_tiket_bus WHERE id_jadwaltiketbus = $jadwal_tiketbus";
+    $result_harga = mysqli_query($conn, $query_harga);
 
+    // Query untuk mendapatkan semua kategori metode pembayaran
+    $query_kategori = "SELECT DISTINCT kategori_metode FROM metodepembayaran";
+    $result_kategori = mysqli_query($conn, $query_kategori);
 
+    // Periksa apakah query mengembalikan hasil
+    if ($result_harga && mysqli_num_rows($result_harga) > 0 && $result_kategori && mysqli_num_rows($result_kategori) > 0) {
+        // Ambil harga dari hasil query
+        $row_harga = mysqli_fetch_assoc($result_harga);
+        $harga = $row_harga['harga'];
 
-            echo "<div class='route'> " . $terminal_keberangkatan . " <img src='img/route.svg'> " . $terminal_kedatangan . "</div><br><br>";
-          
-
-
-            // Tampilkan data dalam tabel
-           // Tampilkan data dalam tabel
-echo "<table>";
-echo "<tr><th>PO BUS</th><th>Berangkat</th><th>Durasi</th><th>Tiba</th><th></th><th>Harga</th></tr>";
-while ($row = mysqli_fetch_assoc($result)) {
-    // Ambil waktu keberangkatan dan waktu kedatangan
-    $waktu_keberangkatan = strtotime($row["waktu_keberangkatan"]);
-    $waktu_kedatangan = strtotime($row["waktu_kedatangan"]);
-
-   // Hitung durasi antara waktu keberangkatan dan waktu kedatangan
-$durasi = $waktu_kedatangan - $waktu_keberangkatan;
-
-// Pastikan durasi positif
-if ($durasi < 0) {
-    $durasi = 0;
-}
-
-// Hitung jumlah jam dan menit
-$jam = floor($durasi / 3600); // Ambil jam dari durasi
-$menit = floor(($durasi % 3600) / 60); // Ambil menit dari sisa durasi
-
-// Buat string format "2j 10m"
-$durasi_formatted = $jam . 'j ' . $menit . 'm';
-
-
-
-    // Tampilkan data tiket dalam tabel
-    echo "<tr>";
-    echo "<td><img src='" . $row["logo_vendor"] . "' alt='Logo metode' style='max-width: 100px; max-height: 100px;'><br>" . $row["nama_vendor"] . "</td>";
-
-    echo "<td><span class='waktu-keberangkatan'>" . date("H:i", $waktu_keberangkatan) . "</span><br><span class='terminal-keberangkatan'>" . $row["terminal_keberangkatan"] . "</span></td>";
-
-
-    echo "<td class='durasi'>" . $durasi_formatted . "</td>";
-
-    echo "<td><span class='waktu-keberangkatan'>" . date("H:i", $waktu_kedatangan) . "</span><br><span class='terminal-keberangkatan'>" . $row["terminal_kedatangan"] . "</span></td>";
-
-
-
-    $harga = number_format($row["harga"], 0, ',', '.');
-    echo "<td class='kelas'>" . $row["kelas"] . "</td>";
-    // Tampilkan harga dalam tabel
-    echo "<td><span> Rp." . $harga . " /Tiket</span><br><br><a href='detailbooktiket.php?id=" . $row['id_jadwaltiketbus'] . "' class='button-beli'>Booking</a></td>";
-
-
-   
-    echo "</tr>";
-}
-echo "</table>";
-
-        } else {
-            echo "Tidak ada jadwal tiket bus yang sesuai dengan pencarian Anda.";
+        // Tampilkan formulir pembayaran
+        echo "<p>Lanjutkan Ke Pembayaran</p>";
+        echo "Harga: " . number_format($harga, 0, ',', '.') . " IDR"; // Menampilkan harga
+        
+        // Loop through each category
+        while($kategori_row = mysqli_fetch_assoc($result_kategori)) {
+            $kategori = $kategori_row['kategori_metode'];
+            echo "<p> ($kategori):</p>";
+            // Query to get payment methods for this category
+            $query_metode_pembayaran = "SELECT * FROM metodepembayaran WHERE kategori_metode='$kategori'";
+            $result_metode_pembayaran = mysqli_query($conn, $query_metode_pembayaran);
+            // Display payment methods
+            while($row = mysqli_fetch_assoc($result_metode_pembayaran)) {
+                echo "<input type='radio' name='metode_pembayaran' value='" . $row['id_metode'] . "' id='metode_".$row['id_metode']."'>";
+                echo "<label for='metode_".$row['id_metode']."'><img src='" . $row['logo_metode'] . "' alt='" . $row['nama_metode'] . "' style='width: 50px; height: auto;'> " . $row['nama_metode'] . "</label><br>";
+                // Hyperlink untuk melanjutkan pembayaran dengan menyertakan ID metode
+                echo "<a href='pembayaran.php?id_pengguna=$id_pengguna&id_jadwaltiketbus=$jadwal_tiketbus&harga=$harga&id_datapenumpang=$id_data_penumpang&id_metode=" . $row['id_metode'] . "' class='lanjutkan_pembayaran' id='link_".$row['id_metode']."'>Lanjutkan Pembayaran</a>";
+            }
         }
-
-        // Tutup koneksi database
-        mysqli_close($conn);
     } else {
-        // Jika tidak semua field diisi, berikan pesan kesalahan
-        echo "Mohon lengkapi semua field.";
+        echo "Error: Tidak dapat mengambil harga tiket atau kategori metode pembayaran.";
     }
 } else {
-    // Jika metode permintaan bukan POST, mungkin Anda ingin memberikan tindakan alternatif atau hanya mengabaikannya
-    echo "Metode permintaan yang diterima bukan metode POST.";
+    echo "Error: Pengguna belum login.";
 }
 ?>
-</main>
+<script>
+    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            // Semua tautan lanjutkan_pembayaran disembunyikan
+            document.querySelectorAll('.lanjutkan_pembayaran').forEach(function(link) {
+                link.style.display = 'none';
+            });
+            // Tampilkan tautan lanjutkan_pembayaran yang sesuai
+            var idMetode = this.value;
+            document.getElementById('link_' + idMetode).style.display = 'block';
+        });
+    });
+</script>
+
+            </main>
+
+
+
+
+
+
+
 
 <footer id="footer" class="mt-0">
     <section class="section bg-white shadow-md pt-4 pb-3">
@@ -629,4 +559,21 @@ echo "</table>";
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

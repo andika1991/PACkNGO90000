@@ -282,8 +282,9 @@
             <th>Harga Tiket</th>
             <th>Kelas</th>
             <th>Stok Tiket</th>
-            <th>Deskripsi</th>
+       
             <th>PO BUS</th>
+            <th>No Kendaraan</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>
@@ -311,7 +312,8 @@
             jtp.kapasitas_stok_tiket,
             jtp.deskripsi_jadwal,
             vp.nama_vendor,
-            jtp.status_jadwal 
+            jtp.status_jadwal, 
+            jtp.no_kendaraan
         FROM 
             jadwal_tiket_bus jtp
         JOIN 
@@ -333,8 +335,9 @@
                 echo "<td>" . $row["harga"] . "</td>";
                 echo "<td>" . $row["kelas"] . "</td>";
                 echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
-                echo "<td>" . $row["deskripsi_jadwal"] . "</td>";
+               
                 echo "<td>" . $row["nama_vendor"] . "</td>";
+                echo "<td>" . $row["no_kendaraan"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
                 echo "<td>
                         <a href='editjadwalbus.php?id=" . $row["id_jadwaltiketbus"] . "' class='btn btn-primary btn-sm edit-btn'>Edit</a>
@@ -363,8 +366,9 @@
             <th>Harga Tiket</th>
             <th>Kelas</th>
             <th>Stok Tiket</th>
-            <th>Deskripsi</th>
+        
             <th>PO BUS</th>
+            <th>No Kendaraan</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>
@@ -384,7 +388,8 @@
             jtp.kapasitas_stok_tiket,
             jtp.deskripsi_jadwal,
             vp.nama_vendor,
-            jtp.status_jadwal 
+            jtp.status_jadwal ,
+            jtp.no_kendaraan
         FROM 
             jadwal_tiket_bus jtp
         JOIN 
@@ -404,8 +409,9 @@
                 echo "<td>" . $row["harga"] . "</td>";
                 echo "<td>" . $row["kelas"] . "</td>";
                 echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
-                echo "<td>" . $row["deskripsi_jadwal"] . "</td>";
+              
                 echo "<td>" . $row["nama_vendor"] . "</td>";
+                echo "<td>" . $row["no_kendaraan"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
                 echo "<td>
                         <a href='detailjadwalbus.php?id=" . $row["id_jadwaltiketbus"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>

@@ -1,39 +1,10 @@
 <?php
-// Mulai sesi
-session_start();
 
-// Sertakan file koneksi
-include 'koneksi.php';
 
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['email'])) {
-    // Jika pengguna telah login, dapatkan email pengguna dari sesi
-    $email_pengguna = $_SESSION['email'];
 
-    // Query untuk mendapatkan nama pengguna dan ID pengguna berdasarkan email pengguna
-    $query = "SELECT id_pengguna, username_pengguna FROM pengguna WHERE email = '$email_pengguna'";
+include 'session.php';
 
-    // Eksekusi query
-    $result = mysqli_query($conn, $query);
 
-    // Periksa apakah query mengembalikan hasil
-    if ($result && mysqli_num_rows($result) > 0) {
-        // Ambil nama pengguna dan ID pengguna dari hasil query
-        $row = mysqli_fetch_assoc($result);
-        $nama_pengguna = $row['username_pengguna'];
-        $id_pengguna = $row['id_pengguna'];
-
-        // Simpan nama pengguna dan ID pengguna dalam sesi
-        $_SESSION['nama_pengguna'] = $nama_pengguna;
-        $_SESSION['id_pengguna'] = $id_pengguna;
-    } else {
-        // Jika query tidak mengembalikan hasil, beri nilai default pada nama pengguna
-        $nama_pengguna = "Nama Pengguna";
-    }
-} else {
-    // Jika pengguna belum login, beri nilai default pada nama pengguna
-    $nama_pengguna = "Nama Pengguna";
-}
 ?>
 
 <!DOCTYPE html>
@@ -41,109 +12,85 @@ if (isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/769968477.css"> 
+    <link rel="stylesheet" href="css/875398515.css">
+    <link rel="stylesheet" href="css/1882545488.css">
+    <link rel="stylesheet" href="css/boostrap.min.css"> 
+    <link rel="stylesheet" href="css/datepicker3.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/sb-admin-2.css">
+    <link rel="stylesheet" href="css/sb-admin-2.min.css"> 
+    <link rel="stylesheet" href="css/select2.min.css">
+    <link rel="stylesheet" href="css/toastr.min.css">
     <title>PACK N GO</title>
     <style>
-        /* Styling untuk navbar */
+         /* Styling untuk navbar */
+         body {
+            font-family: Poppins;
+            background-color: #E7E9ED;
+        }
         header {
-            background-color: #66a1e4;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: sticky; /* Buat header menjadi sticky */
+    top: 0;           /* Header tetap berada di bagian atas saat digulir */
+    z-index: 1000;    /* Pastikan header berada di atas konten lainnya */
         }
 
         .logo img {
             height: 80px;
-            margin-right: 20px;
-            margin-left: 130px;
             width: 250px;
-            content: url('https://sin1.contabostorage.com/0a986eb902c4469cb860e43985eb18a1:vocapanel/dkamondshop/PACKNGO1-77e7-original.png');
+        }
+        .square {
+            width: 514px; /* Lebar persegi */
+            height: 283px; /* Tinggi persegi */
+            border-radius: 20px; /* Sudut melengkung */
+            background-color: #0071CC; /* Warna persegi */
+            display: inline-block; /* Pastikan bentuk persegi */
+            margin: 50px; /* Ruang antar-persegi */
         }
 
+        /* Atur carousel item */
+        .carousel-item {
+            text-align: center; /* Menyelaraskan konten ke tengah */
+            padding: 20px; /* Memberikan ruang dalam */
+        }
         nav {
             display: flex;
             align-items: center;
-            margin-right: 20px;
         }
 
         nav ul {
-            list-style-type: none;
-            margin: 0;
+            list-style: none;
             padding: 0;
+            margin: 0;
             display: flex;
-        }
-
-        nav ul li {
-            margin-right: 30px;
-            font-size: 23px;
+            gap: 30px;
         }
 
         nav a {
             text-decoration: none;
-            color: black;
+            font-family: 'Poppins', sans-serif;
+            color: #0C2E53;
+            font-size: 18px;
+            transition: color 0.3s;
+            padding: 0 10px;
         }
 
         nav a:hover {
-            font-weight: bold;
-        }
-
-        .login {
-            background-color: #007bff;
-            color: #fff;
-            padding: 0px 30px;
-            border: none;
-            border-radius: 5px;
+            color: #107ACF;
             text-decoration: none;
-            cursor: pointer;
         }
 
-        .login:hover {
-            background-color: #d9e4f0;
-        }
-
-        h1 {
-            font-style: normal;
-            text-align: center;
-            color:black;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .page-header {
-    padding: 1.5rem;
-}
-
-
-
-.page-header h1 {
-    font-size: 1.5rem; /* Ubah ukuran font sesuai kebutuhan */
-    color: black; /* Warna teks */
-}
-
-.page-header .breadcrumb {
-    margin-bottom: 0; /* Hilangkan margin bawah */
-    list-style: none;
-    padding: 0;
-}
-
-.page-header .breadcrumb li {
-    display: inline-block;
-    font-size: 0.875rem; /* Ukuran font breadcrumb */
-}
-
-.page-header .breadcrumb li a {
-    color: black; /* Warna teks link */
-    text-decoration: none;
-}
-
-.page-header .breadcrumb li i {
-    margin: 0 0.25rem;
-    color: #fff; /* Warna ikon breadcrumb */
-}
-
-/* Steps Progress bar */
 .form-steps {
     display: flex;
     justify-content: center;
@@ -233,110 +180,11 @@ tr:hover {
     background-color: #0056b3;
 }
 
-/* CSS untuk submenu */
-.submenu {
-    display: none;
-    position: absolute;
-    z-index: 1;
-}
 
-.profile-menu:hover .submenu {
-    display: block;
-}
 
-/* CSS untuk tampilan submenu */
-.profile-menu {
-    position: relative;
-}
 
-.profile-menu a {
-    color: #333;
-    text-decoration: none;
-}
 
-.profile-menu .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 160px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
 
-.profile-menu .submenu li {
-    padding: 10px;
-}
-
-.profile-menu .submenu li a {
-    color: #333;
-    display: block;
-    padding: 8px 12px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.profile-menu .submenu li a:hover {
-    background-color: #f4f4f4;
-}
-
-/* Styling untuk navbar */
-header {
-    background-color: #66a1e4;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo img {
-    height: 80px;
-    margin-right: 20px;
-    margin-left: 130px;
-    width: 250px;
-    content: url('https://sin1.contabostorage.com/0a986eb902c4469cb860e43985eb18a1:vocapanel/dkamondshop/PACKNGO1-77e7-original.png');
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav ul li {
-    margin-right: 30px;
-    font-size: 23px;
-}
-
-nav a {
-    text-decoration: none;
-    color: black;
-}
-
-nav a:hover {
-    font-weight: bold;
-}
-
-.login {
-    background-color: #007bff;
-    color: #fff;
-    padding: 0px 30px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.login:hover {
-    background-color: #d9e4f0;
-}
 
 h1 {
     font-style: normal;
@@ -378,76 +226,6 @@ html, body {
             color: #fff;
         }
 
-.page-header h1 {
-    font-size: 1.5rem; /* Ubah ukuran font sesuai kebutuhan */
-    color: black; /* Warna teks */
-}
-
-.page-header .breadcrumb {
-    margin-bottom: 0; /* Hilangkan margin bawah */
-    list-style: none;
-    padding: 0;
-}
-
-.page-header .breadcrumb li {
-    display: inline-block;
-    font-size: 0.875rem; /* Ukuran font breadcrumb */
-}
-
-.page-header .breadcrumb li a {
-    color: black; /* Warna teks link */
-    text-decoration: none;
-}
-
-.page-header .breadcrumb li i {
-    margin: 0 0.25rem;
-    color: #fff; /* Warna ikon breadcrumb */
-}
-
-/* Steps Progress bar */
-.form-steps {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem; /* Atur margin atas sesuai kebutuhan */
-}
-
-.form-steps__item {
-    flex: 1;
-    text-align: center;
-}
-
-.form-steps__item-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.form-steps__item-icon {
-    width: 36px; 
-    height: 36px; 
-    line-height: 36px; 
-    border-radius: 50%;
-    background-color: #f8f9fa;
-    color: #495057; 
-    font-size: 1rem; 
-}
-
-.form-steps__item-line {
-    flex: 1;
-    width: 2px; 
-    background-color: #f8f9fa; 
-}
-
-.form-steps__item-text {
-    font-size: 0.875rem; 
-    margin-top: 0.5rem; 
-}
-
-.form-steps__item--completed .form-steps__item-icon {
-    background-color: #007bff; 
-    color: #fff; 
-}
 
 /* Styling untuk tabel */
 table {
@@ -479,68 +257,26 @@ tr:hover {
     background-color: #f1f1f1; /* Warna latar belakang saat hover */
 }
 
-/* Tombol Beli */
-.button-beli {
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
+
+
+.keberangkatan {
+    display: flex;
+    justify-content: center;
+    background-color: #0071CC;
+    padding: 20px;
+    border-radius: 8px; 
+    max-width: 1296px; 
+    margin: 0 auto; 
 }
 
-.button-beli:hover {
-    background-color: #0056b3;
+.DaftarKeberangkatan {
+    color: #DEE3E4;
+    margin-left:30px;
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* CSS untuk submenu */
-.submenu {
-    display: none;
-    position: absolute;
-    z-index: 1;
-}
-
-.profile-menu:hover .submenu {
-    display: block;
-}
-
-/* CSS untuk tampilan submenu */
-.profile-menu {
-    position: relative;
-}
-
-.profile-menu a {
-    color: #333;
-    text-decoration: none;
-}
-
-.profile-menu .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 160px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
-
-.profile-menu .submenu li {
-    padding: 10px;
-}
-
-.profile-menu .submenu li a {
-    color: #333;
-    display: block;
-    padding: 8px 12px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.profile-menu .submenu li a:hover {
-    background-color: #f4f4f4;
-}
 
 /* Gaya untuk formulir */
 form {
@@ -576,7 +312,16 @@ input[type="submit"] {
     cursor: pointer;
     text-decoration: none;
 }
-
+nav ul li a.login {
+    background-color: #D9D9D9; 
+    color: #0C2E53; 
+    border-radius: 5px; 
+    padding: 10px;
+}
+nav ul li a.login:hover,
+nav ul li a.register:hover {
+    background-color: #2980b9; 
+}
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
@@ -585,221 +330,643 @@ input[type="submit"]:hover {
     background-color: #007bff; /* Warna biru untuk langkah pertama */
     color: #fff; /* Warna teks putih */
 }
+.line {
+    width: 95%;
+    border-bottom: 5px solid #007bff; 
+    margin-top: 10px; 
+    margin: 0 auto;
+    margin-bottom: 10px; 
+}
+ul {
+    padding: 0; /* Menghilangkan padding default */
+    margin: 0;  /* Menghilangkan margin default */
+}
+
+li {
+    list-style: none; /* Menghilangkan bullet */
+}
+
+a {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: #333; /* Warna teks */
+}
+
+.icon {
+    vertical-align: middle; /* Menyelaraskan ikon dengan teks */
+    margin-right: 5px; /* Memberikan sedikit ruang antara ikon dan teks */
+    width: 16px; /* Ukuran ikon lebih kecil */
+    height: 16px; /* Ukuran ikon lebih kecil */
+}
+
+.contaifoner {
+    background-color: #FFFFFF; /* Warna latar belakang putih */
+    width: 600px; /* Lebar container */
+    height: 400px; /* Tinggi container */
+    padding: 20px; /* Padding untuk mengatur ukuran shape */
+    display: inline-block; /* Membuat container sesuai dengan ukuran teks di dalamnya */
+}
+.custom-button {
+    font-size: 24px;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 900px; /* Sesuaikan dengan jarak dari bawah */
+    right: 20px; /* Sesuaikan dengan jarak dari kanan */
+}
+
+main{
+    padding-bottom:140px;
+}
+.RincianBiaya {
+    width: 646px;
+    height: 67px;
+    text-align: center;
+    color: #010101;
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    line-height: 32px; /* Sesuaikan dengan kebutuhan */
+    word-wrap: break-word;
+    position: absolute;
+    top: 800px;
+    right: 0;
+}
+.Tiket {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 880px;
+    right: 500px;
+}
+.Biayaadm {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 920px;
+    right: 350px;
+}
+
+.Biayabagasi {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 960px;
+    right: 418px;
+}
+
+.Biayalayanan {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 1000px;
+    right: 398px;
+}
+.Line2 {
+    width: 550px; 
+    height: 0; 
+    border: 1px black solid; 
+    position: absolute;
+    top: 1050px;
+    left: 780px;
+}
+
+
+.Totalpembayaran {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 1080px;
+    right: 350px;
+}
+#Rincian {
+    background-color: #FFFFFF; /* Warna latar belakang putih */
+    width: 590px; /* Lebar container */
+    height: 400px; /* Tinggi container */
+    margin-left:140px;
+    padding: 20px; /* Padding untuk mengatur ukuran shape */
+    display: inline-block; /* Membuat container sesuai dengan ukuran teks di dalamnya */
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup button {
+    margin: 10px;
+}
+
+
 
     </style>
 </head>
 <body>
 <header>
-    <div class="logo">
-        <img src="https://sin1.contabostorage.com/0a986eb902c4469cb860e43985eb18a1:vocapanel/dkamondshop/PACKNGO1-77e7-original.png" alt="Logo">
-    </div>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Cek pesanan</a></li>
-            <li><a href="#">Tentang Kami</a></li>
-            <li><a href="#">FAQ</a></li>
-        
+<div class="logo">
+            <img src="https://sin1.contabostorage.com/0a986eb902c4469cb860e43985eb18a1:vocapanel/dkamondshop/PACKNGO1-77e7-original.png" alt="PACK N GO Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="homeakun.php">Home</a></li>
+                <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
+                <li><a href="tentangkami.php">Tentang Kami</a></li>
+                <li><a href="faq.html">FAQ</a></li>
 
-
-            <?php
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['email'])) {
-    // Jika pengguna telah login, tampilkan tautan untuk mengakses profil, nama pengguna, dan tautan logout
-   
-    // Periksa apakah nama pengguna telah diset
-    if (isset($_SESSION['nama_pengguna'])) {
-        // Jika nama pengguna telah diset, tampilkan
-        echo '<li class="profile-menu">';
-        echo '<a href="#">' . $_SESSION['nama_pengguna'] . '</a>';
-        // Tambahkan submenu untuk profil dan pesanan tiket
-        echo '<ul class="submenu">';
-        echo '<li><a href="profile.php">Profil Ku</a></li>';
-        echo '<li><a href="pesanantiket.php">Pesanan Tiket Ku</a></li>';
-        echo '<li><a href="logout.php">Logout</a></li>';
-        echo '</ul>';
-        echo '</li>';
-    }
-   
-} else {
-    // Jika pengguna belum login, tampilkan tautan untuk login
-    echo '<li><a href="login.php">Login</a></li>';
-}
-?>
- </ul>
-    </nav>
+                <?php
+                // Periksa apakah pengguna sudah login
+                if (isset($_SESSION['username_pengguna'])) {
+                    // Jika sudah login, tampilkan nama pengguna dan opsi logout
+                    $username = $_SESSION['username_pengguna'];
+                    echo "<li><a href='akun.php' class='login'><img src='img/Group.jpg' alt='User Icon'> $username</a></li>";
+    
+                } else {
+                    // Jika belum login, tampilkan opsi login
+                    echo "<li><a href='loginuser.html' class='login'><i class='fas fa-lock'></i> Login</a></li>";
+                }
+                ?>
+            </ul>
+        </nav>
 </header>
-
-<section class="page-header page-header-dark bg-secondary mb-0" style="padding: 1.5rem;">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h1>Pengisian Data Penumpang</h1>
-            </div>
-            <div class="col-md-4">
-                <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
-                    <li><a href="home.html">Beranda <i></i></a></li>
-                    <li><i class="active"></i> Pengisian Data Penumpang</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ======= Page Header end -->
+<main>
 
 
+<img src="img/data.svg">
 
-<!-- ======= Steps Progress bar =======-->
-<nav class="form-steps">
-    <div class="form-steps__item step-1">
-        <div class="form-steps__item-content">
-            <span class="form-steps__item-icon bg-primary">1</span>
-            <span class="form-steps__item-text">Cari Tiket</span>
-        </div>
-    </div>
-    <div class="form-steps__item step-2">
-        <div class="form-steps__item-content">
-            <span class="form-steps__item-icon">2</span>
-            <span class="form-steps__item-line"></span>
-            <span class="form-steps__item-text">Pengisian Data</span>
-        </div>
-    </div>
-    <div class="form-steps__item step-3">
-        <div class="form-steps__item-content">
-            <span class="form-steps__item-icon">3</span>
-            <span class="form-steps__item-line"></span>
-            <span class="form-steps__item-text">Pembayaran</span>
-        </div>
-    </div>
-    <div class="form-steps__item step-4">
-        <div class="form-steps__item-content">
-            <span class="form-steps__item-icon">4</span>
-            <span class="form-steps__item-line"></span>
-            <span class="form-steps__item-text">E-Tiket Terbit</span>
-        </div>
-    </div>
-</nav>
-<h2>Pilih Tempat Duduk</h2>
-    <div class="bus" id="bus">
-        <!-- Kursi disini akan di-generate menggunakan JavaScript -->
-        <?php
-// Ambil semua kursi yang tersedia
-$available_seats = [];
-for ($row = 1; $row <= 2; $row++) {
-    for ($col = 1; $col <= 10; $col++) {
-        $available_seats[] = ($row === 1 ? 'K' : 'A') . $col;
+<div class="keberangkatan">
+    <div class="DaftarKeberangkatan">Pengisian Data Penumpang</div> 
+  </div><br> 
+<section id="infotiket">
+  <?php
+// Include file koneksi.php untuk menghubungkan ke database
+include 'koneksi.php';
+
+// Periksa apakah parameter id tiket ada dalam URL
+if(isset($_GET['id'])) {
+    // Ambil ID tiket dari URL
+    $id_tiket = $_GET['id'];
+
+    // Buat query untuk mengambil detail tiket berdasarkan ID
+    $query = "SELECT j.*, v.nama_vendor, v.logo_vendor, v.alamat_vendor
+    FROM jadwal_tiket_bus AS j
+    JOIN vendor_bus AS v ON j.id_vendorbus = v.id_vendorbus
+    WHERE j.id_jadwaltiketbus = '$id_tiket'
+    ";
+    
+    // Eksekusi query
+    $result = mysqli_query($conn, $query);
+
+    // Periksa apakah query berhasil dieksekusi
+    if(mysqli_num_rows($result) > 0) {
+        // Tampilkan detail tiket
+        while($row = mysqli_fetch_assoc($result)) {
+            // Tampilkan detail tiket sesuai kebutuhan
+       ;
+       echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_jadwal'] . "</div>";
+       echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";
+
+       echo "<img style='width: 92px; height: 78px; margin-left:80px; margin-top:20px;' src='" . $row['logo_vendor'] . "' alt='Logo Vendor'><br>";
+       echo "<p style='font-size: 18px; color: #333;  margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama Vendor: " . $row['nama_vendor'] . "</p>";
+       echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat Vendor: " . $row['alamat_vendor'] . "</p>";
+       
+            echo "<div style='display: flex; align-items: center;'>";
+echo "<img src='img/uang.svg' style='width:70px; margin-left: 60px;'>";
+$harga_formatted = number_format($row['harga'], 0, ',', '.');
+$tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($row['waktu_keberangkatan']));
+
+echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>"; 
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
+echo "</div>";
+echo "</div>";
+echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -30px;'>Class: " . $row['kelas'] . "</div>"; 
+echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -5px;'> Nomor Kendaraan Bus: " . $row['no_kendaraan'] . "</div>"; 
+echo "<div style='font-size: 24px; color: #0071CC; margin-left: 40px; margin-top: ;'> Stok Tiket: " . $row['kapasitas_stok_tiket'] . "</div>"; 
+            
+$jam_keberangkatan = date("H:i", strtotime($row['waktu_keberangkatan']));
+$jam_kedatangan = date("H:i", strtotime($row['waktu_kedatangan']));
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 400px; right: 300px;'>" . $tanggal_keberangkatan_indonesia . "</div>";
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 435px; right: 320px;'>Keberangkatan</div>";
+
+
+
+
+echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 450px; margin-right:450px'> " . $jam_keberangkatan . "</p>";
+echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 480px;'>" . $row['terminal_keberangkatan'] . "</div>";
+ 
+echo "<div style='position: absolute; top: 0; right: 0; margin-right: 350px; margin-top: 540px;' ><img src='img/arrowdown.svg'></div>";
+
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 625px; right: 340px;'>Kedatangan</div>";
+echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 640px; margin-right:450px'> " . $jam_kedatangan . "</p>";
+echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 670px;'>" . $row['terminal_kedatangan'] . "</div>";
+echo "<div class='Idr30000' style='position: absolute; top: 880px; right: 20px;'>";
+echo "<div style='display: inline-block;'>";
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
+echo "</div>";
+echo "</div>";
+
+echo "<div class='Idr30000' style='position: absolute; top: 920px; right: 20px;'>";
+echo "<div style='display: inline-block;'>";
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'> 0 </span>";
+echo "</div>";
+echo "</div>";
+
+
+echo "<div class='Idr30000' style='position: absolute; top: 960px; right: 20px;'>";
+echo "<div style='display: inline-block;'>";
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'> 0 </span>";
+echo "</div>";
+echo "</div>";
+
+
+echo "<div class='Idr30000' style='position: absolute; top: 1000px; right: 20px;'>";
+echo "<div style='display: inline-block;'>";
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'> 0 </span>";
+echo "</div>";
+echo "</div>";
+
+echo "<div class='Idr30000' style='position: absolute; top: 1080px; right: 20px;'>";
+echo "<div style='display: inline-block;'>";
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'> ". $harga_formatted  ." </span>";
+echo "</div>";
+echo "</div>";
+
+}
+} else {
+    echo "Tiket tidak ditemukan.";
 }
 
-// Query untuk mendapatkan kursi-kursi yang sudah dipesan pada jadwal tiket bus tertentu
-$id_jadwaltiketbus = $_GET['id'];
-$query_kursi_dipesan = "SELECT kursi FROM datapenumpangbus WHERE id_jadwaltiketbus = $id_jadwaltiketbus";
 
-// Eksekusi query
-$result_kursi_dipesan = mysqli_query($conn, $query_kursi_dipesan);
-
-// Periksa apakah query mengembalikan hasil
-if ($result_kursi_dipesan && mysqli_num_rows($result_kursi_dipesan) > 0) {
-    // Buat array untuk menyimpan kursi-kursi yang sudah dipesan
-    $reserved_seats = [];
-    while ($row_kursi_dipesan = mysqli_fetch_assoc($result_kursi_dipesan)) {
-        $reserved_seats[] = $row_kursi_dipesan['kursi'];
-    }
-
-    // Hapus kursi yang sudah dipesan dari daftar kursi yang tersedia
-    $available_seats = array_diff($available_seats, $reserved_seats);
+} else {
+echo "ID Tiket tidak ditemukan.";
 }
-
-// Tampilkan daftar kursi yang tersedia sebagai opsi pemesanan
-foreach ($available_seats as $seat) {
-    echo '<div class="seat">' . $seat . '</div>';
-}}
 ?>
+</section>
+<div class="line" style></div>
+<section class="contaifoner">
+    <h2>Formulir Pengisian Data Penumpang</h2>
+    <form id="checkout-form" action="proses_pengisian_data.php" method="POST">
+        <input type="hidden" id="selected-seat" name="selected_seat">
+        <input type="hidden" id="id_jadwaltiketbus" name="id_jadwaltiketbus" value="<?php echo $_GET['id']; ?>">
+
+        
+            <label for="nik" style="display: inline-block; width: 100px; padding: 10px;">NIK:</label>
+            <input type="number" id="nik" name="nik" style="width: 411px; height: 47px; background: white; border-radius: 5px; border: 1px black solid; margin-bottom: 10px; margin-left:-20px;" required><br>
+       
+
+        
+            <label for="nama_lengkap" style="display: inline-block; width: 100px; padding: 10px;">Nama Lengkap:</label>
+            <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 411px; height: 47px; background: white; border-radius: 5px; border: 1px black solid; margin-bottom: 20px;margin-top: 10px;" required><br>
+    
+
+    
+            <label for="jenis_kelamin" >Jenis Kelamin:</label>
+            <input type="radio" id="tuan" name="jenis_kelamin" value="Tuan" required>
+            <label for="tuan" >Tuan</label>
+            <input type="radio" id="nyonya" name="jenis_kelamin" value="Nyonya" required>
+            <label for="tuan" >nyonya</label><br>
+
+      
+            <label for="no_hp" style="display: inline-block; width: 100px; padding: 10px;">No. HP:</label>
+            <input type="text" id="no_hp" name="no_hp" style="width: 411px; height: 47px; background: white; border-radius: 5px; border: 1px black solid; margin-bottom: 10px;" required><br>
 
 
+      
+            <label for="email" style="display: inline-block; width: 100px; padding: 10px;">Email:</label>
+            <input type="email" id="email" name="email" style="width: 411px; height: 47px; background: white; border-radius: 5px; border: 1px black solid; margin-bottom: 10px;" required><br>
+   
+      
+        <input type="submit" value="Checkout Tiket"  class="custom-button">
+    </form>
+
+    <div id="popup" class="popup">
+    <div class="popup-content">
+        <p>Apakah Anda yakin ingin melakukan checkout tiket?</p>
+        <p>Pastikan Data yang anda isi sudah sesuai Jika ingin cek lagi silahkan klik batal,
+jika sudah yakin klik Lanjut</p>
+<button id="cancel-btn">Batal</button>
+        <button id="confirm-btn">Lanjut</button>
+     
+    </div>
 </div>
 
+    <script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const checkoutButton = document.querySelector('.custom-button');
+    const popup = document.getElementById('popup');
+    const confirmButton = document.getElementById('confirm-btn');
+    const cancelButton = document.getElementById('cancel-btn');
 
-<section class="container">
-    <h2>Formulir Pengisian Data Penumpang</h2>
-    <form action="proses_pengisian_data.php" method="POST">
-    <input type="hidden" id="selected-seat" name="selected_seat">
-    <input type="hidden" id="id_jadwaltiketbus" name="id_jadwaltiketbus" value="<?php echo $_GET['id']; ?>">
+    checkoutButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        popup.style.display = 'flex';
+    });
 
+    confirmButton.addEventListener('click', () => {
+        // Lanjutkan dengan proses checkout
+        document.getElementById('checkout-form').submit();
+    });
 
+    cancelButton.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+});
 
-        <label for="nama_lengkap">Nama Penumpang:</label><br>
-        <input type="text" id="nama_lengkap" name="nama_lengkap" required><br><br>
-        
-        <label for="usia">Umur Penumpang:</label><br>
-        <input type="number" id="usia" name="usia" required><br><br>
-        
-        <label for="jenis_kelamin">Jenis Kelamin:</label><br>
-        <input type="radio" id="tuan" name="jenis_kelamin" value="Tuan" required>
-        <label for="tuan">Tuan</label>
-        <input type="radio" id="nyonya" name="jenis_kelamin" value="Nyonya" required>
-        <label for="nyonya">Nyonya</label><br><br>
-        
-        <label for="no_hp">No. HP:</label><br>
-        <input type="text" id="no_hp" name="no_hp" required><br><br>
-        
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <input type="submit" value="Submit">
-    </form>
-    
+        </script>
 </section>
 
-<script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const bus = document.getElementById('bus');
-            const bookingForm = document.getElementById('booking-form');
-            const selectedSeatInput = document.getElementById('selected-seat');
-            let selectedSeat = '';
+<section id="Rincian">
+<div class="RincianBiaya">
+    Rincian Biaya
+</div>
+<div class="Tiket">
+    1 Tiket
+</div>
 
-            // Ambil denah kursi dari database atau tentukan secara statis
-            const seats = [];
-            for (let row = 1; row <= 2; row++) {
-                for (let col = 1; col <= 10; col++) {
-                    seats.push((row === 1 ? 'K' : 'A') + col);
-                }
+<div class="Biayaadm">
+    Biaya Administrasi
+</div>
+
+<div class="Biayabagasi">
+    Biaya Bagasi
+</div>
+
+<div class="Biayalayanan">
+    Biaya Layanan
+</div>
+<div class="Line2"></div>
+<div class="Totalpembayaran">
+    Total Pembayaran
+</div>
+</section>
+<h2>Pilih Tempat Duduk</h2>
+<p> Posisi kursi nantinya juga dapat menyesuaikan ditempat</p>
+<div class="bus" id="bus">
+    <?php
+    // Ambil semua kursi yang tersedia
+    $available_seats = [];
+    for ($row = 1; $row <= 2; $row++) {
+        for ($col = 1; $col <= 20; $col++) { // Ubah menjadi 20 kursi per baris
+            $available_seats[] = ($row === 1 ? 'A' : 'B') . $col;
+        }
+    }
+
+    // Query untuk mendapatkan kursi-kursi yang sudah dipesan pada jadwal tiket bus tertentu
+    $id_jadwaltiketbus = $_GET['id'];
+    $query_kursi_dipesan = "SELECT kursi FROM datapenumpangbus WHERE id_jadwaltiketbus = $id_jadwaltiketbus";
+
+  
+    $result_kursi_dipesan = mysqli_query($conn, $query_kursi_dipesan);
+
+
+    if ($result_kursi_dipesan && mysqli_num_rows($result_kursi_dipesan) > 0) {
+      
+        $reserved_seats = [];
+        while ($row_kursi_dipesan = mysqli_fetch_assoc($result_kursi_dipesan)) {
+            $reserved_seats[] = $row_kursi_dipesan['kursi'];
+        }
+
+
+        foreach ($available_seats as $seat) {
+            if (in_array($seat, $reserved_seats)) {
+                echo '<div class="seat reserved">' . $seat . '</div>';
+            } else {
+                echo '<div class="seat">' . $seat . '</div>';
             }
+        }
+    } else {
 
-            // Buat kursi
-            seats.forEach(seat => {
-                const div = document.createElement('div');
-                div.classList.add('seat');
-                if (seat === 'K1') {
-                    div.classList.add('driver');
-                }
-                div.textContent = seat;
-                div.addEventListener('click', () => {
-                    if (!div.classList.contains('selected')) {
-                        // Hapus kelas 'selected' dari kursi sebelumnya
-                        const prevSelectedSeat = document.querySelector('.selected');
-                        if (prevSelectedSeat) {
-                            prevSelectedSeat.classList.remove('selected');
-                        }
-                        // Tandai kursi yang dipilih
-                        div.classList.add('selected');
-                        selectedSeat = seat;
-                        // Simpan kursi yang dipilih ke dalam input tersembunyi
-                        selectedSeatInput.value = selectedSeat;
-                    }
-                });
-                bus.appendChild(div);
-            });
+        foreach ($available_seats as $seat) {
+            echo '<div class="seat">' . $seat . '</div>';
+        }
+    }
+    ?>
+</div>
 
-            // Submit form jika kursi telah dipilih
-            bookingForm.addEventListener('submit', (event) => {
-                if (!selectedSeat) {
-                    event.preventDefault();
-                    alert('Silakan pilih tempat duduk terlebih dahulu.');
-                }
-            });
-        });
-    </script>
-    <!-- ======= Page Header end -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const bus = document.getElementById('bus');
+    const selectedSeatInput = document.getElementById('selected-seat');
+    let selectedSeat = '';
+
+    
+    const reservedSeats = document.querySelectorAll('.reserved');
+    reservedSeats.forEach(seat => {
+        seat.classList.add('unavailable');
+    });
+
+    
+    bus.addEventListener('click', (event) => {
+        const clickedSeat = event.target;
+        if (clickedSeat.classList.contains('seat') && !clickedSeat.classList.contains('unavailable')) {
+            const prevSelectedSeat = document.querySelector('.selected');
+            if (prevSelectedSeat) {
+                prevSelectedSeat.classList.remove('selected');
+            }
+            clickedSeat.classList.add('selected');
+            selectedSeat = clickedSeat.textContent;
+            selectedSeatInput.value = selectedSeat;
+        }
+    });
+});
+</script>
+
+
+    </main>
+
+    <footer id="footer" class="mt-0">
+    <section class="section bg-white shadow-md pt-4 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <div class="featured-box text-center">
+                        <div class="featured-box-icon text-primary"> <img src="img/Icon (7).png"> </div>
+                        <h4 class="text">Pencarian Tiket Lengkap</h4>
+                        <p>Mencari dan membandingkan harga dan promo tiket pesawat, pelni, kereta, dan hotel lengkap.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="featured-box text-center">
+                        <div class="featured-box-icon text-primary"> <img src="img/Vector (1).png"> </div>
+                        <h4 class="text">Terjamin Keamanan</h4>
+                        <p>Data pribadi dan pesanan Anda terjamin keamanannya di server kami (HTTPS).</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="featured-box text-center">
+                        <div class="featured-box-icon text-primary"> <img src="img/Vector (2).png"> </div>
+                        <h4 class="text">Harga Sudah Termasuk Pajak</h4>
+                        <p>Harga yang ditampilkan sudah termasuk pajak, Iuran Wajib Jasa Raharja, & fuel surcharge.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="featured-box text-center">
+                        <div class="featured-box-icon text-primary"> <img src="img/Icon (6).png"> </div>
+                        <h4 class="text">Issued Otomatis</h4>
+                        <p>Otomatis memproses tiket dan
+                            bisa langsung mendownload tiket.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container mt-4">
+        <div class="row g-4 d-flex justify-content-between">
+            <div class="col-md-4">
+                <div class="d-flex justify-content-center justify-content-md-start">
+                    <h1 class="text-3 d-block mb-2">PACK N GO</h1>
+                </div>
+                <span class="text-1 text-muted">PACK N GO menyajikan informasi terkini untuk perjalanan wisata Anda, lengkap dengan daftar harga tiket pesawat, kereta, pelni dan hotel murah.</span>
+                <div class="d-flex mt-3">
+                    <div class="p-2" style="border-top: 1px solid #ced4da;">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <div class="p-2">
+                        <p class="text">Jln.Sumantri Brodjonegoro Unila</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="p-2">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                    <div class="p-2">
+                        <p class="text">081256689025</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="p-2">
+                        <i class="bi bi-envelope-paper-fill"></i>
+                    </div>
+                    <div class="p-2">
+                        <a class="text" href="/cdn-cgi/l/email-protection#8bfffeece2eae5ffe4b3cbece6eae2e7a5e8e4e6"><span class="__cf_email__" data-cfemail="c7b3b2a0aea6a9b3a8ff87a0aaa6aeabe9a4a8aa">packngo8@gmail.com</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-evenly justify-content-md-around">
+                <div>
+                    <h1 class="text-3 d-block mb-2">Layanan Bantuan</h1>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="" target="_blank">
+                                <img src="img/🦆 icon _headset one_.png" alt="Customer Service" class="icon"> Customer Service
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div>
+                    <h1 class="text-3 d-block mb-2">Web Check-In</h1>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="https://www.lionair.co.id/kelola-pemesanan/web-check-in" target="_blank">Lion Air</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://www.batikair.com/en/Checkin" target="_blank">Batik Air</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://checkin.batikair.com/dx/IWCI/#/check-in/start?locale=en-US" target="_blank">Wings Air</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://book.citilink.co.id/SearchWebCheckin.aspx" target="_blank">Citilink</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://www.airasia.com/check-in/en/gb" target="_blank">Air Asia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://checkin.si.amadeus.net/1ASIHSSCWEBGA/sscwga/checkin?ln=en" target="_blank">Garuda Indonesia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://webcheckin.sriwijayaair.co.id/webcheckin/" target="_blank">Sriwijaya</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <h1 class="text-3 d-block mb-2">Partner Pembayaran</h1>
+                <ul class="payments-types my-3 d-flex justify-content-between justify-content-md-start">
+                    <li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/bca.png" alt="BCA" title="" data-bs-original-title="BCA" aria-label="BCA" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/bri.png" alt="BRI" title="" data-bs-original-title="BRI" aria-label="BRI" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/bni.png" alt="BNI" title="" data-bs-original-title="BNI" aria-label="BNI" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/mandiri.png" alt="MANDIRI" title="" data-bs-original-title="MANDIRI" aria-label="MANDIRI" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/permata.png" alt="PERMATA" title="" data-bs-original-title="PERMATA" aria-label="PERMATA" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/cimb-niaga.png" alt="CIMB_NIAGA" title="" data-bs-original-title="CIMB_NIAGA" aria-label="CIMB_NIAGA" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/bsi.png" alt="BSI" title="" data-bs-original-title="BSI" aria-label="BSI" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/keb-hana-indonesia.png" alt="KEB_HANA_INDONESIA" title="" data-bs-original-title="KEB_HANA_INDONESIA" aria-label="KEB_HANA_INDONESIA" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/maybank.png" alt="MAYBANK" title="" data-bs-original-title="MAYBANK" aria-label="MAYBANK" /></div></a></li><li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;" data-bs-toggle="tooltip" src="https://faiztravel.co.id/asset/images/bank/danamon.png" alt="DANAMON" title="" data-bs-original-title="DANAMON" aria-label="DANAMON" /></div></a></li>
+                    <li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;height: 30px;" data-bs-toggle="tooltip" src="img/GOPAY.jpeg" alt="GOPAY" title="" data-bs-original-title="GOPAY" aria-label="GOPAY" /></div></a></li>
+                    <li>
+                        <a href="javascript:;" style="cursor: auto;"><div class="featured-box-icon text-primary border border-primary rounded p-2">
+                            <img 
+                              style="width: 70px; height: 30px; object-fit: contain;"
+                              data-bs-toggle="tooltip"
+                              src="img/Dana (1).png" 
+                              alt="DANA" 
+                              title=""
+                              data-bs-original-title="DANA"
+                              aria-label="DANA" 
+                            />
+                          </div>
+                        </a>
+                      </li>
+                      <li><a href="javascript:;" style="cursor:auto"><div class="featured-box-icon text-primary border border-primary rounded p-2"> <img style="width: 70px;height: 30px;" data-bs-toggle="tooltip" src="img/th (20).jpeg" alt="GOPAY" title="" data-bs-original-title="GOPAY" aria-label="GOPAY" /></div></a></li>
+                      
+               
+               
+                </ul>
+                <h1 class="text-3 d-block mb-2">Jam Operasional</h1>
+                <div class="d-flex my-2 d-block">
+                    <div class="p-1">
+                        Senin-Sabtu
+                    </div>
+                    <div class="p-1">
+                        <p class="m-0 text-primary">: <span ="text-muted">8:00 - 21:00 WIB</p>
+                    </div>
+                </div>
+                <div class="d-flex my-2 ">
+                    <div class="p-1">
+                        Minggu / Hari Libur
+                    </div>
+                    <div class="p-1">
+                        <p class="m-0 text-primary"> : <span ="text-muted">8:00 - 16:00 WIB</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="footer-copyright mt-2 pt-2">
+
+       
+            <p class="copyright-text text-1">Copyright <i class="far fa-copyright"></i> 2024 <a href="https://faiztravel.co.id/tentang-kami">PACK N GO</a> All Rights Reserved.</p><span class="copyright-text text-1"><em>~ powered by </em>PACK N GO ~</span>	</div>
+    </div>
+</div>
+</footer>
 
 </body>
 </html>

@@ -271,7 +271,9 @@ if(isset($_GET['id'])) {
         $harga = $row['harga'];
         $kelas = $row['kelas'];
         $kapasitas_stok_tiket = $row['kapasitas_stok_tiket'];
+        $no_kendaraan=$row['no_kendaraan'];
         $deskripsi_jadwal = $row['deskripsi_jadwal'];
+     
     } else {
         // Handle if no data found
         echo "Data tidak ditemukan.";
@@ -748,6 +750,11 @@ if(isset($_GET['id'])) {
         <label for="status_jadwal">Status:</label>
         <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia"  required>
     </div>
+    <div class="form-group">
+    <label for="no_kendaraan">Nomor kendaraan:</label>
+    <input type="text" class="form-control" id="no_kendaraan" name="no_kendaraan" value="<?php echo isset($no_kendaraan) ? htmlspecialchars($no_kendaraan) : ''; ?>" required>
+</div>
+
     <div class="form-group">
     <label for="id_vendorbus">Vendor:</label>
     <select class="form-control" id="id_vendorbus" name="id_vendorbus">

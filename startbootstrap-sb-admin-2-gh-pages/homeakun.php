@@ -166,12 +166,7 @@ nav ul li a.login {
 }
 
 
-nav ul li a.register {
-    background-color: #D9D9D9; 
-    color: #0C2E53; 
-    border-radius: 5px;
-    padding: 10px;
-}
+
 
 /* Hover effect untuk tautan "Login" dan "Daftar" */
 nav ul li a.login:hover,

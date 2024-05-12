@@ -769,6 +769,10 @@
         <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia" required>
     </div>
     <div class="form-group">
+        <label for="no_kendaraan">Nomor kendaraan:</label>
+        <input type="text" class="form-control" id="no_kendaraan" name="no_kendaraan" required>
+    </div>
+    <div class="form-group">
     <label for="id_vendorbus">Vendor:</label>
     <select class="form-control" id="id_vendorbus" name="id_vendorbus" required>
         <?php
