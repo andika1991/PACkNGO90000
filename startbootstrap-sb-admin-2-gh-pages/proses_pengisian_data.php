@@ -35,13 +35,3 @@ if (isset($_SESSION['email'])) {
     echo "Error: Pengguna belum login.";
 }
 ?>
-
-
-
-
-
-
-
-
-
-

@@ -281,6 +281,37 @@ nav ul li a.login {
     border-radius: 5px; 
     padding: 10px;
 }
+.Rectangle27 {
+    width: 200px;
+    height: auto; /* Anda mungkin perlu menyesuaikan tinggi sesuai kebutuhan */
+    padding: 10px; /* Atur padding agar konten tidak terlalu dekat dengan tepi */
+    background-color: #f0f0f0; /* Warna latar belakang sesuaikan dengan preferensi */
+    border: 1px solid #ccc; /* Garis tepi untuk memberi sedikit kontras */
+    border-radius: 5px; /* Bulatan sudut untuk tampilan yang lebih lembut */
+    margin-bottom: 10px; /* Beri jarak antara elemen-elemen jika perlu */
+}
+
+.Rectangle27 img {
+    width: 50px; /* Ukuran gambar */
+    height: auto; /* Tinggi otomatis sesuai lebar gambar */
+    margin-right: 10px; /* Beri jarak antara gambar dan teks */
+}
+
+.ButtonContainer {
+    margin-top: 10px; /* Beri jarak antara gambar dan tombol */
+}
+
+.lanjutkan_pembayaran {
+    display: inline-block; /* Jadikan tombol sebagai elemen inline */
+    padding: 5px 10px; /* Atur padding untuk tampilan tombol yang lebih baik */
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: #fff; /* Warna teks tombol */
+    text-decoration: none; /* Hapus dekorasi tautan */
+    border: none; /* Hapus garis tepi */
+    border-radius: 3px; /* Bulatan sudut untuk tampilan yang lebih lembut */
+}
+
+
 
 .keberangkatan {
     display: flex;
@@ -330,9 +361,11 @@ nav ul li a.login {
             </ul>
         </nav>
 </header>
-<img src="img/pembayar.svg">
+<img src="img/pembayar.svg"> <br><br>
 
-
+<div class="keberangkatan">
+    <div class="DaftarKeberangkatan">Pilih Metode Pembayaran</div> 
+  </div><br>
 <main>
 
 <?php
@@ -373,10 +406,15 @@ if (isset($_SESSION['email'])) {
             $result_metode_pembayaran = mysqli_query($conn, $query_metode_pembayaran);
             // Display payment methods
             while($row = mysqli_fetch_assoc($result_metode_pembayaran)) {
+                echo '<div class="Rectangle27">';
                 echo "<input type='radio' name='metode_pembayaran' value='" . $row['id_metode'] . "' id='metode_".$row['id_metode']."'>";
-                echo "<label for='metode_".$row['id_metode']."'><img src='" . $row['logo_metode'] . "' alt='" . $row['nama_metode'] . "' style='width: 50px; height: auto;'> " . $row['nama_metode'] . "</label><br>";
-                // Hyperlink untuk melanjutkan pembayaran dengan menyertakan ID metode
-                echo "<a href='pembayaran.php?id_pengguna=$id_pengguna&id_jadwaltiketbus=$jadwal_tiketbus&harga=$harga&id_datapenumpang=$id_data_penumpang&id_metode=" . $row['id_metode'] . "' class='lanjutkan_pembayaran' id='link_".$row['id_metode']."'>Lanjutkan Pembayaran</a>";
+                               echo "<label for='metode_".$row['id_metode']."'><img src='" . $row['logo_metode'] . "' alt='" . $row['nama_metode'] . "' style='width: 80px; height: auto;'> " . $row['nama_metode'] . "</label>";
+               echo '    <div class="ButtonContainer">';
+               echo '        <a href="pembayaran.php?id_pengguna=' . $id_pengguna . '&id_jadwaltiketbus=' . $jadwal_tiketbus . '&harga=' . $harga . '&id_datapenumpang=' . $id_data_penumpang . '&id_metode=' . $row['id_metode'] . '" class="lanjutkan_pembayaran" id="link_' . $row['id_metode'] . '">Pilih Pembayaran</a>';
+               echo '    </div>';
+               echo '</div>';
+                
+
             }
         }
     } else {
@@ -385,7 +423,12 @@ if (isset($_SESSION['email'])) {
 } else {
     echo "Error: Pengguna belum login.";
 }
+
+
+
+
 ?>
+
 <script>
     document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
@@ -399,6 +442,7 @@ if (isset($_SESSION['email'])) {
         });
     });
 </script>
+
 
             </main>
 

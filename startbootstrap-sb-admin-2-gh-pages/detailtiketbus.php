@@ -315,7 +315,7 @@
                             dpb.nama_lengkap,
                             dpb.no_hp,
                             dpb.email,
-                            dpb.usia,
+                            dpb.nik,
                             dpb.kursi
                         FROM 
                             pesanantiketbus pb 
@@ -353,11 +353,12 @@
                                 <p class="card-text"><strong>Harga:</strong> <?php echo $row["harga"]; ?></p>
                                 <p class="card-text"><strong>Username Pengguna:</strong> <?php echo $row["username_pengguna"]; ?></p>
                                 <p class="card-text"><strong>Waktu Pesanan:</strong> <?php echo $row["TIMEORDER"]; ?></p>
+                                <p class="card-text"><strong>NIK:</strong> <?php echo $row["nik"]; ?></p>
                                 <p class="card-text"><strong>Jenis Kelamin:</strong> <?php echo $row["jenis_kelamin"]; ?></p>
                                 <p class="card-text"><strong>Nama Lengkap:</strong> <?php echo $row["nama_lengkap"]; ?></p>
                                 <p class="card-text"><strong>No. HP:</strong> <?php echo $row["no_hp"]; ?></p>
                                 <p class="card-text"><strong>Email:</strong> <?php echo $row["email"]; ?></p>
-                                <p class="card-text"><strong>Usia:</strong> <?php echo $row["usia"]; ?></p>
+                              
                                 <p class="card-text"><strong>Kursi:</strong> <?php echo $row["kursi"]; ?></p>
                             </div>
                         </div>

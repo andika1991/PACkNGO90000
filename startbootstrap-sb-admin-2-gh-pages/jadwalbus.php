@@ -302,26 +302,29 @@
         mysqli_query($conn, $updateQuery);
         
         $query = "SELECT 
-            jtp.id_jadwaltiketbus,
-            jtp.waktu_keberangkatan,
-            jtp.waktu_kedatangan,
-            jtp.terminal_keberangkatan,
-            jtp.terminal_kedatangan,
-            jtp.harga,
-            jtp.kelas,
-            jtp.kapasitas_stok_tiket,
-            jtp.deskripsi_jadwal,
-            vp.nama_vendor,
-            jtp.status_jadwal, 
-            jtp.no_kendaraan
-        FROM 
-            jadwal_tiket_bus jtp
-        JOIN 
-            vendor_bus vp 
-        ON 
-            jtp.id_vendorbus = vp.id_vendorbus
-        WHERE 
-            DATE(jtp.waktu_keberangkatan) = CURDATE();";
+        jtp.id_jadwaltiketbus,
+        jtp.waktu_keberangkatan,
+        jtp.waktu_kedatangan,
+        jtp.terminal_keberangkatan,
+        jtp.terminal_kedatangan,
+        jtp.harga,
+        jtp.kelas,
+        jtp.kapasitas_stok_tiket,
+        jtp.deskripsi_jadwal,
+        vp.nama_vendor,
+        jtp.status_jadwal, 
+        jtp.no_kendaraan
+    FROM 
+        jadwal_tiket_bus jtp
+    JOIN 
+        vendor_bus vp 
+    ON 
+        jtp.id_vendorbus = vp.id_vendorbus
+    WHERE 
+        DATE(jtp.waktu_keberangkatan) = CURDATE()
+    ORDER BY 
+        jtp.waktu_keberangkatan DESC;";
+    
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
@@ -378,24 +381,27 @@
         include 'koneksi.php';
 
         $query = "SELECT 
-            jtp.id_jadwaltiketbus,
-            jtp.waktu_keberangkatan,
-            jtp.waktu_kedatangan,
-            jtp.terminal_keberangkatan,
-            jtp.terminal_kedatangan,
-            jtp.harga,
-            jtp.kelas,
-            jtp.kapasitas_stok_tiket,
-            jtp.deskripsi_jadwal,
-            vp.nama_vendor,
-            jtp.status_jadwal ,
-            jtp.no_kendaraan
-        FROM 
-            jadwal_tiket_bus jtp
-        JOIN 
-            vendor_bus vp 
-        ON 
-            jtp.id_vendorbus = vp.id_vendorbus;";
+        jtp.id_jadwaltiketbus,
+        jtp.waktu_keberangkatan,
+        jtp.waktu_kedatangan,
+        jtp.terminal_keberangkatan,
+        jtp.terminal_kedatangan,
+        jtp.harga,
+        jtp.kelas,
+        jtp.kapasitas_stok_tiket,
+        jtp.deskripsi_jadwal,
+        vp.nama_vendor,
+        jtp.status_jadwal ,
+        jtp.no_kendaraan
+    FROM 
+        jadwal_tiket_bus jtp
+    JOIN 
+        vendor_bus vp 
+    ON 
+        jtp.id_vendorbus = vp.id_vendorbus
+    ORDER BY 
+        jtp.waktu_keberangkatan DESC;";
+
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
