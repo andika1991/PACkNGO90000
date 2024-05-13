@@ -393,10 +393,13 @@ if (isset($_SESSION['email'])) {
         $row_harga = mysqli_fetch_assoc($result_harga);
         $harga = $row_harga['harga'];
 
-        // Tampilkan formulir pembayaran
-        echo "<p>Lanjutkan Ke Pembayaran</p>";
-        echo "Harga: " . number_format($harga, 0, ',', '.') . " IDR"; // Menampilkan harga
-        
+      
+      
+        echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>"; 
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . number_format($harga, 0, ',', '.') . "</span>";
+echo "</div>";
+echo "</div>";
         // Loop through each category
         while($kategori_row = mysqli_fetch_assoc($result_kategori)) {
             $kategori = $kategori_row['kategori_metode'];

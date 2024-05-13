@@ -289,6 +289,7 @@ a {
     color: #535B61;
 }
 
+
 .search-form select, .search-form input {
     padding: 10px;
     border: 1px solid #D5D3D3;
