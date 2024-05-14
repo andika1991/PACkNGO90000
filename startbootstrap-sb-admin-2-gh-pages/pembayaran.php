@@ -738,10 +738,14 @@ function generateInvoiceID($conn) {
     <button onclick="showUploadForm()">Upload Bukti Pembayaran</button>
 
     <div id="uploadForm" style="display: none;">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
             <label for="bukti_pembayaran">Pilih File Bukti Pembayaran:</label>
             <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/*">
             <input type="hidden" name="invoice_id" value="<?php echo $invoice_id; ?>">
+            <input type="hidden" name="id_datapenumpang" value="<?php echo $id_datapenumpang; ?>">
+            <input type="hidden" name="id_jadwaltiketbus" value="<?php echo $id_jadwaltiketbus; ?>">
+            <input type="hidden" name="id_metode" value="<?php echo $id_metode; ?>">
+            <input type="hidden" name="id_pengguna" value="<?php echo $id_pengguna; ?>">
             <br><br>
             <input type="submit" value="Upload" name="submit">
         </form>
