@@ -630,7 +630,7 @@ if (isset($_GET['invoice_id'])) {
                 echo "<div class='line'></div>";
 
                 echo "<button class='download-button' onclick='downloadPDF(\"" . $invoice_id . "\")'>Download E-Tiket</button>";
-                $verify_url = "http://localhost/PACNGO/startbootstrap-sb-admin-2-gh-pages/webterbitiket.php?invoice_id" . urlencode($row['invoice_id']);
+                $verify_url = "http://localhost/PACNGO/startbootstrap-sb-admin-2-gh-pages/webterbitiket.php?invoice_id=" . urlencode($row['invoice_id']);
 
        
                 $tempDir = 'qrcodes/';
@@ -642,7 +642,7 @@ if (isset($_GET['invoice_id'])) {
 
                 // Tampilkan QR code
                 echo "<div style='margin-left:900px; margin-top:20px; width:400px;height:300px;'><img src='$qrFile' alt='QR Code'></div>";
-            }echo "<div style='position:absolut'>QR code ini digunakan untuk memverivikasi keaslian tiket anda oleh petugas</div>";
+            }echo "<div style='position:absolut; margin-left:300px;'>QR code ini digunakan untuk memverivikasi keaslian tiket anda oleh petugas</div>";
         } else {
             echo "Tiket tidak ditemukan.";
         }

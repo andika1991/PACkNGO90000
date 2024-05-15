@@ -270,6 +270,7 @@ if(isset($_GET['id'])) {
         $harga = $row['harga'];
         $kelas = $row['kelas'];
         $kapasitas_stok_tiket = $row['kapasitas_stok_tiket'];
+        $nomor_penerbangan=$row['nomor_penerbangan'];
         $deskripsi_jadwal = $row['deskripsi_jadwal'];
     } else {
         // Handle if no data found
@@ -621,7 +622,10 @@ if(isset($_GET['id'])) {
     <label for="deskripsi_jadwal">Deskripsi Jadwal:</label>
     <textarea class="form-control" id="deskripsi_jadwal" name="deskripsi_jadwal" rows="8" required><?php echo $deskripsi_jadwal; ?></textarea>
 </div>
-
+<div class="form-group">
+        <label for="nomor_penerbangan">Nomor Penerbangan:</label>
+        <input type="text" class="form-control" id="nomor_penerbangan" name="nomor_penerbangan" value="<?php echo $nomor_penerbangan; ?>" required>
+    </div>
     <div class="form-group">
         <label for="status_jadwal">Status:</label>
         <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia"  required>

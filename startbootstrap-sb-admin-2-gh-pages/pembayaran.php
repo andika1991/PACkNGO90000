@@ -688,8 +688,8 @@ if(isset($_GET['id_pengguna']) && isset($_GET['id_jadwaltiketbus']) && isset($_G
                 echo "<div class='line' ></div>";
 echo "<p style='text-align:center; font-weight:bold; color:#0071CC; font-size:20px;'>Silahkan Lakukan Pembayaran</p>";
 echo "<p style='color:#0071CC;margin-left:40px;margin-top:-20px;font-weight:medium;' >Metode Pembayaran : " . $row["nama_metode"] . "</p><br>";
-echo "<img src='" . $row["logo_metode"] . "' alt='Logo Metode' style='width: 150px; height: 100px; margin-top:-70px;margin-left:40px;'><br>";
-echo "<p style='color:#0071CC; margin-left: 40px; margin-top: -35px; font-weight: medium; position: relative;'>Nomor Pembayaran:</p>";
+echo "<img src='" . $row["logo_metode"] . "' alt='Logo Metode' style='width: 150px; height: 100px; margin-top:-40px;margin-left:40px;'><br>";
+echo "<p style='color:#0071CC; margin-left: 40px; margin-top: -3px; font-weight: medium; position: relative;'>Nomor Pembayaran:</p>";
 echo "<p style='font-weight: bold; background-color: #0071CC; font-size: 22px; color: #000000; margin-left:40px; margin-top: -45px; display: inline-block;'>" . $row["nomor_metode"] . "</p><br>";
 echo "<p style='color:#0071CC; margin-left: 40px; margin-top: -10px; font-weight: medium; position: relative;'>Tata Cara Pembayaran:</p>";
 echo "<div style='color:black; margin-left:40px; margin-top:-20px;'>" . nl2br($row["Deksripsi_metode"]) . "</div><br>";

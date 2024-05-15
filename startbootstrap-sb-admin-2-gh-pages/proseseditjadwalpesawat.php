@@ -14,6 +14,7 @@ $kelas = $_POST['kelas'];
 $kapasitas_stok_tiket = $_POST['kapasitas_stok_tiket'];
 $deskripsi_jadwal = $_POST['deskripsi_jadwal'];
 $status_jadwal = $_POST['status_jadwal'];
+$nomor_penerbangan=$_POST['nomor_penerbangan'];
 $id_vendorpesawat = $_POST['id_vendorpesawat']; // Anda perlu mendapatkan ID vendor pesawat yang ingin diubah
 
 // Memasukkan data ke dalam database
@@ -26,6 +27,7 @@ $query = "UPDATE jadwal_tiket_pesawat SET
             kelas = '$kelas',
             kapasitas_stok_tiket = $kapasitas_stok_tiket,
             deskripsi_jadwal = '$deskripsi_jadwal',
+            nomor_penerbangan='$nomor_penerbangan',
             status_jadwal = '$status_jadwal'
           WHERE
             id_jadwaltiketpesawat = $id_jadwal_pesawat"; // Menambahkan kondisi untuk memastikan hanya data dengan ID yang tepat yang diubah

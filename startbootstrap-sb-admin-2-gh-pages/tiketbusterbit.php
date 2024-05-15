@@ -39,7 +39,7 @@ if (isset($_GET['invoice_id'])) {
             $pdf->Ln(10);
 
             while ($row = $result->fetch_assoc()) {
-                $pdf->Image('PACKNGO.png', 30, 30, 50, 30);
+            
                 // Informasi tiket
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(40, 10, 'Status Tiket: ' . $row['status_pembayaran'], 0, 1);

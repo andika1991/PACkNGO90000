@@ -264,6 +264,7 @@
 <!-- Modal Tambah Data -->
 
 <h3>Jadwal Hari ini</h3>
+<div class="table-responsive">
         <table class="table">
     <thead>
         <tr>
@@ -276,7 +277,7 @@
             <th>Kelas</th>
             <th>Stok Tiket</th>
             <th>Status</th>
-            <th>Deskripsi</th>
+            <th>No Penerbangan</th>
             <th>Maskapai Penyedia</th>
             <th>Aksi</th>
         </tr>
@@ -301,6 +302,7 @@
         jtp.kelas,
         jtp.kapasitas_stok_tiket,
         jtp.status_jadwal,
+        jtp.nomor_penerbangan,
         jtp.deskripsi_jadwal,
         vp.nama_vendor 
     FROM 
@@ -326,7 +328,7 @@
                 echo "<td>" . $row["kelas"] . "</td>";
                 echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
-                echo "<td>" . $row["deskripsi_jadwal"] . "</td>";
+                echo "<td>" . $row["nomor_penerbangan"] . "</td>";
                 echo "<td>" . $row["nama_vendor"] . "</td>";
                 echo "<td>
                <a href='editjadwalpswt.php?id=" . $row["id_jadwaltiketpesawat"] . "' class='btn btn-primary btn-sm edit-btn'>Edit</a>
@@ -340,8 +342,9 @@
         ?>
     </tbody>
 </table>
-
+</div>
 <h3>Jadwal Tiket Pesawat All</h3>
+<div class="table-responsive">
         <table class="table">
     <thead>
         <tr>
@@ -354,7 +357,7 @@
             <th>Kelas</th>
             <th>Stok Tiket</th>
             <th>Status</th>
-            <th>Deskripsi</th>
+            <th>No Penerbangan</th>
             <th>Maskapai Penyedia</th>
             <th>Aksi</th>
         </tr>
@@ -364,7 +367,7 @@
         <?php
         include 'koneksi.php';
 
-        $query = "SELECT id_jadwaltiketpesawat,waktu_keberangkatan,waktu_kedatangan,bandara_keberangkatan,deskripsi_jadwal,bandara_kedatangan,harga,kelas ,kapasitas_stok_tiket,status_jadwal,vendor_pesawat.nama_vendor FROM `jadwal_tiket_pesawat`,vendor_pesawat;";
+        $query = "SELECT id_jadwaltiketpesawat,waktu_keberangkatan,waktu_kedatangan,bandara_keberangkatan,deskripsi_jadwal,bandara_kedatangan,harga,kelas ,kapasitas_stok_tiket,status_jadwal,nomor_penerbangan,vendor_pesawat.nama_vendor FROM `jadwal_tiket_pesawat`,vendor_pesawat;";
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {
@@ -379,7 +382,7 @@
                 echo "<td>" . $row["kelas"] . "</td>";
                 echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
-                echo "<td>" . $row["deskripsi_jadwal"] . "</td>";
+                echo "<td>" . $row["nomor_penerbangan"] . "</td>";
                 echo "<td>" . $row["nama_vendor"] . "</td>";
                 echo "<td>
                 <a href='detailjadwalpswt.php?id=" . $row["id_jadwaltiketpesawat"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>
@@ -395,7 +398,7 @@
         ?>
     </tbody>
 </table>
-
+    </div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

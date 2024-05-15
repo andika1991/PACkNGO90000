@@ -588,6 +588,10 @@
         <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia" required>
     </div>
     <div class="form-group">
+        <label for="nomor_penerbangan">Status:</label>
+        <input type="text" class="form-control" id="nomor_penerbangan" name="nomor_penerbangan"  required>
+    </div>
+    <div class="form-group">
     <label for="id_vendorpesawat">Vendor:</label>
     <select class="form-control" id="id_vendorpesawat" name="id_vendorpesawat" required>
         <?php

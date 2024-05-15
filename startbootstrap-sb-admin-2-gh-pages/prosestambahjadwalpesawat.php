@@ -13,7 +13,7 @@ $kelas = $_POST['kelas'];
 $kapasitas_stok_tiket = $_POST['kapasitas_stok_tiket'];
 $deskripsi_jadwal = $_POST['deskripsi_jadwal'];
 $status_jadwal = $_POST['status_jadwal'];
-
+$nomor_penerbangan=$_POST['nomor_penerbangan'];
 
 // Memeriksa apakah ID vendor pesawat ada
 if (isset($_POST['id_vendorpesawat'])) {
@@ -27,9 +27,9 @@ if (isset($_POST['id_vendorpesawat'])) {
 // Memasukkan data ke dalam database
 // Memasukkan data ke dalam database
 $query = "INSERT INTO jadwal_tiket_pesawat (waktu_keberangkatan, waktu_kedatangan, bandara_keberangkatan, 
-bandara_kedatangan, harga, kelas, kapasitas_stok_tiket, deskripsi_jadwal, id_vendorpesawat, status_jadwal)
+bandara_kedatangan, harga, kelas, kapasitas_stok_tiket, deskripsi_jadwal, id_vendorpesawat, status_jadwal,nomor_penerbangan)
 VALUES ('$waktu_keberangkatan', '$waktu_kedatangan', '$bandara_keberangkatan', 
-'$bandara_kedatangan', $harga, '$kelas', $kapasitas_stok_tiket, '$deskripsi_jadwal', $id_vendorpesawat, '$status_jadwal')";
+'$bandara_kedatangan', $harga, '$kelas', $kapasitas_stok_tiket, '$deskripsi_jadwal', $id_vendorpesawat, '$status_jadwal','$nomor_penerbangan')";
 
 
 // Menjalankan query
