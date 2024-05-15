@@ -65,15 +65,18 @@
 
         .content {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 50px;
+            flex-direction: column;
+            align-content: center;
+            flex-wrap: nowrap;
         }
 
         .content img {
-            max-width: 40%; /* Membuat gambar lebih besar */
-            height: auto;
-            margin-right: 20px; /* Beri jarak antara gambar dan formulir */
+            /* max-width: 40%; Membuat gambar lebih besar */
+            /* height: auto; */
+            /* margin-right: 20px; Beri jarak antara gambar dan formulir */
         }
 
         .form-container {
@@ -183,6 +186,9 @@ nav ul li a.register:hover {
             color: #0071CC; /* Warna Merah */
         }
 
+        .berhasil {
+            color: #25ae88;
+        }
     
     </style>
 </head>
@@ -193,40 +199,22 @@ nav ul li a.register:hover {
     </div>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="loginuser.html">Home</a></li>
             <li><a href="#">Kirim Feedback</a></li>
             <li><a href="#">Tentang Kami</a></li>
             <li><a href="#">FAQ</a></li>
-            <li><a href="loginuser.html" class="login"><i class="fas fa-lock"></i> Login</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="content">
-    <img src="img/image 1.png" alt="Image 1" class="image">
+    <img src="berhasil.png" alt="">
     <div class="form-container">
-        <h2>DAFTAR</h2>
-        <form action="daftarakun.php" method="post"> <!-- Pastikan method dan action benar -->
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required> <!-- Pastikan ada atribut name -->
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required> <!-- Pastikan ada atribut name -->
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirmpassword">Confirm Password</label>
-                <input type="password" id="confirmpassword" name="confirmpassword" required>
-            </div>
-            <button href="daftarberhasil.html" type="submit">Daftar</button>
-        </form>
-    </div>
+        <h2 class="berhasil">PENDAFTARAN BERHASIL</h2>
+        </div>
+     </div>
 </div>
+
 
 <footer id="footer" class="mt-0">
     <section class="section bg-white shadow-md pt-4 pb-3">
