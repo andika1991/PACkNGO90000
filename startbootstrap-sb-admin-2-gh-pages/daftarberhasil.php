@@ -73,11 +73,6 @@
             flex-wrap: nowrap;
         }
 
-        .content img {
-            /* max-width: 40%; Membuat gambar lebih besar */
-            /* height: auto; */
-            /* margin-right: 20px; Beri jarak antara gambar dan formulir */
-        }
 
         .form-container {
             width: 50%; /* Menambah lebar formulir */
