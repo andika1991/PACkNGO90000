@@ -20,19 +20,16 @@
 </head>
     <title>PACK N GO</title>
     <style>
-        body {
+    body {
             font-family: Poppins;
             background-color: #E7E9ED;
         }
         header {
             background-color: #FFFFFF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    position: sticky; /* Buat header menjadi sticky */
-    top: 0;           /* Header tetap berada di bagian atas saat digulir */
-    z-index: 1000;    /* Pastikan header berada di atas konten lainnya */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
         }
 
         .logo img {
@@ -64,21 +61,18 @@
 
         nav a:hover {
             color: #107ACF;
-            text-decoration: none;
         }
 
         .content {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 50px;
+            flex-direction: column;
+            align-content: center;
+            flex-wrap: nowrap;
         }
 
-        .content img {
-            max-width: 40%; /* Membuat gambar lebih besar */
-            height: auto;
-            margin-right: 20px; /* Beri jarak antara gambar dan formulir */
-        }
 
         .form-container {
             width: 50%; /* Menambah lebar formulir */
@@ -187,30 +181,9 @@ nav ul li a.register:hover {
             color: #0071CC; /* Warna Merah */
         }
 
-        ul {
-    padding: 0; /* Menghilangkan padding default */
-    margin: 0;  /* Menghilangkan margin default */
-}
-
-li {
-    list-style: none; /* Menghilangkan bullet */
-}
-
-a {
-    text-decoration: none; /* Hilangkan garis bawah */
-    color: #333; /* Warna teks */
-}
-
-.icon {
-    vertical-align: middle; /* Menyelaraskan ikon dengan teks */
-    margin-right: 5px; /* Memberikan sedikit ruang antara ikon dan teks */
-    width: 16px; /* Ukuran ikon lebih kecil */
-    height: 16px; /* Ukuran ikon lebih kecil */
-}
-
-
-
-
+        .berhasil {
+            color: #25ae88;
+        }
     
     </style>
 </head>
@@ -221,32 +194,22 @@ a {
     </div>
     <nav>
         <ul>
-            <li><a href="homeakun.php">Home</a></li>
-            <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
-            <li><a href="tentangkami.php">Tentang Kami</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="daftarakun.html" class="register"><i class="fas fa-user-plus"></i> Daftar</a></li>
+            <li><a href="loginuser.html">Home</a></li>
+            <li><a href="#">Kirim Feedback</a></li>
+            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="#">FAQ</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="content">
-    <img src="img/image 1.png" alt="Image 1" class="image">
+    <img src="berhasil.png" alt="">
     <div class="form-container">
-        <h2>Login</h2>
-        <form action="loguser.php" method="post"> <!-- Pastikan method dan action benar -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required> <!-- Pastikan ada atribut name -->
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Masuk</button>
-        </form>
-    </div>
+        <h2 class="berhasil">PENDAFTARAN BERHASIL</h2>
+        </div>
+     </div>
 </div>
+
 
 <footer id="footer" class="mt-0">
     <section class="section bg-white shadow-md pt-4 pb-3">
@@ -315,18 +278,17 @@ a {
                         <a class="text" href="/cdn-cgi/l/email-protection#8bfffeece2eae5ffe4b3cbece6eae2e7a5e8e4e6"><span class="__cf_email__" data-cfemail="c7b3b2a0aea6a9b3a8ff87a0aaa6aeabe9a4a8aa">packngo8@gmail.com</span></a>
                     </div>
                 </div>
+
             </div>
             <div class="col-md-4 d-flex justify-content-evenly justify-content-md-around">
                 <div>
-                    <h1 class="text-3 d-block mb-2">Layanan Bantuan</h1>
-                    <ul>
-                        <li class="nav-item">
-                            <a class="nav-link" href="" target="_blank">
-                                <img src="img/🦆 icon _headset one_.png" alt="Customer Service" class="icon"> Customer Service
-                            </a>
-                        </li>
+                    <h1 class="text-3 d-block mb-2"></h1>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="" target="_blank"></a></li>
+                        <li class="nav-item"><a class="nav-link" href= "" target="_blank"></a></li>
+                        <li class="nav-item"><a class="nav-link" href="" target="_blank"></a></li>
+                        <li class="nav-item"><a class="nav-link" href="" target="_blank"></a></li>
                     </ul>
-                    
                 </div>
                 <div>
                     <h1 class="text-3 d-block mb-2">Web Check-In</h1>
