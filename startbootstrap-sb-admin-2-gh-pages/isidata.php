@@ -663,10 +663,10 @@ echo "ID Tiket tidak ditemukan.";
         
             <label for="nama_lengkap" style="display: inline-block; width: 100px; padding: 10px;">Nama Lengkap:</label>
             <input type="text" id="nama_lengkap" name="nama_lengkap" style="width: 411px; height: 47px; background: white; border-radius: 5px; border: 1px black solid; margin-bottom: 20px;margin-top: 10px;" required><br>
-    
+            <p style="color:black;margin-left:30px;margin-top:-20px;font-size:13px;">Pastikan Nama lengkap harus sesuai dengan NIK</p>
 
     
-            <label for="jenis_kelamin" >Jenis Kelamin:</label>
+            <label for="jenis_kelamin" style="margin-top:-10px;">Jenis Kelamin:</label>
             <input type="radio" id="tuan" name="jenis_kelamin" value="Tuan" required>
             <label for="tuan" >Tuan</label>
             <input type="radio" id="nyonya" name="jenis_kelamin" value="Nyonya" required>

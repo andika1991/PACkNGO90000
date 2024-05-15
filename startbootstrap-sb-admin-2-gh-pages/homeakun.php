@@ -443,7 +443,7 @@ input {
 }
 
 .romu{
-    background-image: url('img/vgb.jpg'); 
+    background-image: url('img/background.svg'); 
 }
 .form-horizontal {
     display: flex; /* Menggunakan flexbox */
@@ -571,7 +571,7 @@ label {
 
 <section class="romu"> 
     <br>
-<h2 class="text-9 fw-300 text-white text-center mb-4 mb-md-5 d-none d-sm-block">Booking Tiket <span class="text-primary border rounded bg-white"><b>MURAH</b></span> & Dijamin Cepat<span class="text-primary border rounded bg-white"></span></h2>
+<h2 style="text-align:center;">Booking Tiket <span class="text-primary border rounded bg-white"><b>MURAH</b></span> & Dijamin Cepat<span class="text-primary border rounded bg-white"></span></h2>
 <div class="tiketorderborder">
     <div class="gambar-container">
         <a href="#kereta-form">
