@@ -92,7 +92,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                
+                Interface
             </div>
 
            <!-- Nav Item - Pages Collapse Menu -->
@@ -184,6 +184,7 @@
 </li>
 </ul>
         <!-- End of Sidebar -->
+        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -255,124 +256,114 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Jadwal Tiket Bus</h1>
-                        <a href="cetaktiketbus.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Cetak Tiket Pesawat</a>
+                        <h1 class="h3 mb-0 text-gray-800">Jadwal Tiket Pesawat</h1>
+                        <a href="csvjadwalpswt.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download CSV Jadwal pesawat</a>
 
                     </div>
 
                   
-
-                    <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail pesanan Tiket Bus</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .card {
-            margin-bottom: 20px;
-        }
-
-        .card-title {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .card-text {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-    </style>
-</head>
-
-<body>
-    <h3 class="text-center mt-4 mb-5">Detail Pesanan Tiket Bus</h3>
-    <div class="container">
-        <div class="row">
+                    <h3>Pesanan Tiket Pesawat </h3>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Bandara Keberangkatan</th>
+                <th>Bandara Tujuan</th>
+                <th>Nama Vendor</th>
+                <th>Bukti Bayar</th>
+                <th>Status Pembayaran</th>
+                <th>Harga</th>
+                <th>Metode Pembayaran</th>
+                <th>Order By</th>
+                <th>Waktu Order</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
             include 'koneksi.php';
 
-            // Periksa apakah parameter 'id' ada dalam URL
-            if(isset($_GET['id'])) {
-                // Tangkap nilai 'id' dari URL
-                $id_pesanantiketbus = $_GET['id'];
-                
-                // Buat kueri SQL untuk mendapatkan data tiket bus berdasarkan ID
-                $query = "SELECT 
-                            pb.invoice_id, 
-                            jtb.terminal_keberangkatan, 
-                            jtb.terminal_kedatangan, 
-                            vb.nama_vendor, 
-                            mp.nama_metode, 
-                            pb.bukti_bayar, 
-                            pb.status_pembayaran, 
-                            jtb.harga, 
-                            uo.username_pengguna, 
-                            pb.TIMEORDER,
-                            dpb.jenis_kelamin,
-                            dpb.nama_lengkap,
-                            dpb.no_hp,
-                            dpb.email,
-                            dpb.usia,
-                            dpb.kursi
-                        FROM 
-                            pesanantiketbus pb 
-                        JOIN 
-                            jadwal_tiket_bus jtb ON pb.id_jadwaltiketbus = jtb.id_jadwaltiketbus 
-                        JOIN 
-                            vendor_bus vb ON jtb.id_vendorbus = vb.id_vendorbus 
-                        JOIN 
-                            metodepembayaran mp ON pb.id_metode = mp.id_metode 
-                        JOIN 
-                            pengguna uo ON pb.id_pengguna = uo.id_pengguna
-                        JOIN
-                            datapenumpangbus dpb ON pb.id_datapenumpang = dpb.id_datapenumpang
-                        WHERE
-                            pb.id_pesanantiketbus = $id_pesanantiketbus";
-                
-                // Eksekusi kueri SQL
-                $result = mysqli_query($conn, $query);
+            $query = "SELECT pb.id_pesanantiket,pb.invoice_id, jtb.bandara_keberangkatan, jtb.bandara_kedatangan, vb.nama_vendor, mp.nama_metode, pb.bukti_bayar, pb.status_pembayaran, jtb.harga, uo.username_pengguna, pb.TIMEORDER FROM pesanantiketpesawat pb JOIN jadwal_tiket_pesawat jtb ON pb.id_jadwaltiketpesawat = jtb.id_jadwaltiketpesawat JOIN vendor_pesawat vb ON jtb.id_vendorpesawat = vb.id_vendorpesawat JOIN metodepembayaran mp ON pb.id_metode = mp.id_metode JOIN pengguna uo ON pb.id_pengguna = uo.id_pengguna ORDER BY pb.TIMEORDER DESC";
 
-                // Periksa apakah ada hasil dari kueri
-                if (mysqli_num_rows($result) > 0) {
-                    // Ambil satu baris data dari hasil kueri
-                    $row = mysqli_fetch_assoc($result);
-            ?>
-                       <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Invoice ID: <?php echo $row["invoice_id"]; ?></h5>
-                                <p class="card-text"><strong>Terminal Keberangkatan:</strong> <?php echo $row["terminal_keberangkatan"]; ?></p>
-                                <p class="card-text"><strong>Terminal Kedatangan:</strong> <?php echo $row["terminal_kedatangan"]; ?></p>
-                                <p class="card-text"><strong>Nama Vendor:</strong> <?php echo $row["nama_vendor"]; ?></p>
-                                <p class="card-text"><strong>Nama Metode:</strong> <?php echo $row["nama_metode"]; ?></p>
-                                <p class="card-text"><strong>Bukti Bayar:</strong> <a href="<?php echo $row["bukti_bayar"]; ?>" target="_blank">Lihat Bukti Bayar</a></p>
-                                <p class="card-text"><strong>Status Pembayaran:</strong> <?php echo $row["status_pembayaran"]; ?></p>
-                                <p class="card-text"><strong>Harga:</strong> <?php echo $row["harga"]; ?></p>
-                                <p class="card-text"><strong>Username Pengguna:</strong> <?php echo $row["username_pengguna"]; ?></p>
-                                <p class="card-text"><strong>Waktu Pesanan:</strong> <?php echo $row["TIMEORDER"]; ?></p>
-                                <p class="card-text"><strong>Jenis Kelamin:</strong> <?php echo $row["jenis_kelamin"]; ?></p>
-                                <p class="card-text"><strong>Nama Lengkap:</strong> <?php echo $row["nama_lengkap"]; ?></p>
-                                <p class="card-text"><strong>No. HP:</strong> <?php echo $row["no_hp"]; ?></p>
-                                <p class="card-text"><strong>Email:</strong> <?php echo $row["email"]; ?></p>
-                                <p class="card-text"><strong>Usia:</strong> <?php echo $row["usia"]; ?></p>
-                                <p class="card-text"><strong>Kursi:</strong> <?php echo $row["kursi"]; ?></p>
-                            </div>
-                        </div>
-                    </div>
-            <?php
+            $result = mysqli_query($conn, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row["invoice_id"] . "</td>";
+                    echo "<td>" . $row["bandara_keberangkatan"] . "</td>";
+                    echo "<td>" . $row["bandara_kedatangan"] . "</td>";
+                    echo "<td>" . $row["nama_vendor"] . "</td>";
+                    if (!empty($row["bukti_bayar"])) {
+                        // Jika ada, tampilkan tautan untuk melihat bukti bayar
+                        echo "<td><a href='" . $row["bukti_bayar"] . "' target='_blank'>Lihat Bukti Bayar</a></td>";
+                    } else {
+                        // Jika tidak ada, tampilkan pesan bahwa bukti bayar belum dikirim
+                        echo "<td><button onclick='showAlert()'>Belum mengirimkan bukti</button></td>";
+                    }
+            
+          
+                    echo "<td>";
+                    echo "<select id='status_pembayaran_" . $row["id_pesanantiketbus"] . "' onchange='updateStatus(" . $row["id_pesanantiketbus"] . ")'>";
+                    echo "<option value='Belum Lunas'" . ($row["status_pembayaran"] == "Belum Lunas" ? " selected" : "") . ">Belum Lunas</option>";
+                    echo "<option value='Lunas'" . ($row["status_pembayaran"] == "Lunas" ? " selected" : "") . ">Lunas</option>";
+                    echo "</select>";
+                    echo "</td>";
+                    echo "<td>" . $row["harga"] . "</td>";
+                    echo "<td>" . $row["nama_metode"] . "</td>";
+                    echo "<td>" . $row["username_pengguna"] . "</td>";
+                    echo "<td>" . $row["TIMEORDER"] . "</td>";
+                    echo "<td>
+                    <a href='detailtiketbus.php?id=" . $row["id_pesanantiketbus"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>
+                </td>";
+                    echo "</tr>";
                 }
             } else {
-                echo "<p class='col'>Tidak ada pesanan tiket bus.</p>";
+                echo "<tr><td colspan='11'>Tidak ada jadwal tiket pesawat yang tersedia.</td></tr>";
             }
             ?>
-        </div>
-    </div>
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-</body>
-<script src="vendor/jquery/jquery.min.js"></script>
+<script>
+    function updateStatus(id_pesanantiketpesawat) {
+        var status_pembayaran = $("#status_pembayaran_" + id_pesanantiketbus).val(); // Dapatkan nilai dropdown menggunakan jQuery
+
+        var confirmation = confirm("Apakah Anda yakin ingin mengupdate status pembayaran menjadi '" + status_pembayaran + "'?");
+
+        if (confirmation) {
+            // Buat objek FormData untuk mengirim data ke PHP
+            var formData = new FormData();
+            formData.append('id_pesanantiketpesawat', id_pesanantiketbus);
+            formData.append('status_pembayaran', status_pembayaran);
+
+            // Kirim permintaan POST ke update_status_pembayaran.php
+            fetch('update_status_pembayaran.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ada kesalahan saat memperbarui status pembayaran.');
+                    }
+                    // Lakukan tindakan setelah berhasil memperbarui status pembayaran
+                    // Misalnya, muat ulang halaman atau tampilkan pesan sukses
+                })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                    // Tampilkan pesan kesalahan kepada pengguna jika terjadi kesalahan saat memperbarui status pembayaran
+                });
+        } else {
+            var previousValue = $("#status_pembayaran_" + id_pesanantiketbus).data("previous-value"); // Dapatkan nilai sebelumnya dari data-previous-value
+            $("#status_pembayaran_" + id_pesanantiketbus).val(previousValue); // Setel nilai dropdown kembali ke nilai sebelumnya
+        }
+    }
+</script>
+ <!-- Bootstrap core JavaScript-->
+ <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -396,4 +387,3 @@
             });
         });
     </script>
-</html>

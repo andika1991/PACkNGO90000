@@ -360,7 +360,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>
+                    <h1 class="h3 mb-4 text-gray-800 text-center">Feedback</h1>
 
                     <div class="row">
 
@@ -368,6 +368,60 @@
 
                             <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
+                            <div class="mb-3 row pl-2 pt-2">
+    <label for="nama" class="col-sm-2 col-form-label pl-4">Nama</label>
+    <div class="col-sm-7">
+        <input type="text" class="form-control" id="nama">
+    </div>
+</div>
+<div class="mb-3 pl-2">
+    <div class="pl-3">
+                <label for="nama" class="form-label">Menurut anda apakah pelayanan sudah cukup baik?</label>
+</div>
+                <div class="col-sm-7">
+                <input type="text" class="form-control" id="nama">
+</div>
+            </div>
+            <div class="pl-4">
+            <label>Bagaimana penilaian anda terhadap user interface pack n go?</label>
+            <div class="mb-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Feedback" id="Sangat Kurang" value="Sangat Kurang">
+                    <label class="form-check-label" for="Sangat Kurang">
+                        Sangat Kurang
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Feedback" id="Cukup Baik" value="Cukup Baik">
+                    <label class="form-check-label" for="Cukup Baik">
+                        Cukup Baik
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Feedback" id="Baik" value="Baik">
+                    <label class="form-check-label" for="Baik">
+                        Baik
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Feedback" id="Sangat Baik" value="Sangat Baik">
+                    <label class="form-check-label" for="Sangat Baik">
+                        Sangat Baik
+                    </label>
+                </div>
+            </div>
+</div>
+<div class="mb-3 pl-3 pr-5">
+    <label for="exampleFormControlTextarea1" class="form-label">Kritik dan saran anda untuk kemajuan PACK N GO</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+<div class="container">
+    <div class="row justify-content-end mt-2">
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary">Tombol</button>
+        </div>
+    </div>
+</div>
+</div>  
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Circle Buttons</h6>
                                 </div>
