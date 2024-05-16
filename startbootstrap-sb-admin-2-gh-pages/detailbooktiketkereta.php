@@ -1,14 +1,9 @@
 <?php
 
-
-
 include 'session.php';
 
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -281,37 +276,6 @@ nav ul li a.login {
     border-radius: 5px; 
     padding: 10px;
 }
-.Rectangle27 {
-    width: 200px;
-    height: auto; /* Anda mungkin perlu menyesuaikan tinggi sesuai kebutuhan */
-    padding: 10px; /* Atur padding agar konten tidak terlalu dekat dengan tepi */
-    background-color: #f0f0f0; /* Warna latar belakang sesuaikan dengan preferensi */
-    border: 1px solid #ccc; /* Garis tepi untuk memberi sedikit kontras */
-    border-radius: 5px; /* Bulatan sudut untuk tampilan yang lebih lembut */
-    margin-bottom: 10px; /* Beri jarak antara elemen-elemen jika perlu */
-}
-
-.Rectangle27 img {
-    width: 50px; /* Ukuran gambar */
-    height: auto; /* Tinggi otomatis sesuai lebar gambar */
-    margin-right: 10px; /* Beri jarak antara gambar dan teks */
-}
-
-.ButtonContainer {
-    margin-top: 10px; /* Beri jarak antara gambar dan tombol */
-}
-
-.lanjutkan_pembayaran {
-    display: inline-block; /* Jadikan tombol sebagai elemen inline */
-    padding: 5px 10px; /* Atur padding untuk tampilan tombol yang lebih baik */
-    background-color: #007bff; /* Warna latar belakang tombol */
-    color: #fff; /* Warna teks tombol */
-    text-decoration: none; /* Hapus dekorasi tautan */
-    border: none; /* Hapus garis tepi */
-    border-radius: 3px; /* Bulatan sudut untuk tampilan yang lebih lembut */
-}
-
-
 
 .keberangkatan {
     display: flex;
@@ -361,99 +325,116 @@ nav ul li a.login {
             </ul>
         </nav>
 </header>
-<img src="img/pembayar.svg"> <br><br>
+<img src="img/detailtiket.svg"> <br> <br> <br>
 
 <div class="keberangkatan">
-    <div class="DaftarKeberangkatan">Pilih Metode Pembayaran</div> 
-  </div><br>
+    <div class="DaftarKeberangkatan">Detail Tiket Jadwal Keberangkatan</div> 
+            </div>
 <main>
-
 <?php
-// Sertakan file koneksi
+// Include file koneksi.php untuk menghubungkan ke database
 include 'koneksi.php';
 
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['email'])) {
-    // Ambil informasi yang diperlukan dari URL
-    $id_pengguna = $_GET['id_pengguna'];
-  
-    $jadwal_tiketbus = $_GET['id_jadwaltiketbus'];
-    $id_data_penumpang = $_GET['id_datapenumpang'];
+// Periksa apakah parameter id tiket ada dalam URL
+if(isset($_GET['id'])) {
+    // Ambil ID tiket dari URL
+    $id_tiket = $_GET['id'];
+
+    // Buat query untuk mengambil detail tiket berdasarkan ID
+    $query = "SELECT j.*, v.nama_vendor, v.logo_vendor, v.alamat_vendor
+    FROM jadwal_tiket_kereta AS j
+    JOIN vendor_kereta AS v ON j.id_vendorkrta = v.id_vendorkrta
+    WHERE j.id_jadwaltiketkereta = '$id_tiket'
+    ";
     
-    // Query untuk mendapatkan harga tiket berdasarkan id_jadwaltiketbus
-    $query_harga = "SELECT harga FROM jadwal_tiket_bus WHERE id_jadwaltiketbus = $jadwal_tiketbus";
-    $result_harga = mysqli_query($conn, $query_harga);
+    // Eksekusi query
+    $result = mysqli_query($conn, $query);
 
-    // Query untuk mendapatkan semua kategori metode pembayaran
-    $query_kategori = "SELECT DISTINCT kategori_metode FROM metodepembayaran";
-    $result_kategori = mysqli_query($conn, $query_kategori);
+    // Periksa apakah query berhasil dieksekusi
+    if(mysqli_num_rows($result) > 0) {
+        // Tampilkan detail tiket
+        while($row = mysqli_fetch_assoc($result)) {
+            // Tampilkan detail tiket sesuai kebutuhan
+       ;
+       echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_jadwal'] . "</div>";
+       echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";
 
-    // Periksa apakah query mengembalikan hasil
-    if ($result_harga && mysqli_num_rows($result_harga) > 0 && $result_kategori && mysqli_num_rows($result_kategori) > 0) {
-        // Ambil harga dari hasil query
-        $row_harga = mysqli_fetch_assoc($result_harga);
-        $harga = $row_harga['harga'];
+       echo "<img style='width: 92px; height: 78px; margin-left:80px; margin-top:20px;' src='" . $row['logo_vendor'] . "' alt='Logo Vendor'><br>";
+       echo "<p style='font-size: 18px; color: #333;  margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama Penyedia: " . $row['nama_vendor'] . "</p>";
+       echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat : " . $row['alamat_vendor'] . "</p>";
+       
+            echo "<div style='display: flex; align-items: center;'>";
+echo "<img src='img/uang.svg' style='width:70px; margin-left: 60px;'>";
+$harga_formatted = number_format($row['harga'], 0, ',', '.');
+$tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($row['waktu_keberangkatan']));
 
-      
-      
-        echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>"; 
+echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>"; 
 echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
-echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . number_format($harga, 0, ',', '.') . "</span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
 echo "</div>";
 echo "</div>";
-        // Loop through each category
-        while($kategori_row = mysqli_fetch_assoc($result_kategori)) {
-            $kategori = $kategori_row['kategori_metode'];
-            echo "<p> ($kategori):</p>";
-            // Query to get payment methods for this category
-            $query_metode_pembayaran = "SELECT * FROM metodepembayaran WHERE kategori_metode='$kategori'";
-            $result_metode_pembayaran = mysqli_query($conn, $query_metode_pembayaran);
-            // Display payment methods
-            while($row = mysqli_fetch_assoc($result_metode_pembayaran)) {
-                echo '<div class="Rectangle27">';
-                echo "<input type='radio' name='metode_pembayaran' value='" . $row['id_metode'] . "' id='metode_".$row['id_metode']."'>";
-                               echo "<label for='metode_".$row['id_metode']."'><img src='" . $row['logo_metode'] . "' alt='" . $row['nama_metode'] . "' style='width: 80px; height: auto;'> " . $row['nama_metode'] . "</label>";
-               echo '    <div class="ButtonContainer">';
-               echo '        <a href="pembayaran.php?id_pengguna=' . $id_pengguna . '&id_jadwaltiketbus=' . $jadwal_tiketbus . '&harga=' . $harga . '&id_datapenumpang=' . $id_data_penumpang . '&id_metode=' . $row['id_metode'] . '" class="lanjutkan_pembayaran" id="link_' . $row['id_metode'] . '">Pilih Pembayaran</a>';
-               echo '    </div>';
-               echo '</div>';
-                
+echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -30px;'>Class: " . $row['kelas'] . "</div>"; 
+ 
+echo "<div style='font-size: 24px; color: #0071CC; margin-left: 40px; margin-top: ;'> Stok Tiket: " . $row['kapasitas_stok_tiket'] . "</div>"; 
+            
+$jam_keberangkatan = date("H:i", strtotime($row['waktu_keberangkatan']));
+$jam_kedatangan = date("H:i", strtotime($row['waktu_kedatangan']));
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 400px; right: 300px;'>" . $tanggal_keberangkatan_indonesia . "</div>";
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 435px; right: 320px;'>Keberangkatan</div>";
 
-            }
+
+
+
+echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 450px; margin-right:600px'> " . $jam_keberangkatan . "</p>";
+echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 480px;'>" . $row['stasiun_keberangkatan'] . "</div>";
+ 
+echo "<div style='position: absolute; top: 0; right: 0; margin-right: 350px; margin-top: 540px;' ><img src='img/arrowdown.svg'></div>";
+
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 625px; right: 340px;'>Kedatangan</div>";
+echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 640px; margin-right:600px'> " . $jam_kedatangan . "</p>";
+echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 670px;'>" . $row['stasiun_kedatangan'] . "</div>";
+
+          
+echo "<div style='background-color: #007bff; padding: 10px; border-radius: 5px; border-radius: 8px; max-width: 1296px; margin: 0 auto; '>";
+echo "<p style='  display: flex;justify-content: center; margin-bottom: 10px; color: #fff;  font-size: 32px;font-weight: 700;'>Deskripsi</p>";
+echo "<p style='color: #fff;'>" . $row['deskripsi_jadwal'] . "</p>";
+echo "</div>";
+
+echo "<p style='  display: flex;justify-content: center; margin-bottom: 10px; color: #0C2F54;  font-size: 32px;font-weight: 700;'>Fasilitas</p>";
+
+echo "<div style='display: flex; flex-direction: row; align-items: center;'>";
+echo "<img src='img/secure.svg' style=' margin-right: 20px; margin-left:40px;'>";
+echo "<img src='img/refund.svg' style=' margin-right: 20px;margin-left:40px;'>";
+echo "<img src='img/nyapu.svg' style=' margin-right: 20px;margin-left:100px;'>";
+echo "<img src='img/selonjor.svg' style=' margin-right: 20px;margin-left:100px;'>";
+echo "<img src='img/fast.svg' style='margin-left:40px;'>";
+echo "</div>";
+
+echo "<div style='display: flex; flex-direction: row; align-items: center; color:#0C2F54;'>";
+echo "<div style='margin-right: 10px; text-align:center; margin-left:60px;'>Tiket 100% Aman dan Legal</div>";
+echo "<div style='margin-right: 30px;text-align:center; margin-left:90px;'>Bisa Batalkan Tiket<br> Minimal H-3, FULL REFFUND 100%</div>";
+echo "<div style='margin-right: 10px;text-align:center;margin-left:40px;'>Kebersihan dan Kenyamanan<br>menjadi prioritas layanan</div>";
+echo "<div style='margin-right: 10px;text-align:center;margin-left:40px;'>Tersedia Tempat Istirahat Full AC</div>";
+echo "<div style='text-align:center;'>Proses Pelayanan Baik dan Cepat</div>";
+echo "</div>";
+
+
+            echo "<a href='isidatakereta.php?id=" . $row['id_jadwaltiketkereta'] . "' class='button-beli' ><img src='img/isidata.svg'>Lanjut Pengisian Data</a>";
+            // Tampilkan detail lainnya...
         }
     } else {
-        echo "Error: Tidak dapat mengambil harga tiket atau kategori metode pembayaran.";
+        echo "Tiket tidak ditemukan.";
     }
+
+    // Tutup koneksi database
+    mysqli_close($conn);
 } else {
-    echo "Error: Pengguna belum login.";
+    echo "ID Tiket tidak ditemukan.";
 }
-
-
-
-
 ?>
 
-<script>
-    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            // Semua tautan lanjutkan_pembayaran disembunyikan
-            document.querySelectorAll('.lanjutkan_pembayaran').forEach(function(link) {
-                link.style.display = 'none';
-            });
-            // Tampilkan tautan lanjutkan_pembayaran yang sesuai
-            var idMetode = this.value;
-            document.getElementById('link_' + idMetode).style.display = 'block';
-        });
-    });
-</script>
 
-
-            </main>
-
-
-
-
-
+</main>
 
 
 
@@ -607,21 +588,4 @@ echo "</div>";
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

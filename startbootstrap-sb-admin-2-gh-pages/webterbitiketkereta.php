@@ -499,7 +499,7 @@ main{
     font-weight: bold;
 
     position:absolute;
-    top: 1600px;
+    top: 1500px;
     right: 150px;
 
 }
@@ -559,11 +559,11 @@ if (isset($_GET['invoice_id'])) {
     // Ambil ID tiket dari URL
     $invoice_id = $_GET['invoice_id'];
 
-    $query_select = "SELECT pa.invoice_id, pa.TIMEORDER, jtb.waktu_keberangkatan, jtb.waktu_kedatangan, jtb.kapasitas_stok_tiket, jtb.terminal_keberangkatan, jtb.terminal_kedatangan, jtb.harga, jtb.kelas, jtb.no_kendaraan, jtb.status_jadwal, vb.nama_vendor, vb.logo_vendor, vb.alamat_vendor, dpb.jenis_kelamin, dpb.nik, dpb.nama_lengkap, dpb.no_hp, dpb.email, dpb.kursi, mp.nama_metode, mp.nomor_metode, mp.logo_metode, mp.Deksripsi_metode, pa.status_pembayaran 
-    FROM pesanantiketbus AS pa 
-    JOIN jadwal_tiket_bus AS jtb ON pa.id_jadwaltiketbus = jtb.id_jadwaltiketbus 
-    JOIN vendor_bus AS vb ON jtb.id_vendorbus = vb.id_vendorbus 
-    JOIN datapenumpangbus AS dpb ON pa.id_datapenumpang = dpb.id_datapenumpang 
+    $query_select = "SELECT pa.invoice_id, pa.TIMEORDER, jtb.waktu_keberangkatan, jtb.waktu_kedatangan, jtb.kapasitas_stok_tiket, jtb.stasiun_keberangkatan, jtb.stasiun_kedatangan, jtb.harga, jtb.kelas, jtb.status_jadwal, vb.nama_vendor, vb.logo_vendor, vb.alamat_vendor, dpb.jenis_kelamin, dpb.nik, dpb.nama_lengkap, dpb.no_hp, dpb.email, mp.nama_metode, mp.nomor_metode, mp.logo_metode, mp.Deksripsi_metode, pa.status_pembayaran 
+    FROM pesanantiketkereta AS pa 
+    JOIN jadwal_tiket_kereta AS jtb ON pa.id_jadwaltiketkereta = jtb.id_jadwaltiketkereta 
+    JOIN vendor_kereta AS vb ON jtb.id_vendorkrta = vb.id_vendorkrta 
+    JOIN datapenumpangkereta AS dpb ON pa.id_datapenumpang = dpb.id_datapenumpang 
     JOIN metodepembayaran AS mp ON pa.id_metode = mp.id_metode 
     WHERE pa.invoice_id = ?";
 
@@ -585,8 +585,8 @@ if (isset($_GET['invoice_id'])) {
                 echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_pembayaran'] . "</div>";
                 echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";
                 echo "<img style='width: 92px; height: 78px; margin-left:80px; margin-top:20px;' src='" . $row['logo_vendor'] . "' alt='Logo Vendor'><br>";
-                echo "<p style='font-size: 18px; color: #333; margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama PO: " . $row['nama_vendor'] . "</p>";
-                echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat PO: " . $row['alamat_vendor'] . "</p>";
+                echo "<p style='font-size: 18px; color: #333; margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama Penyedia: " . $row['nama_vendor'] . "</p>";
+                echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat : " . $row['alamat_vendor'] . "</p>";
 
                 echo "<div style='display: flex; align-items: center;'>";
                 echo "<img src='img/uang.svg' style='width:70px; margin-left: 60px;'>";
@@ -598,19 +598,19 @@ if (isset($_GET['invoice_id'])) {
                 echo "</div>";
                 echo "</div>";
                 echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -30px;'>Class: " . $row['kelas'] . "</div>"; 
-                echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -5px;'> Nomor Kendaraan Bus: " . $row['no_kendaraan'] . "</div>"; 
+
 
                 $jam_keberangkatan = date("H:i", strtotime($row['waktu_keberangkatan']));
                 $jam_kedatangan = date("H:i", strtotime($row['waktu_kedatangan']));
                 echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 400px; right: 300px;'>" . $tanggal_keberangkatan_indonesia . "</div>";
                 echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 435px; right: 320px;'>Keberangkatan</div>";
 
-                echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500; word-wrap: break-word; margin-top: 450px; margin-right:450px'> " . $jam_keberangkatan . "</p>";
-                echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 480px;'>" . $row['terminal_keberangkatan'] . "</div>";
+                echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500; word-wrap: break-word; margin-top: 450px; margin-right:620px'> " . $jam_keberangkatan . "</p>";
+                echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 480px;'>" . $row['stasiun_keberangkatan'] . "</div>";
                 echo "<div style='position: absolute; top: 0; right: 0; margin-right: 350px; margin-top: 540px;' ><img src='img/arrowdown.svg'></div>";
                 echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 625px; right: 340px;'>Kedatangan</div>";
-                echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500; word-wrap: break-word; margin-top: 640px; margin-right:450px'> " . $jam_kedatangan . "</p>";
-                echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 670px;'>" . $row['terminal_kedatangan'] . "</div>";
+                echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500; word-wrap: break-word; margin-top: 640px; margin-right:635px'> " . $jam_kedatangan . "</p>";
+                echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 670px;'>" . $row['stasiun_kedatangan'] . "</div>";
                 echo '<div class="invoice-id">' . "Invoice ID: " . $row["invoice_id"] . '</div>';
                 echo "<div style='position: absolute; top: 320px; right: 1100px;'>";
                 echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
@@ -624,12 +624,12 @@ if (isset($_GET['invoice_id'])) {
                 echo "Jenis Kelamin: " . $row["jenis_kelamin"] . "<br>";
                 echo "No HP: " . $row["no_hp"] . "<br>";
                 echo "Email: " . $row["email"] . "<br>";
-                echo "Kursi: " . $row["kursi"] . "<br><br>";
+              
                 echo "</div>";
                 echo "<div class='line'></div>";
 
                 echo "<button class='download-button' onclick='downloadPDF(\"" . $invoice_id . "\")'>Download E-Tiket</button>";
-                $verify_url = "http://localhost/PACNGO/startbootstrap-sb-admin-2-gh-pages/webterbitiket.php?invoice_id=" . urlencode($row['invoice_id']);
+                $verify_url = "http://localhost/PACNGO/startbootstrap-sb-admin-2-gh-pages/webterbitiketkereta.php?invoice_id=" . urlencode($row['invoice_id']);
 
        
                 $tempDir = 'qrcodes/';
@@ -715,7 +715,7 @@ if (isset($_GET['invoice_id'])) {
     <script>
      function downloadPDF(invoice_id) {
     
-    var url = "tiketbusterbit.php?invoice_id=" + invoice_id;
+    var url = "tiketkeretaterbit.php?invoice_id=" + invoice_id;
 
 
     window.location.href = url;
@@ -872,6 +872,5 @@ if (isset($_GET['invoice_id'])) {
 </footer>
 </body>
 </html>
-
 
 

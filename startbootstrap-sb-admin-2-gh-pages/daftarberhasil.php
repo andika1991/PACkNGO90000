@@ -182,6 +182,7 @@ nav ul li a.register:hover {
         }
 
         .berhasil {
+            
             color: #25ae88;
         }
     
@@ -203,7 +204,7 @@ nav ul li a.register:hover {
 </header>
 
 <div class="content">
-    <img src="berhasil.png" alt="">
+    <img style="width:300px; margin-bottom:30px;"src="berhasil.png" alt="">
     <div class="form-container">
         <h2 class="berhasil">PENDAFTARAN BERHASIL</h2>
         </div>

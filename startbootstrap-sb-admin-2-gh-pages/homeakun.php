@@ -5,7 +5,6 @@ include 'session.php';
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -614,10 +613,13 @@ label {
 
 <div class="search-form" id="kereta-form">
     <form action="carikereta.php" method="POST">
+    <h4>Cari Tiket Pesawat</h4>
+    <div class="form-horizontal"> 
+        <div class="form-vertical">
         <label for="stasiun_keberangkatan">Stasiun Keberangkatan:</label>
     <select class="form-control" id="stasiun_keberangkatan" name="stasiun_keberangkatan" required>
         <!-- Pilihan stasiun keberangkatan -->
-       
+        <option >Pilih Stasiun Keberangkatan</option>
         <option value="Stasiun Gambir (GMR) - Jakarta">Stasiun Gambir (GMR) - Jakarta</option>
         <option value="Stasiun Pasar Senen (PSE) - Jakarta">Stasiun Pasar Senen (PSE) - Jakarta</option>
         <option value="Stasiun Bandung (BD) - Bandung">Stasiun Bandung (BD) - Bandung</option>
@@ -719,10 +721,11 @@ label {
         <option value="Stasiun Purworejo (PWJ) - Purworejo">Stasiun Purworejo (PWJ) - Purworejo</option>
         <!-- Tambahkan opsi lainnya sesuai kebutuhan -->
     </select>
-        
+    <img class="imgal"src="img/cvws.svg"> 
     <label for="stasiun_kedatangan">Stasiun Kedatangan:</label>
     <select class="form-control" id="stasiun_kedatangan" name="stasiun_kedatangan" required>
         <!-- Pilihan bandara kedatangan -->
+        <option >Pilih Stasiun Kedatangan</option>
         <option value="Stasiun Gambir (GMR) - Jakarta">Stasiun Gambir (GMR) - Jakarta</option>
     <option value="Stasiun Pasar Senen (PSE) - Jakarta">Stasiun Pasar Senen (PSE) - Jakarta</option>
     <option value="Stasiun Bandung (BD) - Bandung">Stasiun Bandung (BD) - Bandung</option>
@@ -823,16 +826,65 @@ label {
     <option value="Stasiun Kutoarjo (KTA) - Kutoarjo">Stasiun Kutoarjo (KTA) - Kutoarjo</option>
     <option value="Stasiun Purworejo (PWJ) - Purworejo">Stasiun Purworejo (PWJ) - Purworejo</option>
     </select>
-        
-        <label for="date">Tanggal Keberangkatan:</label>
-        <input type="date" id="date" name="date" required><br><br>
-        
-        <button type="submit">Cari Tiket</button>
+    </div>
+    <div class="waktu">
+        <h6><img src="img/icon.svg">Waktu Keberangkatan</h6> <br>
+    <label for="date">Tanggal Pergi</label>
+    <input class="form-control" type="date" id="date" name="date" required><br><br>  </div>
+    <div class="waktu">
+    <h6><img src="img/icon.svg">Pilih Kelas</h6> <br>
+    <label for="class">Kelas</label>
+  <select class="form-control" id="class" name="class"> <br>
+  <option  >Pilih Kelas</option>
+    <option  value="Ekonomi">Ekonomi</option>
+    <option  value="Bisnis">Bisnis</option>
+  </select><br>
+            </div>
+    <button type="submit" class="submit-button">Cari Tiket</button>
     </form>
+            </div>
+            <script>
+    function filterOptions(selectElement, inputElement) {
+        var filter = inputElement.value.toUpperCase();
+        var options = selectElement.getElementsByTagName('option');
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            var txtValue = option.textContent || option.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectKeberangkatan = document.getElementById("stasiun_keberangkatan");
+        var inputSearchKeberangkatan = document.createElement("input");
+        inputSearchKeberangkatan.setAttribute("type", "text");
+        inputSearchKeberangkatan.setAttribute("placeholder", "Cari Stasiun keberangkatan...");
+        inputSearchKeberangkatan.addEventListener("input", function() {
+            filterOptions(selectKeberangkatan, inputSearchKeberangkatan);
+        });
+        selectKeberangkatan.parentNode.insertBefore(inputSearchKeberangkatan, selectKeberangkatan.nextSibling);
+
+        var selectKedatangan = document.getElementById("stasiun_kedatangan");
+        var inputSearchKedatangan = document.createElement("input");
+        inputSearchKedatangan.setAttribute("type", "text");
+        inputSearchKedatangan.setAttribute("placeholder", "Cari Stasiun kedatangan...");
+        inputSearchKedatangan.addEventListener("input", function() {
+            filterOptions(selectKedatangan, inputSearchKedatangan);
+        });
+        selectKedatangan.parentNode.insertBefore(inputSearchKedatangan, selectKedatangan.nextSibling);
+    });
+</script>
 </div>
 
 <div class="search-form" id="pesawat-form">
     <form action="caripesawat.php" method="POST">
+    <h4>Cari Tiket Pesawat</h4>
+    <div class="form-horizontal"> 
+        <div class="form-vertical">
         <label for="bandara_keberangkatan">Bandara Keberangkatan:</label>
         <select class="form-control" id="bandara_keberangkatan" name="bandara_keberangkatan" required>
             <!-- Pilihan bandara keberangkatan -->
@@ -983,6 +1035,7 @@ label {
 <option value="Bandara Internasional Abu Dhabi (AUH) - Abu Dhabi, Uni Emirat Arab">Bandara Internasional Abu Dhabi (AUH) - Abu Dhabi, Uni Emirat Arab</option>
 <option value="Bandara Internasional King Abdulaziz (JED) - Jeddah, Arab Saudi">Bandara Internasional King Abdulaziz (JED) - Jeddah, Arab Saudi</option>
         </select>
+          <img class="imgal"src="img/cvws.svg"> 
         <label for="bandara_kedatangan">Bandara Kedatangan:</label>
         <select class="form-control" id="bandara_kedatangan" name="bandara_kedatangan" required>
             <!-- Pilihan bandara kedatangan -->
@@ -1133,22 +1186,69 @@ label {
 <option value="Bandara Internasional Abu Dhabi (AUH) - Abu Dhabi, Uni Emirat Arab">Bandara Internasional Abu Dhabi (AUH) - Abu Dhabi, Uni Emirat Arab</option>
 <option value="Bandara Internasional King Abdulaziz (JED) - Jeddah, Arab Saudi">Bandara Internasional King Abdulaziz (JED) - Jeddah, Arab Saudi</option>
         </select>
-        <label for="date">Tanggal Keberangkatan:</label>
-        <input type="date" id="date" name="date" required><br><br>
-        
-        <button type="submit">Cari Tiket</button>
+            </div>
+    <div class="waktu">
+        <h6><img src="img/icon.svg">Waktu Keberangkatan</h6> <br>
+    <label for="date">Tanggal Pergi</label>
+    <input class="form-control" type="date" id="date" name="date" required><br><br>  </div>
+    <div class="waktu">
+    <h6><img src="img/icon.svg">Pilih Kelas</h6> <br>
+    <label for="class">Kelas</label>
+  <select class="form-control" id="class" name="class"> <br>
+  <option  >Pilih Kelas</option>
+    <option  value="Ekonomi">Ekonomi</option>
+    <option  value="Bisnis">Bisnis</option>
+  </select><br>
+            </div>
+    <button type="submit" class="submit-button">Cari Tiket</button>
     </form>
+            </div>
+            <script>
+    function filterOptions(selectElement, inputElement) {
+        var filter = inputElement.value.toUpperCase();
+        var options = selectElement.getElementsByTagName('option');
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            var txtValue = option.textContent || option.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectKeberangkatan = document.getElementById("bandara_keberangkatan");
+        var inputSearchKeberangkatan = document.createElement("input");
+        inputSearchKeberangkatan.setAttribute("type", "text");
+        inputSearchKeberangkatan.setAttribute("placeholder", "Cari Bandara keberangkatan...");
+        inputSearchKeberangkatan.addEventListener("input", function() {
+            filterOptions(selectKeberangkatan, inputSearchKeberangkatan);
+        });
+        selectKeberangkatan.parentNode.insertBefore(inputSearchKeberangkatan, selectKeberangkatan.nextSibling);
+
+        var selectKedatangan = document.getElementById("bandara_kedatangan");
+        var inputSearchKedatangan = document.createElement("input");
+        inputSearchKedatangan.setAttribute("type", "text");
+        inputSearchKedatangan.setAttribute("placeholder", "Cari Bandara kedatangan...");
+        inputSearchKedatangan.addEventListener("input", function() {
+            filterOptions(selectKedatangan, inputSearchKedatangan);
+        });
+        selectKedatangan.parentNode.insertBefore(inputSearchKedatangan, selectKedatangan.nextSibling);
+    });
+</script>
 </div>
 
 
 <div class="search-form" id="bus-form">
     <form action="caribus.php" method="POST">
-        <h4>Booking Tiket Bus</h4>
+        <h4>Cari Tiket Bus</h4>
         <div class="form-horizontal"> <!-- Mengatur tata letak horizontal -->
         <div class="form-vertical">
         <h6><img src="img/icon.svg">Tujuan Terminal</h6>
         <label for="terminal_keberangkatan">Terminal Asal</label><br>
-    
+       
         <select class="form-control" id="terminal_keberangkatan" name="terminal_keberangkatan" required>
             <!-- Pilihan Pelabuhan keberangkatan -->
             <option value="">Pilih Terminal Keberangkatan</option>
@@ -1637,14 +1737,14 @@ label {
     <label for="class">Kelas</label>
   <select class="form-control" id="class" name="class"> <br>
   <option  >Pilih Kelas</option>
-    <option  value="economy">Ekonomi</option>
-    <option  value="business">Bisnis</option>
+    <option  value="Ekonomi">Ekonomi</option>
+    <option  value="Bisnis">Bisnis</option>
   </select><br>
             </div>
     <button type="submit" class="submit-button">Cari Tiket</button>
     </form>
             </div>
-    <script>
+            <script>
     // Fungsi untuk menyaring opsi berdasarkan input pencarian
     function filterOptions(selectElement, inputElement) {
         var filter = inputElement.value.toUpperCase();
@@ -1683,6 +1783,8 @@ label {
 
 <div class="search-form" id="kapal-form">
     <form action="carikapal.php" method="POST">
+    <div class="form-horizontal"> 
+        <div class="form-vertical">
         <label for="pelabuhan_keberangkatan">Stasiun Keberangkatan:</label>
     <select class="form-control" id="pelabuhan_keberangkatan" name="pelabuhan_keberangkatan" required>
         <!-- Pilihan Pelabuhan keberangkatan -->
@@ -1745,6 +1847,7 @@ label {
         <option>Watampone (Pelabuhan Watampone)</option>
         <option>Ampana (Pelabuhan Ampana)</option>
 </select>
+<img class="imgal"src="img/cvws.svg"> 
         <label for="pelabuhan_kedatangan">Stasiun Kedatangan:</label>
         <select class="form-control" id="pelabuhan_kedatangan" name="pelabuhan_kedatangan" required>
             <!-- Pilihan bandara kedatangan -->
@@ -1807,10 +1910,58 @@ label {
         <option>Watampone (Pelabuhan Watampone)</option>
         <option>Ampana (Pelabuhan Ampana)</option>
         </select>
-        <label for="date">Tanggal Keberangkatan:</label>
-        <input class="date" type="date" id="date" name="date" required><br><br>
-        <button type="submit">Cari</button>
+        </div>
+    <div class="waktu">
+        <h6><img src="img/icon.svg">Waktu Keberangkatan</h6> <br>
+    <label for="date">Tanggal Pergi</label>
+    <input class="form-control" type="date" id="date" name="date" required><br><br>  </div>
+    <div class="waktu">
+    <h6><img src="img/icon.svg">Pilih Kelas</h6> <br>
+    <label for="class">Kelas</label>
+  <select class="form-control" id="class" name="class"> <br>
+  <option  >Pilih Kelas</option>
+    <option  value="Ekonomi">Ekonomi</option>
+    <option  value="Bisnis">Bisnis</option>
+  </select><br>
+            </div>
+    <button type="submit" class="submit-button">Cari Tiket</button>
     </form>
+            </div>
+            <script>
+    function filterOptions(selectElement, inputElement) {
+        var filter = inputElement.value.toUpperCase();
+        var options = selectElement.getElementsByTagName('option');
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            var txtValue = option.textContent || option.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectKeberangkatan = document.getElementById("pelabuhan_keberangkatan");
+        var inputSearchKeberangkatan = document.createElement("input");
+        inputSearchKeberangkatan.setAttribute("type", "text");
+        inputSearchKeberangkatan.setAttribute("placeholder", "Cari Bandara keberangkatan...");
+        inputSearchKeberangkatan.addEventListener("input", function() {
+            filterOptions(selectKeberangkatan, inputSearchKeberangkatan);
+        });
+        selectKeberangkatan.parentNode.insertBefore(inputSearchKeberangkatan, selectKeberangkatan.nextSibling);
+
+        var selectKedatangan = document.getElementById("pelabuhan_kedatangan");
+        var inputSearchKedatangan = document.createElement("input");
+        inputSearchKedatangan.setAttribute("type", "text");
+        inputSearchKedatangan.setAttribute("placeholder", "Cari Bandara kedatangan...");
+        inputSearchKedatangan.addEventListener("input", function() {
+            filterOptions(selectKedatangan, inputSearchKedatangan);
+        });
+        selectKedatangan.parentNode.insertBefore(inputSearchKedatangan, selectKedatangan.nextSibling);
+    });
+</script>
 </div>
 
 </section>
@@ -2139,4 +2290,3 @@ $(document).ready(function(){
 </script>
 
 </html>
-

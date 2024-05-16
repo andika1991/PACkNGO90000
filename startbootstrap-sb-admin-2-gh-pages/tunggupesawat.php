@@ -7,12 +7,10 @@ include 'session.php';
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -32,10 +30,10 @@ include 'session.php';
     <link rel="stylesheet" href="css/toastr.min.css">
     <title>PACK N GO</title>
     <style>
-   
-   body {
+         /* Styling untuk navbar */
+         body {
             font-family: Poppins;
-            background-color: #F6F7F8;
+            background-color: #E7E9ED;
         }
         header {
             background-color: #FFFFFF;
@@ -52,7 +50,20 @@ include 'session.php';
             height: 80px;
             width: 250px;
         }
+        .square {
+            width: 514px; /* Lebar persegi */
+            height: 283px; /* Tinggi persegi */
+            border-radius: 20px; /* Sudut melengkung */
+            background-color: #0071CC; /* Warna persegi */
+            display: inline-block; /* Pastikan bentuk persegi */
+            margin: 50px; /* Ruang antar-persegi */
+        }
 
+        /* Atur carousel item */
+        .carousel-item {
+            text-align: center; /* Menyelaraskan konten ke tengah */
+            padding: 20px; /* Memberikan ruang dalam */
+        }
         nav {
             display: flex;
             align-items: center;
@@ -80,145 +91,48 @@ include 'session.php';
             text-decoration: none;
         }
 
-        .content {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px;
-        }
-
-        .content img {
-            max-width: 40%; /* Membuat gambar lebih besar */
-            height: auto;
-            margin-right: 20px; /* Beri jarak antara gambar dan formulir */
-        }
-
-        .form-container {
-            width: 50%; /* Menambah lebar formulir */
-            padding: 20px;
-           
-            margin-top: 0px; /* Tambah jarak antara kontainer dan heading */
-        }
-
-        .form-container h2 {
-            font-size: 40px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 80px; /* Memberikan jarak antara h2 dan form */
-        }
-
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-            gap: 30px; /* Jarak antar elemen dalam form */
-        }
-
-        .form-container .form-group {
-            display: flex;
-            align-items: center; /* Posisikan elemen dalam satu baris */
-            gap: 10px; /* Jarak antar elemen dalam form */
-        }
-
-        .form-container label {
-            font-weight: bold;
-            font-size: 18px; /* Membuat teks label lebih besar */
-            width: 100px; /* Memberikan lebar tetap untuk label */
-        }
-
-        .form-container input {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px; /* Membuat teks input lebih besar */
-            flex: 1; /* Memperpanjang field input */
-        }
-
-        .form-container button {
-    padding: 15px;
-    background-color: #107ACF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: block;
-    width: 200px; 
-    margin: 0 auto;
+.form-steps {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem; /* Atur margin atas sesuai kebutuhan */
 }
 
-nav ul li a.login {
-    background-color: #D9D9D9; 
-    color: #0C2E53; 
-    border-radius: 5px; 
-    padding: 10px;
+.form-steps__item {
+    flex: 1;
+    text-align: center;
 }
 
-
-nav ul li a.register {
-    background-color: #D9D9D9; 
-    color: #0C2E53; 
-    border-radius: 5px;
-    padding: 10px;
+.form-steps__item-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Hover effect untuk tautan "Login" dan "Daftar" */
-nav ul li a.login:hover,
-nav ul li a.register:hover {
-    background-color: #2980b9; /* Warna lebih gelap untuk "Login" saat di-hover */
+.form-steps__item-icon {
+    width: 36px; 
+    height: 36px; 
+    line-height: 36px; 
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    color: #495057; 
+    font-size: 1rem; 
 }
 
-/* Hover effect untuk "Daftar" */
-nav ul li a.register:hover {
-    background-color: #c0392b; /* Warna lebih gelap untuk "Daftar" saat di-hover */
-}
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .content img {
-                max-width: 70%; /* Menyesuaikan ukuran gambar */
-            }
-
-            .form-container {
-                width: 100%; /* Formulir memenuhi lebar layar */
-            }
-
-            .form-container .form-group {
-                flex-direction: column;
-                align-items: stretch; /* Berubah ke tata letak vertikal */
-            }
-
-            .form-container label {
-                width: auto; /* Tidak ada batasan lebar */
-            }
-        }
-
-        .text {
-            color: #0071CC; /* Warna Merah */
-        }
-
-        ul {
-    padding: 0; /* Menghilangkan padding default */
-    margin: 0;  /* Menghilangkan margin default */
+.form-steps__item-line {
+    flex: 1;
+    width: 2px; 
+    background-color: #f8f9fa; 
 }
 
-li {
-    list-style: none; /* Menghilangkan bullet */
+.form-steps__item-text {
+    font-size: 0.875rem; 
+    margin-top: 0.5rem; 
 }
 
-a {
-    text-decoration: none; /* Hilangkan garis bawah */
-    color: #333; /* Warna teks */
-}
-
-.icon {
-    vertical-align: middle; /* Menyelaraskan ikon dengan teks */
-    margin-right: 5px; /* Memberikan sedikit ruang antara ikon dan teks */
-    width: 16px; /* Ukuran ikon lebih kecil */
-    height: 16px; /* Ukuran ikon lebih kecil */
+.form-steps__item--completed .form-steps__item-icon {
+    background-color: #007bff; 
+    color: #fff; 
 }
 
 /* Styling untuk tabel */
@@ -237,78 +151,110 @@ th, td {
 }
 
 th {
-    background-color: #f8f9fa; 
-    color: #333; 
+    background-color: #f8f9fa; /* Warna latar belakang header */
+    color: #333; /* Warna teks header */
 }
 
 td {
-    background-color: #ffffff; 
-    color: #555; 
+    background-color: #ffffff; /* Warna latar belakang sel data */
+    color: #555; /* Warna teks sel data */
 }
 
-
+/* Hover effect pada baris tabel */
 tr:hover {
-    background-color: #f1f1f1; 
+    background-color: #f1f1f1; /* Warna latar belakang saat hover */
 }
 
-nav ul li a.login:hover,
-nav ul li a.register:hover {
-    background-color: #2980b9; 
-}
 /* Tombol Beli */
 .button-beli {
     background-color: #007bff;
-    font-weight: bold;
-    font-size:20px;
     color: #ffffff;
-    padding: 8px 8px;
+    padding: 10px 20px;
     border: none;
-    margin-left:1000px;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block; /* Menjadikan tombol sebagai elemen inline */
 }
 
 .button-beli:hover {
     background-color: #0056b3;
-    text-decoration: none;
 }
 
-nav ul li a.login {
-    background-color: #D9D9D9; 
-    color: #0C2E53; 
-    border-radius: 5px; 
-    padding: 10px;
-}
-.Rectangle27 {
-    width: 200px;
-    height: auto; /* Anda mungkin perlu menyesuaikan tinggi sesuai kebutuhan */
-    padding: 10px; /* Atur padding agar konten tidak terlalu dekat dengan tepi */
-    background-color: #f0f0f0; /* Warna latar belakang sesuaikan dengan preferensi */
-    border: 1px solid #ccc; /* Garis tepi untuk memberi sedikit kontras */
-    border-radius: 5px; /* Bulatan sudut untuk tampilan yang lebih lembut */
-    margin-bottom: 10px; /* Beri jarak antara elemen-elemen jika perlu */
+
+
+
+
+
+
+h1 {
+    font-style: normal;
+    text-align: center;
+    color:black;
 }
 
-.Rectangle27 img {
-    width: 50px; /* Ukuran gambar */
-    height: auto; /* Tinggi otomatis sesuai lebar gambar */
-    margin-right: 10px; /* Beri jarak antara gambar dan teks */
+html, body {
+    margin: 0;
+    padding: 0;
 }
 
-.ButtonContainer {
-    margin-top: 10px; /* Beri jarak antara gambar dan tombol */
+.page-header {
+    padding: 1.5rem;
+}
+.bus {
+            width: 800px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-gap: 10px;
+        }
+        .seat {
+            background-color: #ccc;
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .seat.selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .driver {
+            background-color: #333;
+            color: #fff;
+        }
+
+
+/* Styling untuk tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
 }
 
-.lanjutkan_pembayaran {
-    display: inline-block; /* Jadikan tombol sebagai elemen inline */
-    padding: 5px 10px; /* Atur padding untuk tampilan tombol yang lebih baik */
-    background-color: #007bff; /* Warna latar belakang tombol */
-    color: #fff; /* Warna teks tombol */
-    text-decoration: none; /* Hapus dekorasi tautan */
-    border: none; /* Hapus garis tepi */
-    border-radius: 3px; /* Bulatan sudut untuk tampilan yang lebih lembut */
+th, td {
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    padding: 12px; /* Sesuaikan padding untuk memperbaiki tata letak */
+    font-family: Arial, sans-serif; /* Font yang mudah dibaca */
+}
+
+th {
+    background-color: #f8f9fa; /* Warna latar belakang header */
+    color: #333; /* Warna teks header */
+}
+
+td {
+    background-color: #ffffff; /* Warna latar belakang sel data */
+    color: #555; /* Warna teks sel data */
+}
+
+/* Hover effect pada baris tabel */
+tr:hover {
+    background-color: #f1f1f1; /* Warna latar belakang saat hover */
 }
 
 
@@ -329,6 +275,238 @@ nav ul li a.login {
     font-size: 32px;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
+}
+
+
+/* Gaya untuk formulir */
+form {
+    margin-top: 20px;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+nav ul li a.login {
+    background-color: #D9D9D9; 
+    color: #0C2E53; 
+    border-radius: 5px; 
+    padding: 10px;
+}
+nav ul li a.login:hover,
+nav ul li a.register:hover {
+    background-color: #2980b9; 
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+/* CSS untuk progress bar */
+.form-steps__item.step-2 .form-steps__item-icon {
+    background-color: #007bff; /* Warna biru untuk langkah pertama */
+    color: #fff; /* Warna teks putih */
+}
+.line {
+    width: 95%;
+    border-bottom: 5px solid #007bff; 
+    margin-top: 10px; 
+    margin: 0 auto;
+    margin-bottom: 10px; 
+}
+ul {
+    padding: 0; /* Menghilangkan padding default */
+    margin: 0;  /* Menghilangkan margin default */
+}
+
+li {
+    list-style: none; /* Menghilangkan bullet */
+}
+
+a {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: #333; /* Warna teks */
+}
+
+.icon {
+    vertical-align: middle; /* Menyelaraskan ikon dengan teks */
+    margin-right: 5px; /* Memberikan sedikit ruang antara ikon dan teks */
+    width: 16px; /* Ukuran ikon lebih kecil */
+    height: 16px; /* Ukuran ikon lebih kecil */
+}
+
+.contaifoner {
+    background-color: #FFFFFF; /* Warna latar belakang putih */
+    width: 600px; /* Lebar container */
+    height: 400px; /* Tinggi container */
+    padding: 20px; /* Padding untuk mengatur ukuran shape */
+    display: inline-block; /* Membuat container sesuai dengan ukuran teks di dalamnya */
+}
+.custom-button {
+    font-size: 24px;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 900px; /* Sesuaikan dengan jarak dari bawah */
+    right: 20px; /* Sesuaikan dengan jarak dari kanan */
+}
+
+main{
+    padding-bottom:140px;
+}
+.RincianBiaya {
+    width: 646px;
+    height: 67px;
+    text-align: center;
+    color: #010101;
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    line-height: 32px; /* Sesuaikan dengan kebutuhan */
+    word-wrap: break-word;
+    position: absolute;
+    top: 800px;
+    right: 0;
+}
+.Tiket {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 880px;
+    right: 500px;
+}
+.Biayaadm {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 920px;
+    right: 350px;
+}
+
+.Biayabagasi {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 960px;
+    right: 418px;
+}
+
+.Biayalayanan {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 1000px;
+    right: 398px;
+}
+.Line2 {
+    width: 550px; 
+    height: 0; 
+    border: 1px black solid; 
+    position: absolute;
+    top: 1050px;
+    left: 780px;
+}
+
+
+.Totalpembayaran {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    word-wrap: break-word;
+    position: absolute;
+    top: 1080px;
+    right: 350px;
+}
+#Rincian {
+    background-color: #FFFFFF; /* Warna latar belakang putih */
+    width: 590px; /* Lebar container */
+    height: 400px; /* Tinggi container */
+    margin-left:140px;
+    padding: 20px; /* Padding untuk mengatur ukuran shape */
+    display: inline-block; /* Membuat container sesuai dengan ukuran teks di dalamnya */
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup button {
+    margin: 10px;
+}
+
+.invoice-id {
+    position: absolute; /* Mengatur posisi absolut */
+    top: 292px; /* Jarak dari bagian atas */
+    right: 20px; /* Jarak dari bagian kanan */
+ 
+    color: black; /* Warna teks */
+    padding: 10px; /* Padding */
+    border-radius: 5px; /* Sudut melengkung */
+    font-size: 30px; /* Ukuran teks */
 }
 
 
@@ -361,101 +539,120 @@ nav ul li a.login {
             </ul>
         </nav>
 </header>
-<img src="img/pembayar.svg"> <br><br>
 
+
+<img src="img/gambar23.svg"><br><br>
 <div class="keberangkatan">
-    <div class="DaftarKeberangkatan">Pilih Metode Pembayaran</div> 
-  </div><br>
-<main>
+    <div class="DaftarKeberangkatan">PEMBAYARAN</div> 
+  </div><br> 
 
-<?php
+  <?php
+// Start output buffering at the beginning of the script
+ob_start();
+
 // Sertakan file koneksi
 include 'koneksi.php';
 
-// Periksa apakah pengguna telah login
-if (isset($_SESSION['email'])) {
-    // Ambil informasi yang diperlukan dari URL
-    $id_pengguna = $_GET['id_pengguna'];
-  
-    $jadwal_tiketbus = $_GET['id_jadwaltiketbus'];
-    $id_data_penumpang = $_GET['id_datapenumpang'];
-    
-    // Query untuk mendapatkan harga tiket berdasarkan id_jadwaltiketbus
-    $query_harga = "SELECT harga FROM jadwal_tiket_bus WHERE id_jadwaltiketbus = $jadwal_tiketbus";
-    $result_harga = mysqli_query($conn, $query_harga);
+// Periksa apakah parameter id tiket ada dalam URL
+if (isset($_GET['invoice_id'])) {
+    // Ambil ID tiket dari URL
+    $invoice_id = $_GET['invoice_id'];
 
-    // Query untuk mendapatkan semua kategori metode pembayaran
-    $query_kategori = "SELECT DISTINCT kategori_metode FROM metodepembayaran";
-    $result_kategori = mysqli_query($conn, $query_kategori);
+    $query_select = "SELECT pa.invoice_id, pa.TIMEORDER, jtb.waktu_keberangkatan, jtb.waktu_kedatangan, jtb.kapasitas_stok_tiket, jtb.bandara_keberangkatan, jtb.bandara_kedatangan, jtb.harga, jtb.kelas, jtb.status_jadwal, vb.nama_vendor, vb.logo_vendor, vb.alamat_vendor, dpb.jenis_kelamin, dpb.nik, dpb.nama_lengkap, dpb.no_hp, dpb.email, mp.nama_metode, mp.nomor_metode, mp.logo_metode, mp.Deksripsi_metode, pa.status_pembayaran 
+    FROM pesanantiketpesawat AS pa 
+    JOIN jadwal_tiket_pesawat AS jtb ON pa.id_jadwaltiketpesawat = jtb.id_jadwaltiketpesawat 
+    JOIN vendor_pesawat AS vb ON jtb.id_vendorpesawat = vb.id_vendorpesawat 
+    JOIN datapenumpangpesawat AS dpb ON pa.id_datapenumpang = dpb.id_datapenumpang 
+    JOIN metodepembayaran AS mp ON pa.id_metode = mp.id_metode 
+    WHERE pa.invoice_id = '$invoice_id'";
 
-    // Periksa apakah query mengembalikan hasil
-    if ($result_harga && mysqli_num_rows($result_harga) > 0 && $result_kategori && mysqli_num_rows($result_kategori) > 0) {
-        // Ambil harga dari hasil query
-        $row_harga = mysqli_fetch_assoc($result_harga);
-        $harga = $row_harga['harga'];
+    $result = mysqli_query($conn, $query_select);
 
-      
-      
-        echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>"; 
-echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
-echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . number_format($harga, 0, ',', '.') . "</span>";
-echo "</div>";
-echo "</div>";
-        // Loop through each category
-        while($kategori_row = mysqli_fetch_assoc($result_kategori)) {
-            $kategori = $kategori_row['kategori_metode'];
-            echo "<p> ($kategori):</p>";
-            // Query to get payment methods for this category
-            $query_metode_pembayaran = "SELECT * FROM metodepembayaran WHERE kategori_metode='$kategori'";
-            $result_metode_pembayaran = mysqli_query($conn, $query_metode_pembayaran);
-            // Display payment methods
-            while($row = mysqli_fetch_assoc($result_metode_pembayaran)) {
-                echo '<div class="Rectangle27">';
-                echo "<input type='radio' name='metode_pembayaran' value='" . $row['id_metode'] . "' id='metode_".$row['id_metode']."'>";
-                               echo "<label for='metode_".$row['id_metode']."'><img src='" . $row['logo_metode'] . "' alt='" . $row['nama_metode'] . "' style='width: 80px; height: auto;'> " . $row['nama_metode'] . "</label>";
-               echo '    <div class="ButtonContainer">';
-               echo '        <a href="pembayaran.php?id_pengguna=' . $id_pengguna . '&id_jadwaltiketbus=' . $jadwal_tiketbus . '&harga=' . $harga . '&id_datapenumpang=' . $id_data_penumpang . '&id_metode=' . $row['id_metode'] . '" class="lanjutkan_pembayaran" id="link_' . $row['id_metode'] . '">Pilih Pembayaran</a>';
-               echo '    </div>';
-               echo '</div>';
-                
-
+    if (mysqli_num_rows($result) > 0) {
+        // Tampilkan detail tiket
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Periksa status pembayaran sebelum output
+            if ($row["status_pembayaran"] == 'Lunas') {
+                echo "<script type='text/javascript'>
+                        window.location.href = 'webterbitiketpesawat.php?invoice_id=" . $row["invoice_id"] . "';
+                      </script>";
+                exit; // Pastikan tidak ada output lain sebelum redirect
             }
+
+            // Tampilkan detail tiket sesuai kebutuhan
+            echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_jadwal'] . "</div>";
+            echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";
+            echo "<img style='width: 92px; height: 78px; margin-left:80px; margin-top:20px;' src='" . $row['logo_vendor'] . "' alt='Logo Vendor'><br>";
+            echo "<p style='font-size: 18px; color: #333; margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama PO: " . $row['nama_vendor'] . "</p>";
+            echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat PO: " . $row['alamat_vendor'] . "</p>";
+
+            echo "<div style='display: flex; align-items: center;'>";
+            echo "<img src='img/uang.svg' style='width:70px; margin-left: 60px;'>";
+            $harga_formatted = number_format($row['harga'], 0, ',', '.');
+            $tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($row['waktu_keberangkatan']));
+            echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>";
+            echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+            echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
+            echo "</div>";
+            echo "</div>";
+            echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -30px;'>Class: " . $row['kelas'] . "</div>"; 
+
+            echo "<div style='font-size: 24px; color: #0071CC; margin-left: 40px; margin-top: ;'> Stok Tiket: " . $row['kapasitas_stok_tiket'] . "</div>"; 
+
+            $jam_keberangkatan = date("H:i", strtotime($row['waktu_keberangkatan']));
+            $jam_kedatangan = date("H:i", strtotime($row['waktu_kedatangan']));
+            echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 400px; right: 300px;'>" . $tanggal_keberangkatan_indonesia . "</div>";
+            echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 435px; right: 320px;'>Keberangkatan</div>";
+
+            echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 450px; margin-right:345px'> " . $jam_keberangkatan . "</p>";
+            echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 80px; margin-top: 510px;'>" . $row['bandara_keberangkatan'] . "</div>";
+             
+            echo "<div style='position: absolute; top: 0; right: 0; margin-right: 350px; margin-top: 540px;' ><img src='img/arrowdown.svg'></div>";
+            
+            echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 625px; right: 340px;'>Kedatangan</div>";
+            echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 640px; margin-right:345px'> " . $jam_kedatangan . "</p>";
+            echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 100px; margin-top: 700px;'>" . $row['bandara_kedatangan'] . "</div>";
+            // Include file koneksi.php untuk menghubungkan ke database
+            echo '<div class="invoice-id">' . "Invoice ID: " . $row["invoice_id"] . '</div>';
+            echo "<div style='position: absolute; top: 320px; right: 1100px;'>";
+            echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+            echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
+            echo "</div>";
+            echo "<div class='line'></div>";
+            echo "<div style='color:black; margin-left:40px;margin-top:0px;'>";
+            echo "Nama Lengkap: " . $row["nama_lengkap"] . "<br>";
+            echo "NIK: " . $row["nik"] . "<br>";
+            echo "Jenis Kelamin: " . $row["jenis_kelamin"] . "<br>";
+            echo "No HP: " . $row["no_hp"] . "<br>";
+            echo "Email: " . $row["email"] . "<br>";
+    
+            echo "</div>";
+            echo "<div class='line'></div>";
+
         }
     } else {
-        echo "Error: Tidak dapat mengambil harga tiket atau kategori metode pembayaran.";
+        echo "Tiket tidak ditemukan.";
     }
 } else {
-    echo "Error: Pengguna belum login.";
+    echo "ID Tiket tidak ditemukan.";
 }
 
-
-
-
+// Akhiri output buffering dan kirim output
+ob_end_flush();
 ?>
 
-<script>
-    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            // Semua tautan lanjutkan_pembayaran disembunyikan
-            document.querySelectorAll('.lanjutkan_pembayaran').forEach(function(link) {
-                link.style.display = 'none';
-            });
-            // Tampilkan tautan lanjutkan_pembayaran yang sesuai
-            var idMetode = this.value;
-            document.getElementById('link_' + idMetode).style.display = 'block';
-        });
-    });
-</script>
+   
+   
+<h2 style="text-align:center;">Terimakasih telah mengirimkan bukti pembayaran, Admin sedang melakukan pengecekan estimasi 1-15 menit</h2>
+    <p style="color:#0C2F54; text-align:center;">Jika status sudah diupdate oleh admin halaman  ini akan terefresh ke halaman penerbitan tiket</p>
+    <p style="color:#0C2F54; text-align:center;">Terimakasih atas kesediaannya menunggu</p>
 
-
-            </main>
-
-
-
-
-
-
-
+    <script>
+        function showUploadForm() {
+            var uploadForm = document.getElementById("uploadForm");
+            uploadForm.style.display = "block";
+        }
+    </script>
 
 <footer id="footer" class="mt-0">
     <section class="section bg-white shadow-md pt-4 pb-3">
@@ -604,24 +801,6 @@ echo "</div>";
     </div>
 </div>
 </footer>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

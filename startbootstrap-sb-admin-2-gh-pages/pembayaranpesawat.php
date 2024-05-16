@@ -41,9 +41,9 @@ include 'session.php';
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    position: sticky; 
-    top: 0;          
-    z-index: 1000;    
+    position: sticky; /* Buat header menjadi sticky */
+    top: 0;           /* Header tetap berada di bagian atas saat digulir */
+    z-index: 1000;    /* Pastikan header berada di atas konten lainnya */
         }
 
         .logo img {
@@ -51,17 +51,18 @@ include 'session.php';
             width: 250px;
         }
         .square {
-            width: 514px; 
-            height: 283px; 
-            border-radius: 20px; 
-            background-color: #0071CC; 
-            display: inline-block; 
-            margin: 50px; 
+            width: 514px; /* Lebar persegi */
+            height: 283px; /* Tinggi persegi */
+            border-radius: 20px; /* Sudut melengkung */
+            background-color: #0071CC; /* Warna persegi */
+            display: inline-block; /* Pastikan bentuk persegi */
+            margin: 50px; /* Ruang antar-persegi */
         }
 
+        /* Atur carousel item */
         .carousel-item {
-            text-align: center; 
-            padding: 20px; 
+            text-align: center; /* Menyelaraskan konten ke tengah */
+            padding: 20px; /* Memberikan ruang dalam */
         }
         nav {
             display: flex;
@@ -93,7 +94,7 @@ include 'session.php';
 .form-steps {
     display: flex;
     justify-content: center;
-    margin-top: 1rem; 
+    margin-top: 1rem; /* Atur margin atas sesuai kebutuhan */
 }
 
 .form-steps__item {
@@ -134,24 +135,24 @@ include 'session.php';
     color: #fff; 
 }
 
-
+/* Styling untuk tabel */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
 }
 
 th, td {
     border: 1px solid #e0e0e0;
     text-align: left;
-    padding: 12px; 
-    font-family: Arial, sans-serif; 
+    padding: 12px; /* Sesuaikan padding untuk memperbaiki tata letak */
+    font-family: Arial, sans-serif; /* Font yang mudah dibaca */
 }
 
 th {
-    background-color: #f8f9fa; 
-    color: #333; 
+    background-color: #f8f9fa; /* Warna latar belakang header */
+    color: #333; /* Warna teks header */
 }
 
 td {
@@ -474,11 +475,33 @@ main{
     display: inline-block; /* Membuat container sesuai dengan ukuran teks di dalamnya */
 }
 
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup button {
+    margin: 10px;
+}
 
 .invoice-id {
-    position: ; /* Mengatur posisi absolut */
-    top: -500px; /* Jarak dari bagian atas */
-    margin-left: 20px; /* Jarak dari bagian kanan */
+    position: absolute; /* Mengatur posisi absolut */
+    top: 292px; /* Jarak dari bagian atas */
+    right: 20px; /* Jarak dari bagian kanan */
  
     color: black; /* Warna teks */
     padding: 10px; /* Padding */
@@ -486,28 +509,6 @@ main{
     font-size: 30px; /* Ukuran teks */
 }
 
-/* styles.css */
-
-/* Tombol download */
-.download-button {
-    background-color: #0071CC;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-
-    position:absolute;
-    top: 1600px;
-    right: 150px;
-
-}
-
-/* Efek hover */
-.download-button:hover {
-    background-color: #0056b3;
-}
 
     </style>
 </head>
@@ -540,187 +541,235 @@ main{
 </header>
 
 
-<img src="img/cetak.svg"><br><br>
+<img src="img/gambar23.svg"><br><br>
 <div class="keberangkatan">
-    <div class="DaftarKeberangkatan">DOWNLOAD E-TIKET</div> 
-    <Img  onclick="downloadPDF()"src="img/donlod.svg">
+    <div class="DaftarKeberangkatan">PEMBAYARAN</div> 
   </div><br> 
 
   <?php
-
-// Sertakan file koneksi
+// Include file koneksi.php untuk menghubungkan ke database
 include 'koneksi.php';
 
-// Sertakan library phpqrcode
-require 'phpqrcode/qrlib.php';
-
 // Periksa apakah parameter id tiket ada dalam URL
-if (isset($_GET['invoice_id'])) {
+if(isset($_GET['id_jadwaltiketpesawat'])) {
     // Ambil ID tiket dari URL
-    $invoice_id = $_GET['invoice_id'];
+    $id_tiket = $_GET['id_jadwaltiketpesawat'];
 
-    $query_select = "SELECT pa.invoice_id, pa.TIMEORDER, jtb.waktu_keberangkatan, jtb.waktu_kedatangan, jtb.kapasitas_stok_tiket, jtb.terminal_keberangkatan, jtb.terminal_kedatangan, jtb.harga, jtb.kelas, jtb.no_kendaraan, jtb.status_jadwal, vb.nama_vendor, vb.logo_vendor, vb.alamat_vendor, dpb.jenis_kelamin, dpb.nik, dpb.nama_lengkap, dpb.no_hp, dpb.email, dpb.kursi, mp.nama_metode, mp.nomor_metode, mp.logo_metode, mp.Deksripsi_metode, pa.status_pembayaran 
-    FROM pesanantiketbus AS pa 
-    JOIN jadwal_tiket_bus AS jtb ON pa.id_jadwaltiketbus = jtb.id_jadwaltiketbus 
-    JOIN vendor_bus AS vb ON jtb.id_vendorbus = vb.id_vendorbus 
-    JOIN datapenumpangbus AS dpb ON pa.id_datapenumpang = dpb.id_datapenumpang 
-    JOIN metodepembayaran AS mp ON pa.id_metode = mp.id_metode 
-    WHERE pa.invoice_id = ?";
+    // Buat query untuk mengambil detail tiket berdasarkan ID
+    $query = "SELECT j.*, v.nama_vendor, v.logo_vendor, v.alamat_vendor
+    FROM jadwal_tiket_pesawat AS j
+    JOIN vendor_pesawat AS v ON j.id_vendorpesawat = v.id_vendorpesawat
+    WHERE j.id_jadwaltiketpesawat = '$id_tiket'
+    ";
+    
+    // Eksekusi query
+    $result = mysqli_query($conn, $query);
 
-    // Persiapkan statement
-    if ($stmt = $conn->prepare($query_select)) {
-        // Bind parameter ke statement
-        $stmt->bind_param("s", $invoice_id);
+    // Periksa apakah query berhasil dieksekusi
+    if(mysqli_num_rows($result) > 0) {
+        // Tampilkan detail tiket
+        while($row = mysqli_fetch_assoc($result)) {
+            // Tampilkan detail tiket sesuai kebutuhan
+       ;
+       echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_jadwal'] . "</div>";
+       echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";
 
-        // Jalankan statement
-        $stmt->execute();
+       echo "<img style='width: 92px; height: 78px; margin-left:80px; margin-top:20px;' src='" . $row['logo_vendor'] . "' alt='Logo Vendor'><br>";
+       echo "<p style='font-size: 18px; color: #333;  margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama Maskapai: " . $row['nama_vendor'] . "</p>";
+       echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat : " . $row['alamat_vendor'] . "</p>";
+       
+            echo "<div style='display: flex; align-items: center;'>";
+echo "<img src='img/uang.svg' style='width:70px; margin-left: 60px;'>";
+$harga_formatted = number_format($row['harga'], 0, ',', '.');
+$tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($row['waktu_keberangkatan']));
 
-        // Dapatkan hasilnya
-        $result = $stmt->get_result();
+echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>"; 
+echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
+echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
+echo "</div>";
+echo "</div>";
+echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -30px;'>Class: " . $row['kelas'] . "</div>"; 
+ 
+echo "<div style='font-size: 24px; color: #0071CC; margin-left: 40px; margin-top: ;'> Stok Tiket: " . $row['kapasitas_stok_tiket'] . "</div>"; 
+            
+$jam_keberangkatan = date("H:i", strtotime($row['waktu_keberangkatan']));
+$jam_kedatangan = date("H:i", strtotime($row['waktu_kedatangan']));
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 400px; right: 300px;'>" . $tanggal_keberangkatan_indonesia . "</div>";
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 435px; right: 320px;'>Keberangkatan</div>";
 
-        if ($result->num_rows > 0) {
-            // Tampilkan detail tiket
-            while ($row = $result->fetch_assoc()) {
-                // Periksa status pembayaran sebelum output
-                echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_pembayaran'] . "</div>";
-                echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";
-                echo "<img style='width: 92px; height: 78px; margin-left:80px; margin-top:20px;' src='" . $row['logo_vendor'] . "' alt='Logo Vendor'><br>";
-                echo "<p style='font-size: 18px; color: #333; margin-left:50px;font-weight: 600; margin-bottom: 5px;'>Nama PO: " . $row['nama_vendor'] . "</p>";
-                echo "<p style='font-size: 16px; color: #333;margin-left:50px; font-weight: 600; margin-bottom: 15px;margin-top:-10px;'>Alamat PO: " . $row['alamat_vendor'] . "</p>";
 
-                echo "<div style='display: flex; align-items: center;'>";
-                echo "<img src='img/uang.svg' style='width:70px; margin-left: 60px;'>";
-                $harga_formatted = number_format($row['harga'], 0, ',', '.');
-                $tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($row['waktu_keberangkatan']));
-                echo "<div class='Idr30000' style='width: 215px; height: 42px; margin-left: 40px; margin-bottom: 20px;'>";
-                echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
-                echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
-                echo "</div>";
-                echo "</div>";
-                echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -30px;'>Class: " . $row['kelas'] . "</div>"; 
-                echo "<div style='font-size: 24px; color: #DC3545; margin-left: 40px; margin-top: -5px;'> Nomor Kendaraan Bus: " . $row['no_kendaraan'] . "</div>"; 
 
-                $jam_keberangkatan = date("H:i", strtotime($row['waktu_keberangkatan']));
-                $jam_kedatangan = date("H:i", strtotime($row['waktu_kedatangan']));
-                echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 400px; right: 300px;'>" . $tanggal_keberangkatan_indonesia . "</div>";
-                echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 435px; right: 320px;'>Keberangkatan</div>";
 
-                echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500; word-wrap: break-word; margin-top: 450px; margin-right:450px'> " . $jam_keberangkatan . "</p>";
-                echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 480px;'>" . $row['terminal_keberangkatan'] . "</div>";
-                echo "<div style='position: absolute; top: 0; right: 0; margin-right: 350px; margin-top: 540px;' ><img src='img/arrowdown.svg'></div>";
-                echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 625px; right: 340px;'>Kedatangan</div>";
-                echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500; word-wrap: break-word; margin-top: 640px; margin-right:450px'> " . $jam_kedatangan . "</p>";
-                echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 110px; margin-top: 670px;'>" . $row['terminal_kedatangan'] . "</div>";
+echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 450px; margin-right:345px'> " . $jam_keberangkatan . "</p>";
+echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 80px; margin-top: 510px;'>" . $row['bandara_keberangkatan'] . "</div>";
+ 
+echo "<div style='position: absolute; top: 0; right: 0; margin-right: 350px; margin-top: 540px;' ><img src='img/arrowdown.svg'></div>";
+
+echo "<div style='width: auto; height: auto; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; position: absolute; top: 625px; right: 340px;'>Kedatangan</div>";
+echo "<p style='position: absolute; top: 0; right: 0; font-size: 48px; color: #0071CC; font-family: Poppins; font-weight: 500;  word-wrap: break-word; margin-top: 640px; margin-right:345px'> " . $jam_kedatangan . "</p>";
+echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; right: 0; margin-right: 100px; margin-top: 700px;'>" . $row['bandara_kedatangan'] . "</div>";
+// Include file koneksi.php untuk menghubungkan ke database
+
+          
+
+        }
+    } else {
+        echo "Tiket tidak ditemukan.";
+    }
+
+    // Tutup koneksi database
+
+} else {
+    echo "ID Tiket tidak ditemukan.";
+}
+
+
+
+
+
+
+echo "<div class='line' ></div>";
+echo "<p style='text-align:center; font-weight:bold; color:#0071CC; font-size:20px;'>Data Penumpang</p>";
+
+
+
+
+// Atur zona waktu PHP ke Indonesia
+date_default_timezone_set('Asia/Jakarta');
+
+// Fungsi untuk menghasilkan invoice_id
+$invoice_id = generateInvoiceID($conn);
+
+// Periksa apakah data-datanya ada di URL
+if(isset($_GET['id_pengguna']) && isset($_GET['id_jadwaltiketpesawat']) && isset($_GET['harga']) && isset($_GET['id_datapenumpang']) && isset($_GET['id_metode'])) {
+    // Ambil data dari URL
+    $id_pengguna = $_GET['id_pengguna'];
+    $id_jadwaltiketkereta = $_GET['id_jadwaltiketpesawat'];
+    $harga = $_GET['harga'];
+    $id_datapenumpang = $_GET['id_datapenumpang'];
+    $id_metode = $_GET['id_metode'];
+
+    // Data untuk dimasukkan
+    $timeorder = date('Y-m-d H:i:s'); // Waktu saat ini
+
+    // Query untuk memasukkan data
+    $query_insert = "INSERT INTO pesanantiketpesawat (bukti_bayar, status_pembayaran, id_datapenumpang, id_metode, invoice_id, TIMEORDER, id_pengguna, id_jadwaltiketpesawat)
+                     VALUES (NULL, 'Belum Bayar', $id_datapenumpang, $id_metode, '$invoice_id', '$timeorder', $id_pengguna, $id_jadwaltiketkereta)";
+
+    // Eksekusi query INSERT
+    if(mysqli_query($conn, $query_insert)) {
+  
+
+        // Query untuk menampilkan data yang diminta
+        $query_select = "SELECT pa.invoice_id, pa.TIMEORDER, jtb.waktu_keberangkatan, jtb.waktu_kedatangan, jtb.bandara_keberangkatan, jtb.bandara_kedatangan, jtb.kelas, jtb.status_jadwal, vb.nama_vendor, dpb.jenis_kelamin, dpb.nama_lengkap, dpb.no_hp, dpb.email, dpb.nik, mp.nama_metode, mp.nomor_metode, mp.logo_metode, mp.Deksripsi_metode FROM pesanantiketpesawat AS pa JOIN jadwal_tiket_pesawat AS jtb ON pa.id_jadwaltiketpesawat = jtb.id_jadwaltiketpesawat JOIN vendor_pesawat AS vb ON jtb.id_vendorpesawat = vb.id_vendorpesawat JOIN datapenumpangpesawat AS dpb ON pa.id_datapenumpang = dpb.id_datapenumpang JOIN metodepembayaran AS mp ON pa.id_metode = mp.id_metode WHERE pa.invoice_id = '$invoice_id'";
+
+        // Eksekusi query SELECT
+        $result = mysqli_query($conn, $query_select);
+
+        // Tampilkan hasil query SELECT
+        if(mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+          
                 echo '<div class="invoice-id">' . "Invoice ID: " . $row["invoice_id"] . '</div>';
+
                 echo "<div style='position: absolute; top: 320px; right: 1100px;'>";
                 echo "<span style='color: #8E9A9D; font-size: 32px; font-family: Poppins; font-weight: 400; line-height: 22px; word-wrap: break-word;'>IDR </span>";
                 echo "<span style='color: #DC3545; font-size: 32px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word;'>" . $harga_formatted  . "</span>";
                 echo "</div>";
-                echo "<div class='line'></div>";
-                echo "<p style='text-align:center; font-weight:bold; color:#0071CC; font-size:20px; margin-top:-10px;'>Data Penumpang</p>";
-                echo "<div style='color:black; margin-left:40px;margin-top:0px;'>";
+                
+                echo "<div style='color:black; margin-left:40px;margin-top:-20px;'>";
                 echo "Nama Lengkap: " . $row["nama_lengkap"] . "<br>";
                 echo "NIK: " . $row["nik"] . "<br>";
                 echo "Jenis Kelamin: " . $row["jenis_kelamin"] . "<br>";
                 echo "No HP: " . $row["no_hp"] . "<br>";
                 echo "Email: " . $row["email"] . "<br>";
-                echo "Kursi: " . $row["kursi"] . "<br><br>";
+             
                 echo "</div>";
-                echo "<div class='line'></div>";
 
-                echo "<button class='download-button' onclick='downloadPDF(\"" . $invoice_id . "\")'>Download E-Tiket</button>";
-                $verify_url = "http://localhost/PACNGO/startbootstrap-sb-admin-2-gh-pages/webterbitiket.php?invoice_id=" . urlencode($row['invoice_id']);
+                echo "<div class='line' ></div>";
+echo "<p style='text-align:center; font-weight:bold; color:#0071CC; font-size:20px;'>Silahkan Lakukan Pembayaran</p>";
+echo "<p style='color:#0071CC;margin-left:40px;margin-top:-20px;font-weight:medium;' >Metode Pembayaran : " . $row["nama_metode"] . "</p><br>";
+echo "<img src='" . $row["logo_metode"] . "' alt='Logo Metode' style='width: 150px; height: 100px; margin-top:-40px;margin-left:40px;'><br>";
+echo "<p style='color:#0071CC; margin-left: 40px; margin-top: -3px; font-weight: medium; position: relative;'>Nomor Pembayaran:</p>";
+echo "<p style='font-weight: bold; background-color: #0071CC; font-size: 22px; color: #000000; margin-left:40px; margin-top: -45px; display: inline-block;'>" . $row["nomor_metode"] . "</p><br>";
+echo "<p style='color:#0071CC; margin-left: 40px; margin-top: -10px; font-weight: medium; position: relative;'>Tata Cara Pembayaran:</p>";
+echo "<div style='color:black; margin-left:40px; margin-top:-20px;'>" . nl2br($row["Deksripsi_metode"]) . "</div><br>";
 
+                echo "<div style='position: absolute; top: 0;color:black; right: 0; margin-right: 100px; margin-top: 1030px;'>Waktu Order: " . $row["TIMEORDER"] . "</div><br>";
        
-                $tempDir = 'qrcodes/';
-                if (!file_exists($tempDir)) {
-                    mkdir($tempDir);
-                }
-                $qrFile = $tempDir . 'qrcode_' . $row['invoice_id'] . '.png';
-                QRcode::png($verify_url, $qrFile, QR_ECLEVEL_L, 10);
-
-                // Tampilkan QR code
-                echo "<div style='margin-left:900px; margin-top:20px; width:400px;height:300px;'><img src='$qrFile' alt='QR Code'></div>";
-
+              
+                
             }
         } else {
-            echo "Tiket tidak ditemukan.";
+            echo "Tidak ada data yang ditemukan.";
         }
-
-        // Tutup statement
-        $stmt->close();
     } else {
-        echo "Terjadi kesalahan: " . $conn->error;
+        echo "Error: " . $query_insert . "<br>" . mysqli_error($conn);
     }
 } else {
-    echo "ID Tiket tidak ditemukan.";
+    echo "Data tidak lengkap. Silakan kembali ke halaman sebelumnya dan pastikan semua data terisi.";
 }
 
+
+
+// Fungsi untuk menghasilkan invoice_id
+function generateInvoiceID($conn) {
+    // Lakukan pengambilan data terakhir
+    $query_last_invoice = "SELECT MAX(CAST(SUBSTRING(invoice_id, 9) AS UNSIGNED)) AS last_id FROM pesanantiketpesawat";
+    $result_last_invoice = mysqli_query($conn, $query_last_invoice);
+
+    // Periksa jika query berhasil dieksekusi
+    if (!$result_last_invoice) {
+        // Jika tidak, tampilkan pesan kesalahan
+        echo "Error: " . mysqli_error($conn);
+        return false;
+    }
+
+    // Ambil nilai terakhir
+    $row_last_invoice = mysqli_fetch_assoc($result_last_invoice);
+    $last_id = $row_last_invoice['last_id'];
+
+    // Jika tidak ada nilai terakhir, mulai dari 1
+    if($last_id === null) {
+        $last_id = 1;
+    } else {
+        $last_id += 1;
+    }
+
+    // Format nomor urut menjadi string dengan panjang 7 karakter
+    $formatted_id = str_pad($last_id, 7, '0', STR_PAD_LEFT);
+
+    // Kembalikan nilai invoice_id
+    return 'PACKNGOP' . $formatted_id;
+}
 ?>
 
-   
-<p style='text-align:left; font-weight:bold; color:#0071CC; font-size:20px; margin-top:-310px; margin-left:33px;'>Petunjuk Check-in</p>;
-<ol style="margin-top:-30px;color:#000000;">
-    <li>1.Beli Tiket
-        <ul>
-            <li>Online: Beli melalui situs web atau aplikasi.</li>
-            <li>Loket: Beli di terminal atau agen resmi.</li>
-        </ul>
-    </li>
-    <li>2.Persiapan
-        <ul>
-            <li>Waktu Kedatangan: Datang 30 menit sebelum jadwal.</li>
-            <li>Dokumen: Bawa KTP atau identitas lainnya.</li>
-            <li>Barang Bawaan: Pastikan sesuai batasan bagasi.</li>
-        </ul>
-    </li>
-    <li>3.Check-In
-        <ul>
-            <li>Loket Check-In: Tunjukkan tiket dan identitas.</li>
-            <li>Boarding Pass: Dapatkan untuk naik ke bus.</li>
-        </ul>
-    </li>
-    <li>4.Naik ke Bus
-        <ul>
-            <li>Zona Boarding: Pergi ke area keberangkatan.</li>
-            <li>Pemeriksaan Boarding Pass: Tunjukkan kepada petugas saat naik.</li>
-        </ul>
-    </li>
-    <li>5.Di Dalam Bus
-        <ul>
-            <li>Temukan Kursi: Duduk sesuai nomor tiket.dapat menyesuaikan nantinya<br> yang penting tidak terjadi keributan</li>
-            <li>Keamanan: Kenakan sabuk pengaman, jika tersedia.</li>
-        </ul>
-    </li>
-    <li>6.Turun dari Bus
-        <ul>
-            <li>Pengumuman Tujuan: Dengarkan pemberitahuan mendekati tujuan.</li>
-            <li>Periksa Barang Bawaan: Jangan tinggalkan barang pribadi.</li>
-            <li>Petunjuk Keluar: Ikuti arah petugas untuk keluar terminal.</li>
-        </ul>
-    </li>
-    <li>7.Bantuan
-        <ul>
-            <li>Bantuan Khusus: Informasikan kepada petugas jika diperlukan.</li>
-            <li>Layanan Pelanggan: Hubungi nomor yang tertera pada tiket jika ada masalah.</li>
-        </ul>
-    </li>
-</ol>
-<h2 style="text-align:center;">Terimakasih telah memesan tiket melalui PACKNGO,<br> Semoga Selamat sampai tujuan</h2>
-    <p style="color:#0C2F54; text-align:center;">Jika anda mengalami kendala silahkan hubungi customer service</p>
 
 
-  
+
+
+    <h2>Upload Bukti Pembayaran</h2>
+    <button onclick="showUploadForm()">Upload Bukti Pembayaran</button>
+
+    <div id="uploadForm" style="display: none;">
+        <form action="uploadpesawat.php" method="POST" enctype="multipart/form-data">
+            <label for="bukti_pembayaran">Pilih File Bukti Pembayaran:</label>
+            <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/*">
+            <input type="hidden" name="invoice_id" value="<?php echo $invoice_id; ?>">
+            <input type="hidden" name="id_datapenumpang" value="<?php echo $id_datapenumpang; ?>">
+            <input type="hidden" name="id_jadwaltiketpesawat" value="<?php echo $id_jadwaltiketkereta; ?>">
+            <input type="hidden" name="id_metode" value="<?php echo $id_metode; ?>">
+            <input type="hidden" name="id_pengguna" value="<?php echo $id_pengguna; ?>">
+            <br><br>
+            <input type="submit" value="Upload" name="submit">
+        </form>
+    </div>
 
     <script>
-     function downloadPDF(invoice_id) {
-    
-    var url = "tiketbusterbit.php?invoice_id=" + invoice_id;
-
-
-    window.location.href = url;
-}
-
+        function showUploadForm() {
+            var uploadForm = document.getElementById("uploadForm");
+            uploadForm.style.display = "block";
+        }
     </script>
 
 <footer id="footer" class="mt-0">
@@ -872,6 +921,3 @@ if (isset($_GET['invoice_id'])) {
 </footer>
 </body>
 </html>
-
-
-

@@ -274,7 +274,91 @@
    <!-- Tambah Data Button -->
    <a href="tambahjadwalkereta.php" class="btn btn-primary">Tambah Data</a>
 <!-- Modal Tambah Data -->
+          <!-- Table Pengguna -->
+          <h3>Jadwal Tiket Bus Hari ini</h3>
+             <div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+        <th>ID</th>
+            <th>Waktu Keberangkatan</th>
+            <th>Waktu Kedatangan</th>
+            <th>Stasiun Keberangkatan</th>
+            <th>Stasiun Tujuan</th>
+            <th>Harga tiket</th>
+            <th>Kelas</th>
+            <th>Stok Tiket</th>
+            <th>Status</th>
+            <th>Vendor Penyedia</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        include 'koneksi.php';
+        
+        // Menandai jadwal tiket yang sudah berangkat
+        $updateQuery = "UPDATE jadwal_tiket_kereta SET status_jadwal = 'On Going' WHERE waktu_keberangkatan <= NOW()";
+        mysqli_query($conn, $updateQuery);
+        
+        // Menandai jadwal tiket yang sudah tiba
+        $updateQuery = "UPDATE jadwal_tiket_kereta SET status_jadwal = 'Arrived' WHERE waktu_kedatangan <= NOW()";
+        mysqli_query($conn, $updateQuery);
+        
+        $query = "SELECT 
+        jtp.id_jadwaltiketkereta,
+        jtp.waktu_keberangkatan,
+        jtp.waktu_kedatangan,
+        jtp.stasiun_keberangkatan,
+        jtp.stasiun_kedatangan,
+        jtp.harga,
+        jtp.kelas,
+        jtp.kapasitas_stok_tiket,
+        jtp.deskripsi_jadwal,
+        vp.nama_vendor,
+        jtp.status_jadwal
+       
+    FROM 
+        jadwal_tiket_kereta jtp
+    JOIN 
+        vendor_kereta vp 
+    ON 
+        jtp.id_vendorkrta = vp.id_vendorkrta
+    WHERE 
+        DATE(jtp.waktu_keberangkatan) = CURDATE()
+    ORDER BY 
+        jtp.waktu_keberangkatan DESC;";
+    
+        $result = mysqli_query($conn, $query);
 
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>" . $row["id_jadwaltiketkereta"] . "</td>";
+                echo "<td>" . $row["waktu_keberangkatan"] . "</td>";
+                echo "<td>" . $row["waktu_kedatangan"] . "</td>";
+                echo "<td>" . $row["stasiun_keberangkatan"] . "</td>";
+                echo "<td>" . $row["stasiun_kedatangan"] . "</td>";
+                echo "<td>" . $row["harga"] . "</td>";
+                echo "<td>" . $row["kelas"] . "</td>";
+                echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
+               
+                echo "<td>" . $row["nama_vendor"] . "</td>";
+                echo "<td>" . $row["status_jadwal"] . "</td>";
+                echo "<td>
+                <a href='editjadwalkereta.php?id=" . $row["id_jadwaltiketkereta"] . "' class='btn btn-primary btn-sm edit-btn'>Edit</a>
+                <button class='btn btn-danger btn-sm delete-btn' data-id_jadwaltiketkereta='" . $row["id_jadwaltiketkereta"] . "' data-toggle='modal' data-target='#deleteModal'>Delete</button>
+
+                      </td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='12'>Tidak ada jadwal tiket pesawat hari ini.</td></tr>";
+        }
+        ?>
+    </tbody>
+</table>
+    </div>
 
 
 <h3>Jadwal Tiket Kereta All</h3>

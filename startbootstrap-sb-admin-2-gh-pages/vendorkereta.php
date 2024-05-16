@@ -395,7 +395,7 @@ $(document).ready(function() {
         }
         $.ajax({
             type: "POST",
-            url: "proses_edit_vendor_kapal.php",
+            url: "proses_edit_vendor_kereta.php",
             data: formData,
             processData: false,
             contentType: false,

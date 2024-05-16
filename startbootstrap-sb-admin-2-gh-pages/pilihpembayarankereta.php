@@ -377,11 +377,11 @@ if (isset($_SESSION['email'])) {
     // Ambil informasi yang diperlukan dari URL
     $id_pengguna = $_GET['id_pengguna'];
   
-    $jadwal_tiketbus = $_GET['id_jadwaltiketbus'];
+    $jadwal_tiketbus = $_GET['id_jadwaltiketkereta'];
     $id_data_penumpang = $_GET['id_datapenumpang'];
     
     // Query untuk mendapatkan harga tiket berdasarkan id_jadwaltiketbus
-    $query_harga = "SELECT harga FROM jadwal_tiket_bus WHERE id_jadwaltiketbus = $jadwal_tiketbus";
+    $query_harga = "SELECT harga FROM jadwal_tiket_kereta WHERE id_jadwaltiketkereta = $jadwal_tiketbus";
     $result_harga = mysqli_query($conn, $query_harga);
 
     // Query untuk mendapatkan semua kategori metode pembayaran
@@ -414,7 +414,7 @@ echo "</div>";
                 echo "<input type='radio' name='metode_pembayaran' value='" . $row['id_metode'] . "' id='metode_".$row['id_metode']."'>";
                                echo "<label for='metode_".$row['id_metode']."'><img src='" . $row['logo_metode'] . "' alt='" . $row['nama_metode'] . "' style='width: 80px; height: auto;'> " . $row['nama_metode'] . "</label>";
                echo '    <div class="ButtonContainer">';
-               echo '        <a href="pembayaran.php?id_pengguna=' . $id_pengguna . '&id_jadwaltiketbus=' . $jadwal_tiketbus . '&harga=' . $harga . '&id_datapenumpang=' . $id_data_penumpang . '&id_metode=' . $row['id_metode'] . '" class="lanjutkan_pembayaran" id="link_' . $row['id_metode'] . '">Pilih Pembayaran</a>';
+               echo '        <a href="pembayarankereta.php?id_pengguna=' . $id_pengguna . '&id_jadwaltiketkereta=' . $jadwal_tiketbus . '&harga=' . $harga . '&id_datapenumpang=' . $id_data_penumpang . '&id_metode=' . $row['id_metode'] . '" class="lanjutkan_pembayaran" id="link_' . $row['id_metode'] . '">Pilih Pembayaran</a>';
                echo '    </div>';
                echo '</div>';
                 
@@ -607,16 +607,6 @@ echo "</div>";
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 
 
