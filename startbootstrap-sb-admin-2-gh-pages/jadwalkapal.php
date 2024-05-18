@@ -248,7 +248,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Jadwal Tiket Kapal</h1>
-                        <a href="csvjadwalpswt.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download CSV Jadwal pesawat</a>
+                      
 
                     </div>
 
@@ -271,7 +271,7 @@
             <th>Pelabuhan Keberangkatan</th>
             <th>Pelabuhan Tujuan</th>
             <th>Harga tiket</th>
-            <th>Kategori</th>
+            <th>Golongan</th>
             <th>Stok Tiket</th>
             <th>Status</th>
             <th>Deskripsi</th>
@@ -296,7 +296,7 @@
         jtp.pelabuhan_keberangkatan,
         jtp.pelabuhan_kedatangan,
         jtp.harga,
-        jtp.kategori,
+        jtp.kelas,
         jtp.kapasitas_stok_tiket,
         jtp.status_jadwal,
         jtp.deskripsi_jadwal,
@@ -321,7 +321,7 @@
                 echo "<td>" . $row["pelabuhan_keberangkatan"] . "</td>";
                 echo "<td>" . $row["pelabuhan_kedatangan"] . "</td>";
                 echo "<td>" . $row["harga"] . "</td>";
-                echo "<td>" . $row["kategori"] . "</td>";
+                echo "<td>" . $row["kelas"] . "</td>";
                 echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
                 echo "<td>" . $row["deskripsi_jadwal"] . "</td>";
@@ -349,7 +349,7 @@
             <th>Pelabuhan Keberangkatan</th>
             <th>Pelabuhan Tujuan</th>
             <th>Harga tiket</th>
-            <th>Kategori</th>
+            <th>Golongan</th>
             <th>Stok Tiket</th>
             <th>Status</th>
             <th>Deskripsi</th>
@@ -362,7 +362,7 @@
         <?php
         include 'koneksi.php';
 
-        $query = "SELECT jadwal_tiket_kapal.id_jadwaltiketkapal, jadwal_tiket_kapal.waktu_keberangkatan, jadwal_tiket_kapal.waktu_kedatangan, jadwal_tiket_kapal.pelabuhan_keberangkatan, jadwal_tiket_kapal.deskripsi_jadwal, jadwal_tiket_kapal.pelabuhan_kedatangan, jadwal_tiket_kapal.harga, jadwal_tiket_kapal.kategori, jadwal_tiket_kapal.kapasitas_stok_tiket, jadwal_tiket_kapal.status_jadwal, vendor_kapal.nama_vendor 
+        $query = "SELECT jadwal_tiket_kapal.id_jadwaltiketkapal, jadwal_tiket_kapal.waktu_keberangkatan, jadwal_tiket_kapal.waktu_kedatangan, jadwal_tiket_kapal.pelabuhan_keberangkatan, jadwal_tiket_kapal.deskripsi_jadwal, jadwal_tiket_kapal.pelabuhan_kedatangan, jadwal_tiket_kapal.harga, jadwal_tiket_kapal.kelas, jadwal_tiket_kapal.kapasitas_stok_tiket, jadwal_tiket_kapal.status_jadwal, vendor_kapal.nama_vendor 
         FROM jadwal_tiket_kapal 
         JOIN vendor_kapal ON jadwal_tiket_kapal.id_vendor = vendor_kapal.id_vendor;
         ";
@@ -377,7 +377,7 @@
                 echo "<td>" . $row["pelabuhan_keberangkatan"] . "</td>";
                 echo "<td>" . $row["pelabuhan_kedatangan"] . "</td>";
                 echo "<td>" . $row["harga"] . "</td>";
-                echo "<td>" . $row["kategori"] . "</td>";
+                echo "<td>" . $row["kelas"] . "</td>";
                 echo "<td>" . $row["kapasitas_stok_tiket"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
                 echo "<td>" . $row["deskripsi_jadwal"] . "</td>";

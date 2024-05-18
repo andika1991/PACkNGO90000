@@ -496,7 +496,11 @@
     </div>
     <div class="form-group">
         <label for="status_jadwal">Status:</label>
-        <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia" required>
+        <select class="form-control" id="status_jadwal" name="status_jadwal" required>
+        <option value="Tersedia">Tersedia</option>
+        <option value="On Going">On Going</option>
+        <option value="Arrived">Arrived</option>
+    </select>
     </div>
     <div class="form-group">
     <label for="id_vendorkrta">Vendor:</label>

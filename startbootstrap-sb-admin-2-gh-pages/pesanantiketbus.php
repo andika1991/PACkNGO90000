@@ -308,6 +308,7 @@
                     echo "<select id='status_pembayaran_" . $row["id_pesanantiketbus"] . "' onchange='updateStatus(" . $row["id_pesanantiketbus"] . ")'>";
                     echo "<option value='Belum Lunas'" . ($row["status_pembayaran"] == "Belum Lunas" ? " selected" : "") . ">Belum Lunas</option>";
                     echo "<option value='Lunas'" . ($row["status_pembayaran"] == "Lunas" ? " selected" : "") . ">Lunas</option>";
+                    echo "<option value='Refunded'" . ($row["status_pembayaran"] == "Refunded" ? " selected" : "") . ">Refunded</option>";
                     echo "</select>";
                     echo "</td>";
                     echo "<td>" . $row["harga"] . "</td>";

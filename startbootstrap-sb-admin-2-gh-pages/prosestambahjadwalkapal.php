@@ -27,7 +27,7 @@ if (isset($_POST['id_vendor'])) {
 // Memasukkan data ke dalam database
 // Memasukkan data ke dalam database
 $query = "INSERT INTO jadwal_tiket_kapal (waktu_keberangkatan, waktu_kedatangan, pelabuhan_keberangkatan, 
-pelabuhan_kedatangan, harga, kategori, kapasitas_stok_tiket, deskripsi_jadwal, id_vendor, status_jadwal)
+pelabuhan_kedatangan, harga, kelas, kapasitas_stok_tiket, deskripsi_jadwal, id_vendor, status_jadwal)
 VALUES ('$waktu_keberangkatan', '$waktu_kedatangan', '$pelabuhan_keberangkatan', 
 '$pelabuhan_kedatangan', $harga, '$kategori', $kapasitas_stok_tiket, '$deskripsi_jadwal', $id_vendorkapal, '$status_jadwal')";
 

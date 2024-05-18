@@ -35,7 +35,7 @@ if (
                 pelabuhan_keberangkatan = '$pelabuhan_keberangkatan',
                 pelabuhan_kedatangan = '$pelabuhan_kedatangan',
                 harga = $harga,
-                kategori = '$kategori',
+                kelas = '$kategori',
                 kapasitas_stok_tiket = $kapasitas_stok_tiket,
                 deskripsi_jadwal = '$deskripsi_jadwal',
                 status_jadwal = '$status_jadwal'

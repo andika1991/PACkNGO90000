@@ -254,21 +254,17 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                
-                     
-                    </div>
+              
 
                   
-                    <h3>Pesanan Tiket Pesawat </h3>
+                    <h3>Pesanan Tiket Bus </h3>
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
                 <th>Invoice ID</th>
-                <th>Bandara Keberangkatan</th>
-                <th>Bandara Tujuan</th>
+                <th>Pelabuhan Keberangkatan</th>
+                <th>Pelabuhan Tujuan</th>
                 <th>Nama Vendor</th>
                 <th>Bukti Bayar</th>
                 <th>Status Pembayaran</th>
@@ -283,7 +279,7 @@
             <?php
             include 'koneksi.php';
 
-            $query = "SELECT pb.id_pesanantiket,pb.invoice_id, jtb.bandara_keberangkatan, jtb.bandara_kedatangan, vb.nama_vendor, mp.nama_metode, pb.bukti_bayar, pb.status_pembayaran, jtb.harga, uo.username_pengguna, pb.TIMEORDER FROM pesanantiketpesawat pb JOIN jadwal_tiket_pesawat jtb ON pb.id_jadwaltiketpesawat = jtb.id_jadwaltiketpesawat JOIN vendor_pesawat vb ON jtb.id_vendorpesawat = vb.id_vendorpesawat JOIN metodepembayaran mp ON pb.id_metode = mp.id_metode JOIN pengguna uo ON pb.id_pengguna = uo.id_pengguna ORDER BY pb.TIMEORDER DESC";
+            $query = "SELECT pb.id_pesanantiketkapal,pb.invoice_id, jtb.pelabuhan_keberangkatan, jtb.pelabuhan_kedatangan, vb.nama_vendor, mp.nama_metode, pb.bukti_bayar, pb.status_pembayaran, jtb.harga, uo.username_pengguna, pb.TIMEORDER FROM pesanantiketkapal pb JOIN jadwal_tiket_kapal jtb ON pb.id_jadwaltiketkapal = jtb.id_jadwaltiketkapal JOIN vendor_kapal vb ON jtb.id_vendor = vb.id_vendor JOIN metodepembayaran mp ON pb.id_metode = mp.id_metode JOIN pengguna uo ON pb.id_pengguna = uo.id_pengguna ORDER BY pb.TIMEORDER DESC";
 
             $result = mysqli_query($conn, $query);
 
@@ -291,8 +287,8 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $row["invoice_id"] . "</td>";
-                    echo "<td>" . $row["bandara_keberangkatan"] . "</td>";
-                    echo "<td>" . $row["bandara_kedatangan"] . "</td>";
+                    echo "<td>" . $row["pelabuhan_keberangkatan"] . "</td>";
+                    echo "<td>" . $row["pelabuhan_kedatangan"] . "</td>";
                     echo "<td>" . $row["nama_vendor"] . "</td>";
                     if (!empty($row["bukti_bayar"])) {
                         // Jika ada, tampilkan tautan untuk melihat bukti bayar
@@ -304,7 +300,7 @@
             
           
                     echo "<td>";
-                    echo "<select id='status_pembayaran_" . $row["id_pesanantiket"] . "' onchange='updateStatus(" . $row["id_pesanantiket"] . ")'>";
+                    echo "<select id='status_pembayaran_" . $row["id_pesanantiketkapal"] . "' onchange='updateStatus(" . $row["id_pesanantiketkapal"] . ")'>";
                     echo "<option value='Belum Lunas'" . ($row["status_pembayaran"] == "Belum Lunas" ? " selected" : "") . ">Belum Lunas</option>";
                     echo "<option value='Lunas'" . ($row["status_pembayaran"] == "Lunas" ? " selected" : "") . ">Lunas</option>";
                     echo "<option value='Refunded'" . ($row["status_pembayaran"] == "Refunded" ? " selected" : "") . ">Refunded</option>";
@@ -315,7 +311,7 @@
                     echo "<td>" . $row["username_pengguna"] . "</td>";
                     echo "<td>" . $row["TIMEORDER"] . "</td>";
                     echo "<td>
-                    <a href='detailtiketpesawat.php?id=" . $row["id_pesanantiket"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>
+                    <a href='detailtiketkapal.php?id=" . $row["id_pesanantiketkapal"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>
                 </td>";
                     echo "</tr>";
                 }
@@ -329,19 +325,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-    function updateStatus(id_pesanantiketpesawat) {
-        var status_pembayaran = $("#status_pembayaran_" + id_pesanantiketpesawat).val(); // Dapatkan nilai dropdown menggunakan jQuery
+    function updateStatus(id_pesanantiketkapal) {
+        var status_pembayaran = $("#status_pembayaran_" + id_pesanantiketkapal).val(); // Dapatkan nilai dropdown menggunakan jQuery
 
         var confirmation = confirm("Apakah Anda yakin ingin mengupdate status pembayaran menjadi '" + status_pembayaran + "'?");
 
         if (confirmation) {
             // Buat objek FormData untuk mengirim data ke PHP
             var formData = new FormData();
-            formData.append('id_pesanantiket', id_pesanantiketpesawat);
+            formData.append('id_pesanantiketkapal', id_pesanantiketkapal);
             formData.append('status_pembayaran', status_pembayaran);
 
             // Kirim permintaan POST ke update_status_pembayaran.php
-            fetch('update_status_pembayaranpesawat.php', {
+            fetch('update_status_pembayarankapal.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -357,8 +353,8 @@
                     // Tampilkan pesan kesalahan kepada pengguna jika terjadi kesalahan saat memperbarui status pembayaran
                 });
         } else {
-            var previousValue = $("#status_pembayaran_" + id_pesanantiketpesawat).data("previous-value"); // Dapatkan nilai sebelumnya dari data-previous-value
-            $("#status_pembayaran_" + id_pesanantiketpesawat).val(previousValue); // Setel nilai dropdown kembali ke nilai sebelumnya
+            var previousValue = $("#status_pembayaran_" + id_pesanantiketkapal).data("previous-value"); // Dapatkan nilai sebelumnya dari data-previous-value
+            $("#status_pembayaran_" + id_pesanantiketkapal).val(previousValue); // Setel nilai dropdown kembali ke nilai sebelumnya
         }
     }
 </script>

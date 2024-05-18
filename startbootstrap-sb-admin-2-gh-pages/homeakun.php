@@ -466,7 +466,7 @@ label {
             padding: 5px; /* Memberikan sedikit padding */
             border: 1px solid #ccc; /* Memberikan batas yang jelas */
             border-radius: 4px; /* Memberikan tepi melengkung */
-            width: 100%; /* Memastikan select menyesuaikan lebar */
+            width: 100%; 
         }
 
 /* Kontainer formulir dengan tata letak vertikal */
@@ -482,36 +482,36 @@ label {
     margin-bottom: 20px; /* Memberikan jarak dari elemen lain di bawah */
 }
 
-/* Gaya untuk tombol */
+
 .submit-button {
  
   
-    width: 900px; /* adjust the width to your liking */
-  height: 40px; /* adjust the height to your liking */
+    width: 900px; 
+  height: 40px; 
  
-  font-size: 16px; /* increase the font size to make the text more prominent */
-    background: #0071CC; /* Warna latar */
-    color: white; /* Warna teks putih */
-    border: none; /* Menghilangkan batas */
-    border-radius: 5px; /* Tepi melengkung */
-    text-align: center; /* Menyelaraskan teks ke tengah */
-    cursor: pointer; /* Kursor tangan saat hover */
+  font-size: 16px; 
+    background: #0071CC; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    text-align: center; 
+    cursor: pointer; 
 
-    align-self: flex-end; /* Memastikan tombol di ujung kanan jika dalam flexbox */
+    align-self: flex-end; 
 
 
 
 }
 
 .submit-button:hover {
-    background: #0056b3; /* Warna saat hover */
+    background: #0056b3; 
 }
 
-/* Atur input dan select untuk tata letak vertikal */
+
 .form-group {
-    display: flex; /* Menggunakan flexbox */
-    flex-direction: column; /* Tata letak vertikal */
-    gap: 20px; /* Jarak antar-elemen dalam grup */
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
 }
 
    
@@ -528,7 +528,7 @@ label {
                 <li><a href="homeakun.php">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.php">FAQ</a></li>
 
                 <?php
                 // Periksa apakah pengguna sudah login
@@ -546,27 +546,61 @@ label {
         </nav>
     </header>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div id="carouselExampleAutoplaying" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="img/Group 1.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="img/gb21.jpg"class="d-block w-100" alt="...">
+      <img src="img/gb21.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="img/gabak.svg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/Group 3.svg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/Group 4.svg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/Group 5.svg" class="d-block w-100" alt="...">
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    
+  <!-- Tombol navigasi ke slide sebelumnya -->
+  <a class="carousel-control-prev" href="#" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <!-- Tombol navigasi ke slide berikutnya -->
+  <a class="carousel-control-next" href="#" role="button" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
-  </button>
+  </a>
 </div>
+
+<script>
+  $(document).ready(function() {
+    // Tambahkan event listener untuk tombol navigasi carousel
+    $('.carousel-control-next').click(function(e) {
+      e.preventDefault(); // Mencegah perilaku standar dari tombol
+      $('#carouselExampleAutoplaying').carousel('next');
+    });
+
+    $('.carousel-control-prev').click(function(e) {
+      e.preventDefault(); // Mencegah perilaku standar dari tombol
+      $('#carouselExampleAutoplaying').carousel('prev');
+    });
+  });
+</script>
+
+
 
 <section class="romu"> 
     <br>
@@ -1916,12 +1950,15 @@ label {
     <label for="date">Tanggal Pergi</label>
     <input class="form-control" type="date" id="date" name="date" required><br><br>  </div>
     <div class="waktu">
-    <h6><img src="img/icon.svg">Pilih Kelas</h6> <br>
-    <label for="class">Kelas</label>
+    <h6><img src="img/icon.svg">Pilih Golongan</h6> <br>
+    <label for="class">Golongan</label>
   <select class="form-control" id="class" name="class"> <br>
-  <option  >Pilih Kelas</option>
-    <option  value="Ekonomi">Ekonomi</option>
-    <option  value="Bisnis">Bisnis</option>
+  <option  >Pilih Golongan</option>
+  <option  value="Ekonomi">Pejalan kaki</option>
+    <option  value="Ekonomi">Bermotor</option>
+    <option  value="Mobil">Mobil</option>
+    <option  value="Truk">Truk</option>
+    <option  value="Bus">Bus</option>
   </select><br>
             </div>
     <button type="submit" class="submit-button">Cari Tiket</button>
@@ -1946,7 +1983,7 @@ label {
         var selectKeberangkatan = document.getElementById("pelabuhan_keberangkatan");
         var inputSearchKeberangkatan = document.createElement("input");
         inputSearchKeberangkatan.setAttribute("type", "text");
-        inputSearchKeberangkatan.setAttribute("placeholder", "Cari Bandara keberangkatan...");
+        inputSearchKeberangkatan.setAttribute("placeholder", "Cari Pelabuhan keberangkatan...");
         inputSearchKeberangkatan.addEventListener("input", function() {
             filterOptions(selectKeberangkatan, inputSearchKeberangkatan);
         });
@@ -1955,7 +1992,7 @@ label {
         var selectKedatangan = document.getElementById("pelabuhan_kedatangan");
         var inputSearchKedatangan = document.createElement("input");
         inputSearchKedatangan.setAttribute("type", "text");
-        inputSearchKedatangan.setAttribute("placeholder", "Cari Bandara kedatangan...");
+        inputSearchKedatangan.setAttribute("placeholder", "Cari Pelabuhan kedatangan...");
         inputSearchKedatangan.addEventListener("input", function() {
             filterOptions(selectKedatangan, inputSearchKedatangan);
         });
@@ -1978,48 +2015,72 @@ label {
 			      </div>
 			</section>
 
-<div id="carouselExample" class="carousel slide" data-ride="carousel">
-        <!-- Indikator carousel -->
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExample" data-slide-to="1"></li>
-            <li data-target="#carouselExample" data-slide-to="2"></li>
-        </ol>
+            <div id="carouselExample" class="carousel slide" data-ride="carousel">
+    <h2 style="text-align:center;">Apa kata Mereka</h2>
+    <h3 style="text-align:center;">Simak Ulasan Pelanggan-Pelanggan PACKNGO</h3>
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExample" data-slide-to="1"></li>
+        <li data-target="#carouselExample" data-slide-to="2"></li>
+    </ol>
 
-        <!-- Isi carousel -->
-        <div class="carousel-inner">
-            <!-- Item pertama -->
-            <div class="carousel-item active">
-                <h3>Simak Ulasan Pelanggan-Pelanggan PACKNGO</h3>
-                <div>
-                    <!-- Dua shape persegi -->
-                    <div class="square"></div>
-                    <div class="square"></div>
-                </div>
-            </div>
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+    <!-- Indikator carousel -->
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExample" data-slide-to="1"></li>
+        <li data-target="#carouselExample" data-slide-to="2"></li>
+    </ol>
 
-            <!-- Item kedua -->
-            <div class="carousel-item">
-                <h3>Penilaian Pelanggan 2</h3>
-                <div>
-                    <!-- Dua shape persegi -->
-                    <div class="square"></div>
-                    <div class="square"></div>
-                </div>
-        
-            </div>
+    <!-- Isi carousel -->
+    <div class="carousel-inner">
+        <?php
+        include 'koneksi.php';
 
-            <!-- Item ketiga -->
-            <div class="carousel-item">
-                <h3>Penilaian Pelanggan 3</h3>
-                <div>
-                    <!-- Dua shape persegi -->
-                    <div class="square"></div>
-                    <div class="square"></div>
-                </div>
-       
-            </div>
-        </div>
+        // Ambil ulasan pelanggan dari database
+        $query = "SELECT * FROM feedback";
+        $result = mysqli_query($conn, $query);
+
+        // Periksa apakah ada hasil yang ditemukan
+        if (mysqli_num_rows($result) > 0) {
+            // Bagi ulasan menjadi kelompok dengan masing-masing kelompok memiliki 3 ulasan
+            $reviews = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $reviews[] = $row;
+            }
+
+            $chunks = array_chunk($reviews, 2);
+
+            // Loop melalui setiap kelompok ulasan
+            foreach ($chunks as $index => $chunk) {
+                // Tentukan kelas active untuk item pertama
+                $activeClass = $index === 0 ? 'active' : '';
+
+                // Tampilkan kelompok ulasan dalam carousel item
+                echo '<div class="carousel-item ' . $activeClass . '">';
+                foreach ($chunk as $review) {
+                    echo '<div class="square">';
+                    echo '<h3 style="font-weight:bold; padding:20px;">' . $review['nama'] . '</h3>';
+                    echo '<div>';
+                    echo '<p  style="color:white;">Kualitas Pelayanan :' . $review['p1'] . '</p>';
+                    echo '<p  style="color:white;"> Penilaian User Interface :' . $review['p2'] . '</p>';
+                    echo '<p  style="color:white;">' . $review['saran'] . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+        } else {
+            // Tampilkan pesan jika tidak ada ulasan yang ditemukan
+            echo '<div class="carousel-item active">';
+            echo '<h3>Tidak ada ulasan tersedia saat ini</h3>';
+            echo '</div>';
+        }
+        ?>
+    </div>
+</div>
+
+
 
         <!-- Kontrol Carousel -->
         <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
