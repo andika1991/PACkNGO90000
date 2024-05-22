@@ -456,7 +456,7 @@ main{
                 <li><a href="homeakun.php#pesawat-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.php">FAQ</a></li>
 
                 <?php
                 // Periksa apakah pengguna sudah login
@@ -500,10 +500,10 @@ if (isset($_SESSION['username_pengguna'])) {
              
                     $user_data = mysqli_fetch_assoc($result);
                     $user_id = $user_data['id_pengguna'];
-                    echo "<img src='img/gvhg.svg' style='width:180px;height:110px; margin-left:300px; margin-bottom:240px;'>";
+                    echo "<img src='img/gvhg.svg' style='width:180px;height:110px; margin-left:240px; margin-bottom:240px;'>";
                     echo "<div class='user-info'>";
-                    echo "<h2  style='color:black; margin-left:750px; margin-top:-220px;'> " . $user_data['username_pengguna'] . "</h2>"; 
-                    echo "<p  style='color:black; margin-left:700px;'>Email: " . $user_data['email'] . "</p>"; 
+                    echo "<h2  style='color:black; margin-left:650px; margin-top:-220px;'> " . $user_data['username_pengguna'] . "</h2>"; 
+                    echo "<p  style='color:black; margin-left:650px;'>Email: " . $user_data['email'] . "</p>"; 
                     echo "<a style='
                     background-color: #0071CC;
                     display: inline-block;
@@ -516,7 +516,7 @@ if (isset($_SESSION['username_pengguna'])) {
                     border-radius: 5px;
                     cursor: pointer;
                     margin-top:60px;
-                    margin-left: calc(62% - 100px);
+                    margin-left: calc(58% - 100px);
                     ' href='editprofil.php?id_pengguna=" . $user_id . "'>Edit Profil</a>";
                     echo "</div>";
                    

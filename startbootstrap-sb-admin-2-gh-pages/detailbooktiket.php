@@ -396,7 +396,7 @@ echo "<div style='font-size: 23px; color: #0C2F54; position: absolute; top: 0; r
 
           
 echo "<div style='background-color: #007bff; padding: 10px; border-radius: 5px; border-radius: 8px; max-width: 1296px; margin: 0 auto; '>";
-echo "<p style='  display: flex;justify-content: center; margin-bottom: 10px; color: #fff;  font-size: 32px;font-weight: 700;'>Deskripsi</p>";
+echo "<p style='  display: flex;justify-content: center; margin-bottom: 10px; color: #fff;  font-size: 32px;font-weight: 700;'>Informasi Tambahan</p>";
 echo "<p style='color: #fff;'>" . $row['deskripsi_jadwal'] . "</p>";
 echo "</div>";
 
@@ -420,7 +420,7 @@ echo "</div>";
 
 
             echo "<a href='isidata.php?id=" . $row['id_jadwaltiketbus'] . "' class='button-beli' ><img src='img/isidata.svg'>Lanjut Pengisian Data</a>";
-            // Tampilkan detail lainnya...
+      
         }
     } else {
         echo "Tiket tidak ditemukan.";

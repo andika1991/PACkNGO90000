@@ -272,6 +272,7 @@ if(isset($_GET['id'])) {
         $kapasitas_stok_tiket = $row['kapasitas_stok_tiket'];
         $nomor_penerbangan=$row['nomor_penerbangan'];
         $deskripsi_jadwal = $row['deskripsi_jadwal'];
+        $status_jadwal = $row['status_jadwal'];
     } else {
         // Handle if no data found
         echo "Data tidak ditemukan.";
@@ -619,7 +620,7 @@ if(isset($_GET['id'])) {
         <input type="number" class="form-control" id="kapasitas_stok_tiket" name="kapasitas_stok_tiket" value="<?php echo $kapasitas_stok_tiket; ?>" required>
     </div>
     <div class="form-group">
-    <label for="deskripsi_jadwal">Deskripsi Jadwal:</label>
+    <label for="deskripsi_jadwal">Informasi Tambahan:</label>
     <textarea class="form-control" id="deskripsi_jadwal" name="deskripsi_jadwal" rows="8" required><?php echo $deskripsi_jadwal; ?></textarea>
 </div>
 <div class="form-group">
@@ -628,24 +629,35 @@ if(isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="status_jadwal">Status:</label>
-        <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia"  required>
+        <select class="form-control" id="status_jadwal" name="status_jadwal" required>
+        <option value="Tersedia"<?php if($status_jadwal == "Tersedia") echo "selected"; ?>>Tersedia</option>
+        <option value="On Going"<?php if($status_jadwal == "On Going") echo "selected"; ?>>On Going</option>
+        <option value="Arrived"<?php if($status_jadwal == "Arrived") echo "selected"; ?>>Arrived</option>
     </div>
+
     <div class="form-group">
     <label for="id_vendorpesawat">Vendor:</label>
     <select class="form-control" id="id_vendorpesawat" name="id_vendorpesawat" required>
         <?php
-        // Sisipkan opsi vendor dari database
+        // Include database connection
         include 'koneksi.php';
+        
+        // Query to fetch vendor data
         $query = "SELECT id_vendorpesawat, nama_vendor FROM vendor_pesawat";
         $result = mysqli_query($conn, $query);
+        
+        // Check if there are rows returned from the query
         if (mysqli_num_rows($result) > 0) {
+            // Loop through each row
             while($row = mysqli_fetch_assoc($result)) {
+                // Display each vendor as an option in the dropdown
                 echo "<option value='" . $row["id_vendorpesawat"] . "'>" . $row["nama_vendor"] . " - " . $row["id_vendorpesawat"] . "</option>";
             }
         }
         ?>
     </select>
 </div>
+
 
     </div>
     <button type="submit" class="btn btn-primary">Update Jadwal</button>

@@ -403,7 +403,7 @@ while ($row = mysqli_fetch_assoc($result_pesawat)):
                         <td><?php echo $row['status_pembayaran']; ?></td>
             <td>
                 <a class="detail" href="tiketpesawatterbit.php?invoice_id=<?= $row['invoice_id'] ?>">Unduh E-Tiket</a>
-                <a class="batalkan" href="#" id-pesanan="<?= $row['id_pesanantiket'] ?>">Batalkan</a>
+                <a class="batalkan" href="#" data-id-pesanan="<?= $row['id_pesanantiket'] ?>" data-type="pesawat">Batalkan</a>
             </td>
         </tr>
         <?php
@@ -426,48 +426,7 @@ while ($row = mysqli_fetch_assoc($result_pesawat)):
 endwhile;
 
 ?>
-<!-- Pop-up HTML -->
-<div id="pop" style="display: none;">
-    <div id="pop-content">
-        <h2 style="font-weight:bold;">Mohon Dibaca dulu...!</h2>
-        <p  style="color:black; font-size:18px;">1.Silahkan anda hubungi customer service terlebih dahulu untuk melakukan konfirmasi pembatalan bisa atau tidaknya </p>
-        <img src="img/img1990.svg">
-        <a href="https://api.whatsapp.com/send?phone=6289507832333" target="blank">Klik disini untuk hubungi admin</a>
-        <p style="color:black; font-size:18px;">2.Jika sudah menghubungi dan disetujui silahkan langsung klik tombol Batalkan tiket dibawah ini,pengembalian uang akan dilakukan melalui customer service</p>
-        <button id="confirm-btn">Ya</button>
-        <button id="cancel-btn">Tidak</button>
-    </div>
-</div>
 
-<script>
-    // Tambahkan event listener ke setiap tautan "Batalkan"
-    document.querySelectorAll('.batalkan').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Hentikan tindakan default
-            
-            var invoiceID = link.getAttribute('id-pesanan'); // Ambil ID invoice
-            var popup = document.getElementById('pop');
-            
-            // Tampilkan pop-up
-            popup.style.display = 'flex'; // Gunakan 'flex' untuk menampilkan dengan CSS Flexbox
-            
-            // Fungsi untuk menutup pop-up
-            function closePopup() {
-                popup.style.display = 'none';
-            }
-            
-            // Tangani klik tombol "Ya"
-            document.getElementById('confirm-btn').onclick = function() {
-                window.location.href = 'batalkantiketpesawat.php?id=' + invoiceID; // Alihkan ke halaman batalkantiket.php dengan ID invoice
-            };
-            
-            // Tangani klik tombol "Tidak"
-            document.getElementById('cancel-btn').onclick = function() {
-                closePopup(); // Tutup pop-up
-            };
-        });
-    });
-</script>
 <?php while ($row = mysqli_fetch_assoc($result_kapal)): ?>
                 <?php
                 $waktu_keberangkatan = strtotime($row['waktu_keberangkatan']);
@@ -485,7 +444,7 @@ endwhile;
                         <td><?= $row['status_pembayaran'] ?></td>
                         <td>
                             <a class="detail" href="tiketkapalterbit.php?invoice_id=<?= $row['invoice_id'] ?>">Unduh E-Tiket</a>
-                            <a class="batalkan" href="#" id-pesanan="<?= $row['id_pesanantiketkapal'] ?>">Batalkan</a>
+                            <a class="batalkan" href="#" data-id-pesanan="<?= $row['id_pesanantiketkapal'] ?>" data-type="kapal">Batalkan</a>
                         </td>
                     </tr>
                     <?php
@@ -520,33 +479,32 @@ endwhile;
 </div>
 
 <script>
-    // Tambahkan event listener ke setiap tautan "Batalkan"
+document.addEventListener('DOMContentLoaded', function() {
+    var popup = document.getElementById('pop');
+    var confirmBtn = document.getElementById('confirm-btn');
+    var cancelBtn = document.getElementById('cancel-btn');
+    var selectedPesananId;
+    var selectedType;
+
     document.querySelectorAll('.batalkan').forEach(function(link) {
         link.addEventListener('click', function(event) {
             event.preventDefault(); // Hentikan tindakan default
-            
-            var invoiceID = link.getAttribute('id-pesanan'); // Ambil ID invoice
-            var popup = document.getElementById('pop');
-            
-            // Tampilkan pop-up
-            popup.style.display = 'flex'; // Gunakan 'flex' untuk menampilkan dengan CSS Flexbox
-            
-            // Fungsi untuk menutup pop-up
-            function closePopup() {
-                popup.style.display = 'none';
-            }
-            
-            // Tangani klik tombol "Ya"
-            document.getElementById('confirm-btn').onclick = function() {
-                window.location.href = 'batalkantiketkapal.php?id=' + invoiceID; // Alihkan ke halaman batalkantiket.php dengan ID invoice
-            };
-            
-            // Tangani klik tombol "Tidak"
-            document.getElementById('cancel-btn').onclick = function() {
-                closePopup(); // Tutup pop-up
-            };
+
+            selectedPesananId = this.getAttribute('data-id-pesanan'); // Ambil ID pesanan dari atribut data
+            selectedType = this.getAttribute('data-type'); // Ambil tipe pesanan dari atribut data
+            popup.style.display = 'flex'; // Tampilkan pop-up dengan CSS Flexbox
         });
     });
+
+    confirmBtn.addEventListener('click', function() {
+        window.location.href = 'batalkantiket.php?id=' + selectedPesananId + '&type=' + selectedType;
+    });
+
+    cancelBtn.addEventListener('click', function() {
+        popup.style.display = 'none'; // Tutup pop-up
+    });
+});
+
 </script>
 <?php
 while ($row = mysqli_fetch_assoc($result_bus)):
@@ -567,7 +525,7 @@ while ($row = mysqli_fetch_assoc($result_bus)):
                         <td><?php echo $row['status_pembayaran']; ?></td>
             <td>
                 <a class="detail" href="tiketbusterbit.php?invoice_id=<?= $row['invoice_id'] ?>">Unduh-E Tiket</a>
-                <a class="batalkan" href="#"id-pesanan="<?= $row['id_pesanantiketbus'] ?>">Batalkan</a>
+                <a class="batalkan" href="#" data-id-pesanan="<?= $row['id_pesanantiketbus'] ?>" data-type="bus">Batalkan</a>
             </td>
         </tr>
         <?php
@@ -589,48 +547,6 @@ while ($row = mysqli_fetch_assoc($result_bus)):
     }
 endwhile;
 ?>
-<!-- Pop-up HTML -->
-<div id="pop" style="display: none;">
-    <div id="pop-content">
-        <h2 style="font-weight:bold;">Mohon Dibaca dulu...!</h2>
-        <p  style="color:black; font-size:18px;">1.Silahkan anda hubungi customer service terlebih dahulu untuk melakukan konfirmasi pembatalan bisa atau tidaknya </p>
-        <img src="img/img1990.svg">
-        <a href="https://api.whatsapp.com/send?phone=6289507832333" target="blank">Klik disini untuk hubungi admin</a>
-        <p style="color:black; font-size:18px;">2.Jika sudah menghubungi dan disetujui silahkan langsung klik tombol Batalkan tiket dibawah ini,pengembalian uang akan dilakukan melalui customer service</p>
-        <button id="confirm-btn">Ya</button>
-        <button id="cancel-btn">Tidak</button>
-    </div>
-</div>
-
-<script>
-    // Tambahkan event listener ke setiap tautan "Batalkan"
-    document.querySelectorAll('.batalkan').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Hentikan tindakan default
-            
-            var invoiceID = link.getAttribute('id-pesanan'); // Ambil ID invoice
-            var popup = document.getElementById('pop');
-            
-            // Tampilkan pop-up
-            popup.style.display = 'flex'; // Gunakan 'flex' untuk menampilkan dengan CSS Flexbox
-            
-            // Fungsi untuk menutup pop-up
-            function closePopup() {
-                popup.style.display = 'none';
-            }
-            
-            // Tangani klik tombol "Ya"
-            document.getElementById('confirm-btn').onclick = function() {
-                window.location.href = 'batalkantiketbus.php?id=' + invoiceID; // Alihkan ke halaman batalkantiket.php dengan ID invoice
-            };
-            
-            // Tangani klik tombol "Tidak"
-            document.getElementById('cancel-btn').onclick = function() {
-                closePopup(); // Tutup pop-up
-            };
-        });
-    });
-</script>
 
 
 
@@ -653,7 +569,7 @@ while ($row = mysqli_fetch_assoc($result_kereta)):
                         <td><?php echo $row['status_pembayaran']; ?></td>
             <td>
                 <a class="detail" href="tiketkeretaterbit.php?id=<?= $row['invoice_id'] ?>">Unduh E-Tiket</a>
-                <a class="batalkan" href="#"id-pesanan="<?= $row['id_pesanantiket'] ?>">Batalkan</a>
+                <a class="batalkan" href="#" data-id-pesanan="<?= $row['id_pesanantiket'] ?>" data-type="kereta">Batalkan</a>
             </td>
         </tr>
         <?php
@@ -675,48 +591,7 @@ while ($row = mysqli_fetch_assoc($result_kereta)):
     }
 endwhile;
 ?>
-<!-- Pop-up HTML -->
-<div id="pop" style="display: none;">
-    <div id="pop-content">
-        <h2 style="font-weight:bold;">Mohon Dibaca dulu...!</h2>
-        <p  style="color:black; font-size:18px;">1.Silahkan anda hubungi customer service terlebih dahulu untuk melakukan konfirmasi pembatalan bisa atau tidaknya </p>
-        <img src="img/img1990.svg">
-        <a href="https://api.whatsapp.com/send?phone=6289507832333" target="blank">Klik disini untuk hubungi admin</a>
-        <p style="color:black; font-size:18px;">2.Jika sudah menghubungi dan disetujui silahkan langsung klik tombol Batalkan tiket dibawah ini,pengembalian uang akan dilakukan melalui customer service</p>
-        <button id="confirm-btn">Ya</button>
-        <button id="cancel-btn">Tidak</button>
-    </div>
-</div>
 
-<script>
-    // Tambahkan event listener ke setiap tautan "Batalkan"
-    document.querySelectorAll('.batalkan').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Hentikan tindakan default
-            
-            var invoiceID = link.getAttribute('id-pesanan'); // Ambil ID invoice
-            var popup = document.getElementById('pop');
-            
-            // Tampilkan pop-up
-            popup.style.display = 'flex'; // Gunakan 'flex' untuk menampilkan dengan CSS Flexbox
-            
-            // Fungsi untuk menutup pop-up
-            function closePopup() {
-                popup.style.display = 'none';
-            }
-            
-            // Tangani klik tombol "Ya"
-            document.getElementById('confirm-btn').onclick = function() {
-                window.location.href = 'batalkantiketkereta.php?id=' + invoiceID; // Alihkan ke halaman batalkantiket.php dengan ID invoice
-            };
-            
-            // Tangani klik tombol "Tidak"
-            document.getElementById('cancel-btn').onclick = function() {
-                closePopup(); // Tutup pop-up
-            };
-        });
-    });
-</script>
             </tbody>
         </table>
     <?php else: ?>

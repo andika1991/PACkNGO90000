@@ -1,12 +1,13 @@
 <?php
+require_once 'TCPDF/tcpdf.php'; // Path ke file tcpdf.php
+
+// Koneksi ke database
 include 'koneksi.php';
-require('fpdf186/fpdf.php');
-require 'phpqrcode/qrlib.php';
 
 if (isset($_GET['invoice_id'])) {
- 
     $invoice_id = $_GET['invoice_id'];
 
+    // Query untuk mendapatkan data tiket
     $query_select = "SELECT pa.invoice_id, pa.TIMEORDER, jtb.waktu_keberangkatan, jtb.waktu_kedatangan, jtb.kapasitas_stok_tiket, jtb.terminal_keberangkatan, jtb.terminal_kedatangan, jtb.harga, jtb.kelas, jtb.no_kendaraan, jtb.status_jadwal, vb.nama_vendor, vb.logo_vendor, vb.alamat_vendor, dpb.jenis_kelamin, dpb.nik, dpb.nama_lengkap, dpb.no_hp, dpb.email, dpb.kursi, mp.nama_metode, mp.nomor_metode, mp.logo_metode, mp.Deksripsi_metode, pa.status_pembayaran 
     FROM pesanantiketbus AS pa 
     JOIN jadwal_tiket_bus AS jtb ON pa.id_jadwaltiketbus = jtb.id_jadwaltiketbus 
@@ -15,69 +16,74 @@ if (isset($_GET['invoice_id'])) {
     JOIN metodepembayaran AS mp ON pa.id_metode = mp.id_metode 
     WHERE pa.invoice_id = ?";
 
-
     if ($stmt = $conn->prepare($query_select)) {
-
         $stmt->bind_param("s", $invoice_id);
-
-
         $stmt->execute();
-
-
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
- 
-            $pdf = new FPDF();
+            $pdf = new TCPDF();
             $pdf->AddPage();
 
-            // Judul
-            $pdf->SetFont('Arial', 'B', 16);
-            $pdf->Cell(190, 10, 'E-Ticket', 0, 1, 'C');
+            // CSS styling
+            $css = "
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 12px;
+                    }
+                    .invoice {
+                        padding: 20px;
+                        border: 1px solid #ccc;
+                        border-radius: 10px;
+                        background-color: #f9f9f9;
+                    }
+                    .logo {
+                        max-width: 100px;
+                    }
+                    h1 {
+                        font-size: 24px;
+                    }
+                    .details {
+                        margin-top: 20px;
+                    }
+                    .details p {
+                        margin: 0;
+                        padding: 5px 0;
+                    }
 
-            // Baris kosong
-            $pdf->Ln(10);
+                    
+                </style>
+            ";
+
+            $html = $css . '<div class="invoice">';
+            $html .= '<h1>E-Ticket</h1>';
 
             while ($row = $result->fetch_assoc()) {
-            
-                // Informasi tiket
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(40, 10, 'Status Tiket: ' . $row['status_pembayaran'], 0, 1);
-                $pdf->Cell(40, 10, 'Nama PO: ' . $row['nama_vendor'], 0, 1);
-                $pdf->Cell(40, 10, 'LOGO PO: ', 0, 0);
-                $pdf->Image($row['logo_vendor'], 50, $pdf->GetY(), 40);
-                $pdf->Ln();
-                
-                $pdf->Cell(40, 10, 'Kelas: ' . $row['kelas'], 0, 1);
-                $pdf->Cell(40, 10, 'Nomor Kendaraan: ' . $row['no_kendaraan'], 0, 1);
-                $pdf->Cell(40, 10, 'Keberangkatan: ' . $row['terminal_keberangkatan'] . ' - ' . date('d/m/Y H:i', strtotime($row['waktu_keberangkatan'])), 0, 1);
-                $pdf->Cell(40, 10, 'Kedatangan: ' . $row['terminal_kedatangan'] . ' - ' . date('d/m/Y H:i', strtotime($row['waktu_kedatangan'])), 0, 1);
- 
-                // Informasi penumpang
-                $pdf->Cell(40, 10, 'Kursi: ' . $row['kursi'], 0, 1);
-                $pdf->Cell(40, 10, 'Nama Penumpang: ' . $row['nama_lengkap'], 0, 1);
-                $pdf->Cell(40, 10, 'NIK: ' . $row['nik'], 0, 1);
-                $pdf->Cell(40, 10, 'Jenis Kelamin: ' . $row['jenis_kelamin'], 0, 1);
-                $pdf->Cell(40, 10, 'No HP: ' . $row['no_hp'], 0, 1);
-                $pdf->Cell(40, 10, 'Email: ' . $row['email'], 0, 1);
-
-                // QR Code
-                $tempDir = 'qrcodes/';
-                if (!file_exists($tempDir)) {
-                    mkdir($tempDir);
-                }
-                $qrFile = $tempDir . 'qrcode_' . $row['invoice_id'] . '.png';
-                QRcode::png($verify_url, $qrFile, QR_ECLEVEL_L, 10);
-                $pdf->Cell(40, 10, 'QR Code: ', 0, 1);
-                $pdf->Image($qrFile, 10, $pdf->GetY(), 50, 0, 'PNG');
-
-                // Baris kosong
-                $pdf->Ln(10);
+                $html .= '<div class="details">';
+                $html .= '<p>Status Tiket: ' . $row['status_pembayaran'] . '</p>';
+                $html .= '<p>Nama PO: ' . $row['nama_vendor'] . '</p>';
+                $html .= '<img src="' . $row['logo_vendor'] . '" class="logo">';
+                $html .= '<p>Kelas: ' . $row['kelas'] . '</p>';
+                $html .= '<p>Nomor Kendaraan: ' . $row['no_kendaraan'] . '</p>';
+                $html .= '<p>Keberangkatan: ' . $row['terminal_keberangkatan'] . ' - ' . date('d/m/Y H:i', strtotime($row['waktu_keberangkatan'])) . '</p>';
+                $html .= '<p>Kedatangan: ' . $row['terminal_kedatangan'] . ' - ' . date('d/m/Y H:i', strtotime($row['waktu_kedatangan'])) . '</p>';
+                $html .= '<p>Kursi: ' . $row['kursi'] . '</p>';
+                $html .= '<p>Nama Penumpang: ' . $row['nama_lengkap'] . '</p>';
+                $html .= '<p>NIK: ' . $row['nik'] . '</p>';
+                $html .= '<p>Jenis Kelamin: ' . $row['jenis_kelamin'] . '</p>';
+                $html .= '<p>No HP: ' . $row['no_hp'] . '</p>';
+                $html .= '<p>Email: ' . $row['email'] . '</p>';
+                $html .= '</div>';
             }
 
-            // Output PDF dengan nama file "nama_file.pdf" dan langsung didownload
-            $pdf->Output('D', 'nam_file.pdf');
+            $html .= '</div>';
 
+            // Write HTML to PDF
+            $pdf->writeHTML($html, true, false, true, false, '');
+
+            // Output PDF
+            $pdf->Output('tiket_bus.pdf', 'I');
         } else {
             echo "Tiket tidak ditemukan.";
         }
@@ -89,6 +95,4 @@ if (isset($_GET['invoice_id'])) {
 } else {
     echo "ID Tiket tidak ditemukan.";
 }
-
 ?>
-

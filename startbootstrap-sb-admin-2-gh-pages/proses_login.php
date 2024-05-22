@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
     session_start();
     $_SESSION['email'] = $email;
 
-    header("Location: index.html");
+    header("Location: index.php");
 } else {
 
     echo "Login failed. Email or password is incorrect.";

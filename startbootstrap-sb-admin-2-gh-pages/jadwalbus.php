@@ -414,7 +414,7 @@
                 echo "<td>" . $row["no_kendaraan"] . "</td>";
                 echo "<td>" . $row["status_jadwal"] . "</td>";
                 echo "<td>
-                        <a href='detailjadwalbus.php?id=" . $row["id_jadwaltiketbus"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>
+                        
                         <a href='editjadwalbus.php?id=" . $row["id_jadwaltiketbus"] . "' class='btn btn-primary btn-sm edit-btn'>Edit</a>
                         <button class='btn btn-danger btn-sm delete-btn' data-id_jadwaltiketbus='" . $row["id_jadwaltiketbus"] . "' data-toggle='modal' data-target='#deleteModal'>Delete</button>
                       </td>";

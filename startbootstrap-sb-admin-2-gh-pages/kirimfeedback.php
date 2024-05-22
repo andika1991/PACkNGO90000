@@ -446,7 +446,7 @@ main{
 }
 
 .containerfaj {
-    width: 500px;
+    width: 600px;
     margin: 0 auto;
     background-color: #f8f8f8;
     border-radius: 10px;

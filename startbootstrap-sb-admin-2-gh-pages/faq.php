@@ -536,7 +536,7 @@ main{
 						<div class="bg-light-4 px-3 py-2 mb-1">
 							<div class="form-check">
 								<input id="q-w7" type="checkbox" class="form-check-input faq-topics-input" data-value="q-w7" checked="" data-faq="agency-sistem">
-								<label class="form-check-label" for="q-w7">Sistem Keagenan</label>
+								<label class="form-check-label" for="q-w7">Informasi lainnya</label>
 							</div>
 						</div>
 
@@ -613,7 +613,7 @@ main{
 						        <div id="faqPencarian1" class="accordion-collapse collapse show" aria-labelledby="pencarian1" data-bs-parent="#pencarian">
 						            <div class="accordion-body">
 						            	<p>Anda dapat melakukan pencarian rute penerbangan yang anda inginkan pada halaman pencarian dan mengikuti langkah-langkahnya, Untuk panduan pemesanan tiket dapat dilihat disini.</p>
-										<p>Anda dapat melakukan booking dan pembelian langsung di Faiz Travel setelah Anda melakukan pencarian.</p>
+										<p>Anda dapat melakukan booking dan pembelian langsung di PACK N GO setelah Anda melakukan pencarian.</p>
 										<p>Tidak ada biaya pemesanan (Booking Fee) untuk setiap pemesanan dan pembelian yang dilakukan.</p>
 									</div>
 						        </div>
@@ -746,7 +746,7 @@ main{
 						    <div class="accordion-item">
 						        <h2 class="accordion-header" id="refund1">
 						            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqRefund1" aria-expanded="true" aria-controls="faqRefund1">
-						            	Apakah bisa melakukan perubahan jadwal penerbangan melalui Faiz Travel						            </button>
+						            	Apakah bisa melakukan perubahan jadwal penerbangan melalui PACK N GO						            </button>
 						        </h2>
 						        <div id="faqRefund1" class="accordion-collapse collapse show" aria-labelledby="refund1" data-bs-parent="#refund">
 						            <div class="accordion-body">
@@ -758,13 +758,13 @@ main{
 						    <div class="accordion-item">
 						        <h2 class="accordion-header" id="refund2">
 						            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqRefund2" aria-expanded="false" aria-controls="faqRefund2">
-						            	Apakah bisa melakukan proses Refund melalui Faiz Travel? Apakah dikenakan biaya?
+						            	Apakah bisa melakukan proses Refund melalui PACK N GO? Apakah dikenakan biaya?
 						            </button>
 						        </h2>
 						        <div id="faqRefund2" class="accordion-collapse collapse" aria-labelledby="refund2" data-bs-parent="#refund">
 						            <div class="accordion-body">
 						            	<p>Bisa, kami akan membantu proses Refund ke maskapai. Namun perlu diperhatikan aturan, ketentuan dan prosedur tiap maskapai berbeda. Semisal, AirAsia, proses Refund <strong>HARUS</strong> dilakukan oleh penumpang itu sendiri.</p>
-										<p>Untuk biaya Refund melalui Faiz Travel, kami memberlakukan biaya administrasi sebesar Rp. 25.000,- per Kode Booking.</p>
+										<p>Untuk biaya Refund melalui PACK N GO, kami memberlakukan biaya administrasi sebesar Rp. 25.000,- per Kode Booking.</p>
 									</div>
 						        </div>
 						    </div>
@@ -772,18 +772,18 @@ main{
 					</div>
 
 					<div class="" id="agency-sistem">
-						<h4 class="block-title"><i class="fas fa-puzzle-piece text-primary"></i> Sistem Keagenan</h4>
+						<h4 class="block-title"><i class="fas fa-puzzle-piece text-primary"></i> Informasi lainnya</h4>
 						<hr class="mb-3">
 						<div class="accordion accordion-flush mb-4" id="keagenan">
 						    <div class="accordion-item">
 						        <h2 class="accordion-header" id="keagenan1">
 						            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqKeagenan1" aria-expanded="true" aria-controls="faqKeagenan1">
-						            	Faiz Travel memiliki sistem keagenan tiket pesawat?
+						            	Butuh informasi lainya mengenai PACK N GO ?
 						            </button>
 						        </h2>
 						        <div id="faqKeagenan1" class="accordion-collapse collapse show" aria-labelledby="keagenan1" data-bs-parent="#keagenan">
 						            <div class="accordion-body">
-										<p>Anda juga bisa mengirimkan email ke alamat <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f5f4e6e8e0eff5eeb9c1e6ece0e8edafe2eeec">[email&#160;protected]</a> dengan mencantumkan: Nama, Alamat, Nama Travel Agent, dan Nomor Kontak yang bisa dihubungi. Kami akan mengirimkan informasi seputar sistem keagenan kami kepada Anda.</p>
+										<p>Silahkan hubungi kami melalui whatsapp dan email yang tertera di customer service</p>
 									</div>
 						        </div>
 						    </div>

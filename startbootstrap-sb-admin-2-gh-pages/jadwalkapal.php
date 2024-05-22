@@ -16,10 +16,48 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<style>
+    /* Gaya untuk tombol sidebar toggler */
+.sidebar-toggler {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
 
+/* Gaya untuk sidebar yang diperkecil */
+#accordionSidebar.toggled {
+    width: 80px;
+}
+
+#accordionSidebar.toggled .sidebar-brand-text {
+    display: none;
+}
+
+#accordionSidebar.toggled .sidebar-brand-icon {
+    padding: 15px 0;
+}
+
+#accordionSidebar.toggled .nav-item .nav-link {
+    text-align: center;
+    padding: 10px;
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#accordionSidebar.toggled .nav-item .nav-link span {
+    display: none;
+}
+
+</style>
 </head>
 
 <body id="page-top">
@@ -29,13 +67,14 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+            <button class="sidebar-toggler">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">PACK N GO<sup>2</sup></div>
+               <img src="PACKNGO.png" width="30px" height="50px">
+                <div class="sidebar-brand-text mx-3">PACK N GO</div>
             </a>
 
             <!-- Divider -->
@@ -53,129 +92,97 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Userr
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Kelola Jadwal Tiket</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Jadwal Kereta</a>
-                        <a class="collapse-item" href="cards.html">Jadwal Kapal</a>
-                        <a class="collapse-item" href="cards.html">Jadwal Bus</a>
-                        <a class="collapse-item" href="cards.html">Jadwal Pesawat</a>
-                    </div>
-                </div>
-            </li>
+           <!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJadwal" aria-expanded="true" aria-controls="collapseJadwal">
+        <i class="bi bi-calendar-week"></i>
+        <span>Kelola Jadwal Tiket</span>
+    </a>
+    <div id="collapseJadwal" class="collapse" aria-labelledby="headingJadwal" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="jadwalpesawat.php">Jadwal Pesawat</a>
+            <a class="collapse-item" href="jadwalkereta.php">Jadwal Kereta</a>
+            <a class="collapse-item" href="jadwalkapal.php">Jadwal Kapal</a>
+            <a class="collapse-item" href="jadwalbus.php">Jadwal Bus</a>
+        </div>
+    </div>
+</li>
 
-                   <!-- Nav Item - Pages Collapse Menu -->
-                   <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Kelola Pesanan Tiket</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html">Pesanan tiket Kereta</a>
-                            <a class="collapse-item" href="cards.html">Pesanan tiket  Kapal</a>
-                            <a class="collapse-item" href="cards.html">Pesanan tiket Bus</a>
-                            <a class="collapse-item" href="cards.html">Pesanan Pesawat</a>
-                        </div>
-                    </div>
-                </li>
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePesanan" aria-expanded="true" aria-controls="collapsePesanan">
+        <i class="bi bi-ticket"></i>
+        <span>Kelola Pesanan Tiket</span>
+    </a>
+    <div id="collapsePesanan" class="collapse" aria-labelledby="headingPesanan" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="pesanantiketpesawat.php">Pesanan tiket Pesawat</a>
+            <a class="collapse-item" href="pesanantiketkereta.php">Pesanan tiket Kereta</a>
+            <a class="collapse-item" href="pesanantiketkapal.php">Pesanan tiket  Kapal</a>
+            <a class="collapse-item" href="pesanantiketbus.php">Pesanan tiket Bus</a>
+        </div>
+    </div>
+</li>
 
-                  <!-- Nav Item - Pages Collapse Menu -->
-                  <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Kelola Vendor</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html"> Vendor Bus</a>
-                            <a class="collapse-item" href="buttons.html"> Vendor Kereta</a>
-                            <a class="collapse-item" href="buttons.html"> Vendor Kapal</a>
-                            <a class="collapse-item" href="buttons.html"> Vendor Pesawat</a>
-                        </div>
-                    </div>
-                </li>
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVendor" aria-expanded="true" aria-controls="collapseVendor">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Kelola Vendor</span>
+    </a>
+    <div id="collapseVendor" class="collapse" aria-labelledby="headingVendor" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="vendorpesawat.php">Vendor Pesawat</a>
+            <a class="collapse-item" href="vendorkereta.php">Vendor Kereta</a>
+            <a class="collapse-item" href="vendorkapal.php">Vendor Kapal</a>
+            <a class="collapse-item" href="vendorbus.php">Vendor Bus</a>
+        </div>
+    </div>
+</li>
 
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePembayaran" aria-expanded="true" aria-controls="collapsePembayaran">
+        <i class="bi bi-credit-card"></i>
+        <span>Kelola Metode Pembayaran</span>
+    </a>
+    <div id="collapsePembayaran" class="collapse" aria-labelledby="headingPembayaran" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="metodepembayaran.php">Metode pembayaran</a>
+        </div>
+    </div>
+</li>
 
-                  <!-- Nav Item - Pages Collapse Menu -->
-                  <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Kelola Metode Pembayaran</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="metodepembayaran.php">Metode Pembayaran</a>
-                    
-                        </div>
-                    </div>
-                </li>
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePengguna" aria-expanded="true" aria-controls="collapsePengguna">
+        <i class="bi bi-people-fill"></i>
+        <span>Kelola Pengguna</span>
+    </a>
+    <div id="collapsePengguna" class="collapse" aria-labelledby="headingPengguna" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+        
+            <a class="collapse-item" href="manajemenpengguna.php">Manajemen Pengguna</a>
+        </div>
+    </div>
+</li>
 
-
-                
-                  <!-- Nav Item - Pages Collapse Menu -->
-                  <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Kelola Pengguna</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                         
-                            <a class="collapse-item" href="manajemenpengguna.php">Manajemen Pengguna</a>
-                        </div>
-                    </div>
-                </li>
-
-
-                  <!-- Nav Item - Pages Collapse Menu -->
-                  <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Feedback</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="buttons.html">Lihat Feedback</a>
-                        </div>
-                    </div>
-                </li>
-
-       
-
-          
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-         
-
-        </ul>
-        <!-- End of Sidebar -->
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeedback" aria-expanded="true" aria-controls="collapseFeedback">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Feedback</span>
+    </a>
+    <div id="collapseFeedback" class="collapse" aria-labelledby="headingFeedback" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="feedbaackadm.php">Lihat Feedback</a>
+        </div>
+    </div>
+</li>
+</ul>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -239,6 +246,7 @@
 
                     </ul>
 
+
                 </nav>
                 <!-- End of Topbar -->
 
@@ -262,6 +270,7 @@
 <!-- Modal Tambah Data -->
 
 <h3>Jadwal Hari ini</h3>
+<div class="table-responsive">
         <table class="table">
     <thead>
         <tr>
@@ -338,8 +347,9 @@
         ?>
     </tbody>
 </table>
-
+    </div>
 <h3>Jadwal Tiket Kapal All</h3>
+<div class="table-responsive">
         <table class="table">
     <thead>
         <tr>
@@ -395,7 +405,7 @@
         ?>
     </tbody>
 </table>
-
+    </div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

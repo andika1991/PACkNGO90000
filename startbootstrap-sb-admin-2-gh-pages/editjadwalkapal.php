@@ -272,6 +272,7 @@ if(isset($_GET['id'])) {
         $kategori = $row['kategori'];
         $kapasitas_stok_tiket = $row['kapasitas_stok_tiket'];
         $deskripsi_jadwal = $row['deskripsi_jadwal'];
+        $status_jadwal = $row['status_jadwal'];
     } else {
         // Handle if no data found
         echo "Data tidak ditemukan.";
@@ -451,13 +452,16 @@ if(isset($_GET['id'])) {
         <input type="number" class="form-control" id="kapasitas_stok_tiket" name="kapasitas_stok_tiket" value="<?php echo $kapasitas_stok_tiket; ?>" required>
     </div>
     <div class="form-group">
-    <label for="deskripsi_jadwal">Deskripsi Jadwal:</label>
+    <label for="deskripsi_jadwal">Informasi Tambahan:</label>
     <textarea class="form-control" id="deskripsi_jadwal" name="deskripsi_jadwal" rows="8" required><?php echo $deskripsi_jadwal; ?></textarea>
 </div>
 
     <div class="form-group">
         <label for="status_jadwal">Status:</label>
-        <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia"  required>
+        <select class="form-control" id="status_jadwal" name="status_jadwal" required>
+        <option value="Tersedia"<?php if($status_jadwal == "Tersedia") echo "selected"; ?>>Tersedia</option>
+        <option value="On Going"<?php if($status_jadwal == "On Going") echo "selected"; ?>>On Going</option>
+        <option value="Arrived"<?php if($status_jadwal == "Arrived") echo "selected"; ?>>Arrived</option>
     </div>
     <div class="form-group">
     <label for="id_vendor">Vendor:</label>

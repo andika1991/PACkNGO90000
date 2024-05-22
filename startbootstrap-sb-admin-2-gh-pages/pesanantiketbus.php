@@ -92,7 +92,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Userr
             </div>
 
            <!-- Nav Item - Pages Collapse Menu -->
@@ -178,13 +178,11 @@
     </a>
     <div id="collapseFeedback" class="collapse" aria-labelledby="headingFeedback" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="buttons.html">Lihat Feedback</a>
+            <a class="collapse-item" href="feedbaackadm.php">Lihat Feedback</a>
         </div>
     </div>
 </li>
 </ul>
-        <!-- End of Sidebar -->
-        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -247,8 +245,7 @@
                         </li>
 
                     </ul>
-
-                </nav>
+</nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

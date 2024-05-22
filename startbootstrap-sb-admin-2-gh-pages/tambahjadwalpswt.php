@@ -580,12 +580,17 @@
         <input type="number" class="form-control" id="kapasitas_stok_tiket" name="kapasitas_stok_tiket" required>
     </div>
     <div class="form-group">
-        <label for="deskripsi_jadwal">Deskripsi Jadwal:</label>
+        <label for="deskripsi_jadwal">Informasi Tambahan:</label>
         <textarea class="form-control" id="deskripsi_jadwal" name="deskripsi_jadwal" rows="8" required></textarea>
     </div>
     <div class="form-group">
         <label for="status_jadwal">Status:</label>
-        <input type="text" class="form-control" id="status_jadwal" name="status_jadwal" value="Tersedia" required>
+        <select class="form-control" id="kelas" name="kelas" required>
+            <option value="Ekonomi">Ekonomi</option>
+            <option value="Bisnis">Bisnis</option>
+            <option value="First">First</option>
+        </select>
+        
     </div>
     <div class="form-group">
         <label for="nomor_penerbangan">Status:</label>

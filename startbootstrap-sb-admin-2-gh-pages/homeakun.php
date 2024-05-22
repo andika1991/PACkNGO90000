@@ -647,7 +647,7 @@ label {
 
 <div class="search-form" id="kereta-form">
     <form action="carikereta.php" method="POST">
-    <h4>Cari Tiket Pesawat</h4>
+    <h4>Cari Tiket Kereta</h4>
     <div class="form-horizontal"> 
         <div class="form-vertical">
         <label for="stasiun_keberangkatan">Stasiun Keberangkatan:</label>
@@ -1817,9 +1817,10 @@ label {
 
 <div class="search-form" id="kapal-form">
     <form action="carikapal.php" method="POST">
+    <h4>Cari Tiket Kapal</h4>
     <div class="form-horizontal"> 
         <div class="form-vertical">
-        <label for="pelabuhan_keberangkatan">Stasiun Keberangkatan:</label>
+        <label for="pelabuhan_keberangkatan">Pelabuhan Keberangkatan:</label>
     <select class="form-control" id="pelabuhan_keberangkatan" name="pelabuhan_keberangkatan" required>
         <!-- Pilihan Pelabuhan keberangkatan -->
         <option value="">Pilih Pelabuhan Keberangkatan</option>
@@ -1882,7 +1883,7 @@ label {
         <option>Ampana (Pelabuhan Ampana)</option>
 </select>
 <img class="imgal"src="img/cvws.svg"> 
-        <label for="pelabuhan_kedatangan">Stasiun Kedatangan:</label>
+        <label for="pelabuhan_kedatangan">Pelabuhan Tujuan:</label>
         <select class="form-control" id="pelabuhan_kedatangan" name="pelabuhan_kedatangan" required>
             <!-- Pilihan bandara kedatangan -->
             <option value="">Pilih Pelabuhan Tujuan</option>
@@ -2266,7 +2267,7 @@ label {
                     <h1 class="text-3 d-block mb-2">Layanan Bantuan</h1>
                     <ul>
                         <li class="nav-item">
-                            <a class="nav-link" href="" target="_blank">
+                            <a class="nav-link" href="customerservice.php" target="_blank">
                                 <img src="img/🦆 icon _headset one_.png" alt="Customer Service" class="icon"> Customer Service
                             </a>
                         </li>
