@@ -527,10 +527,10 @@ if(isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="kelas">Kelas:</label>
-        <select class="form-control" id="kelas" name="kelas" value="<?php echo $kelas; ?>" required>
-            <option value="Ekonomi">Ekonomi</option>
-            <option value="Bisnis">Bisnis</option>
-            <option value="First">First</option>
+        <select class="form-control" id="kelas" name="kelas"  required>
+            <option value="Ekonomi"<?php echo ($kelas == "Ekonomi") ? "selected" : ""; ?>>Ekonomi</option>
+            <option value="Bisnis"<?php echo ($kelas == "Bisnis") ? "selected" : ""; ?>>Bisnis</option>
+            <option value="First"<?php echo ($kelas == "First") ? "selected" : ""; ?>>First</option>
         </select>
     </div>
     <div class="form-group">
