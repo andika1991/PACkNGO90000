@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username_pengguna'] = $row['username_pengguna'];
 
                 // Redirect ke halaman utama atau halaman lain yang sesuai
-                header("Location: homeakun.php#bus-form");
+                header("Location: index.php#bus-form");
                 exit; // Penting untuk menghentikan eksekusi skrip setelah redirect
             } else {
                 // Jika verifikasi gagal, tampilkan pesan kesalahan

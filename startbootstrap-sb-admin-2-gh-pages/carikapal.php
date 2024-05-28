@@ -276,28 +276,28 @@ table {
 }
 
  td {
-  border: 1px solid #FFFFFF; /* Garis pembatas antar sel */
-  background-color: #FFFFFF; /* Latar belakang warna abu-abu */
-  padding: 19px; /* Ruang di dalam sel */
-  text-align: center; /* Penyusunan teks dalam sel */
+  border: 1px solid #FFFFFF; 
+  background-color: #FFFFFF; 
+  padding: 19px; 
+  text-align: center; 
 }
 
 th {
-  background-color: #FFFFFF; /* Latar belakang warna abu-abu */
-  color: #333; /* Warna teks */
+  background-color: #FFFFFF; 
+  color: #333;
   border-bottom: 3px solid #0071CC; 
   padding:15px;
  
   
-  text-align: center; /* Penyusunan teks dalam sel */
+  text-align: center; 
 
 }
 
 .waktu-keberangkatan {
     font-size:25px;
   color: #212529;
-  text-align: center; /* Penulisan yang benar adalah text-align, bukan text-allign */
-  font-family: "Poppins", sans-serif; /* Penulisan yang benar adalah font-family */
+  text-align: center; 
+  font-family: "Poppins", sans-serif; 
 }
 
 
@@ -327,10 +327,10 @@ nav ul li a.login {
     border-radius: 5px; 
     padding: 10px;
 }
-/* Hover effect untuk tautan "Login" dan "Daftar" */
+
 nav ul li a.login:hover,
 nav ul li a.register:hover {
-    background-color: #2980b9; /* Warna lebih gelap untuk "Login" saat di-hover */
+    background-color: #2980b9; 
 }
 .route{
     margin-left:140px;
@@ -350,20 +350,20 @@ main{
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php#pesawat-form">Home</a></li>
+                <li><a href="index.php#kapal-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.php">FAQ</a></li>
 
                 <?php
-                // Periksa apakah pengguna sudah login
+           
                 if (isset($_SESSION['username_pengguna'])) {
-                    // Jika sudah login, tampilkan nama pengguna dan opsi logout
+                 
                     $username = $_SESSION['username_pengguna'];
                     echo "<li><a href='akun.php' class='login'><img src='img/Group.jpg' alt='User Icon'> $username</a></li>";
     
                 } else {
-                    // Jika belum login, tampilkan opsi login
+                    
                     echo "<li><a href='loginuser.html' class='login'><i class='fas fa-lock'></i> Login</a></li>";
                 }
                 ?>
@@ -378,17 +378,17 @@ main{
 
 <main>
     <?php
-// Periksa apakah permintaan adalah metode POST
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Periksa apakah semua field telah diisi
     if (isset($_POST["pelabuhan_keberangkatan"]) && isset($_POST["pelabuhan_kedatangan"]) && isset($_POST["date"])&& isset($_POST["class"])) {
-        // Simpan data dari formulir
+      
         $pelabuhan_keberangkatan = $_POST["pelabuhan_keberangkatan"];
         $pelabuhan_kedatangan = $_POST["pelabuhan_kedatangan"];
         $tanggal_keberangkatan = $_POST["date"];
          $class=$_POST["class"];
         $tanggal_keberangkatan_indonesia = strftime("%A, %d %B %Y", strtotime($tanggal_keberangkatan));
-        // Query untuk mencari data di tabel jadwal_tiket_bus berdasarkan input
+       
         $query = "SELECT j.*, v.nama_vendor, v.logo_vendor  
         FROM jadwal_tiket_kapal AS j 
         JOIN vendor_kapal AS v ON j.id_vendor = v.id_vendor
@@ -398,12 +398,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         AND j.status_jadwal = 'tersedia' AND j.kelas='$class'; ";
 
        
-        // Eksekusi query
+     
         $result = mysqli_query($conn, $query);
 
-        // Periksa apakah ada hasil dari pencarian
+ 
         if (mysqli_num_rows($result) > 0) {
-            // Jika ada hasil, tampilkan rute di luar tabel
+     
             echo "<div class='StrongPenerbanganPergi'>" . $tanggal_keberangkatan_indonesia . "</div><br><br><br>";
 
 
@@ -412,33 +412,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
 
 
-            // Tampilkan data dalam tabel
-           // Tampilkan data dalam tabel
+       
+       
 echo "<table>";
 echo "<tr><th>Penyedia</th><th>Berangkat</th><th>Durasi</th><th>Tiba</th><th></th><th>Harga</th></tr>";
 while ($row = mysqli_fetch_assoc($result)) {
-    // Ambil waktu keberangkatan dan waktu kedatangan
+   
     $waktu_keberangkatan = strtotime($row["waktu_keberangkatan"]);
     $waktu_kedatangan = strtotime($row["waktu_kedatangan"]);
 
-   // Hitung durasi antara waktu keberangkatan dan waktu kedatangan
+ 
 $durasi = $waktu_kedatangan - $waktu_keberangkatan;
 
-// Pastikan durasi positif
+
 if ($durasi < 0) {
     $durasi = 0;
 }
 
-// Hitung jumlah jam dan menit
-$jam = floor($durasi / 3600); // Ambil jam dari durasi
-$menit = floor(($durasi % 3600) / 60); // Ambil menit dari sisa durasi
 
-// Buat string format "2j 10m"
+$jam = floor($durasi / 3600); 
+$menit = floor(($durasi % 3600) / 60); 
+
+
 $durasi_formatted = $jam . 'j ' . $menit . 'm';
 
 
 
-    // Tampilkan data tiket dalam tabel
+
     echo "<tr>";
     echo "<td><img src='" . $row["logo_vendor"] . "' alt='Logo metode' style='max-width: 100px; max-height: 100px;'><br>" . $row["nama_vendor"] . "</td>";
 
@@ -453,7 +453,7 @@ $durasi_formatted = $jam . 'j ' . $menit . 'm';
   
     $harga = number_format($row["harga"], 0, ',', '.');
     echo "<td class='kelas'>" . $row["kelas"] . "</td>";
-    // Tampilkan harga dalam tabel
+ 
     echo "<td><span> Rp." . $harga . " /Tiket</span><br><br><a href='detailbooktiketkapal.php?id=" . $row['id_jadwaltiketkapal'] . "' class='button-beli'>Booking</a></td>";
 
 
@@ -466,14 +466,14 @@ echo "</table>";
             echo "Tidak ada jadwal tiket bus yang sesuai dengan pencarian Anda.";
         }
 
-        // Tutup koneksi database
+  
         mysqli_close($conn);
     } else {
-        // Jika tidak semua field diisi, berikan pesan kesalahan
+ 
         echo "Mohon lengkapi semua field.";
     }
 } else {
-    // Jika metode permintaan bukan POST, mungkin Anda ingin memberikan tindakan alternatif atau hanya mengabaikannya
+   
     echo "Metode permintaan yang diterima bukan metode POST.";
 }
 ?>

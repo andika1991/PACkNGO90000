@@ -30,8 +30,7 @@ include 'session.php';
     <link rel="stylesheet" href="css/toastr.min.css">
     <title>PACK N GO</title>
     <style>
-         /* Styling untuk navbar */
-         body {
+        body {
             font-family: Poppins;
             background-color: #E7E9ED;
         }
@@ -41,9 +40,9 @@ include 'session.php';
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    position: sticky; 
-    top: 0;          
-    z-index: 1000;    
+    position: sticky; /* Buat header menjadi sticky */
+    top: 0;           /* Header tetap berada di bagian atas saat digulir */
+    z-index: 1000;    /* Pastikan header berada di atas konten lainnya */
         }
 
         .logo img {
@@ -51,17 +50,18 @@ include 'session.php';
             width: 250px;
         }
         .square {
-            width: 514px; 
-            height: 283px; 
-            border-radius: 20px; 
-            background-color: #0071CC; 
-            display: inline-block; 
-            margin: 50px; 
+            width: 514px; /* Lebar persegi */
+            height: 283px; /* Tinggi persegi */
+            border-radius: 20px; /* Sudut melengkung */
+            background-color: #0071CC; /* Warna persegi */
+            display: inline-block; /* Pastikan bentuk persegi */
+            margin: 50px; /* Ruang antar-persegi */
         }
 
+        /* Atur carousel item */
         .carousel-item {
-            text-align: center; 
-            padding: 20px; 
+            text-align: center; /* Menyelaraskan konten ke tengah */
+            padding: 20px; /* Memberikan ruang dalam */
         }
         nav {
             display: flex;
@@ -89,6 +89,431 @@ include 'session.php';
             color: #107ACF;
             text-decoration: none;
         }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .content img {
+            max-width: 40%; /* Membuat gambar lebih besar */
+            height: auto;
+            margin-right: 20px; /* Beri jarak antara gambar dan formulir */
+        }
+
+        .form-container {
+            width: 50%; /* Menambah lebar formulir */
+            padding: 20px;
+            position: relative; /* Mengatur konteks posisi untuk elemen di dalamnya */
+            padding-bottom: 40px;
+            margin-top: 0px; /* Tambah jarak antara kontainer dan heading */
+        }
+
+        .form-container h2 {
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 80px; /* Memberikan jarak antara h2 dan form */
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px; /* Jarak antar elemen dalam form */
+        }
+
+        .form-container .form-group {
+            display: flex;
+            align-items: center; /* Posisikan elemen dalam satu baris */
+            gap: 10px; /* Jarak antar elemen dalam form */
+        }
+
+        .form-container label {
+            font-weight: bold;
+            font-size: 18px; /* Membuat teks label lebih besar */
+            width: 100px; /* Memberikan lebar tetap untuk label */
+        }
+
+        .form-container input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px; /* Membuat teks input lebih besar */
+            flex: 1; /* Memperpanjang field input */
+        }
+
+        .form-container button {
+    padding: 15px;
+    background-color: #107ACF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    width: 200px; 
+    margin: 0 auto;
+}
+
+nav ul li a.login {
+    background-color: #D9D9D9; 
+    color: #0C2E53; 
+    border-radius: 5px; 
+    padding: 10px;
+}
+
+
+
+
+/* Hover effect untuk tautan "Login" dan "Daftar" */
+nav ul li a.login:hover,
+nav ul li a.register:hover {
+    background-color: #2980b9; /* Warna lebih gelap untuk "Login" saat di-hover */
+}
+
+/* Hover effect untuk "Daftar" */
+nav ul li a.register:hover {
+    background-color: #c0392b; /* Warna lebih gelap untuk "Daftar" saat di-hover */
+}
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content img {
+                max-width: 70%; /* Menyesuaikan ukuran gambar */
+            }
+
+            .form-container {
+                width: 100%; /* Formulir memenuhi lebar layar */
+            }
+
+            .form-container .form-group {
+                flex-direction: column;
+                align-items: stretch; /* Berubah ke tata letak vertikal */
+            }
+
+            .form-container label {
+                width: auto; /* Tidak ada batasan lebar */
+            }
+        }
+
+        .text {
+            color: #0071CC; /* Warna Merah */
+        }
+
+        ul {
+    padding: 0; /* Menghilangkan padding default */
+    margin: 0;  /* Menghilangkan margin default */
+}
+
+li {
+    list-style: none; /* Menghilangkan bullet */
+}
+
+a {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: #333; /* Warna teks */
+}
+
+.icon {
+    vertical-align: middle; /* Menyelaraskan ikon dengan teks */
+    margin-right: 5px; /* Memberikan sedikit ruang antara ikon dan teks */
+    width: 16px; /* Ukuran ikon lebih kecil */
+    height: 16px; /* Ukuran ikon lebih kecil */
+}
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tiketorderborder {
+            display: flex;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .gambar-container {
+            text-align: center;
+            margin: 0 20px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .gambar-caption {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+
+
+/* Dasar penataan formulir pencarian */
+.search-form {
+    display: none; /* Sembunyikan formulir secara default */
+    background-color: white;
+
+    padding: 20px;
+    border: 1px solid #D5D3D3;
+    border-radius: 4px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease; /* Transisi untuk penampilan */
+    opacity: 0; /* Membuat transisi yang halus */
+    visibility: hidden; /* Menyembunyikan secara visual */
+    margin-bottom: 20px; /* Jarak di bawah formulir */
+      /* Menentukan batas lebar dan mengatur margin */
+      max-width: 1200px; /* Membatasi lebar maksimal */
+    margin: 0 auto; /* Memusatkan secara horizontal */
+}
+
+.search-form:target {
+    display: block; /* Tampilkan saat ditargetkan */
+    opacity: 1; /* Buat terlihat */
+    visibility: visible; /* Juga buat terlihat */
+}
+
+.search-form .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.search-form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #535B61;
+}
+
+
+.search-form select, .search-form input {
+    padding: 10px;
+    border: 1px solid #D5D3D3;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+}
+
+.search-form button {
+    background-color: #0071CC;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #005999;
+}
+
+/* Penataan responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    .search-form {
+        padding: 15px;
+    }
+
+    .search-form .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Pastikan label tampil sebagai blok untuk menempatkan input di bawahnya */
+label {
+    display: block; /* Mengubah label menjadi elemen blok */
+    font-size: 16px; /* Ukuran teks label */
+    font-weight: bold; /* Teks label tebal */
+    color: #535B61; /* Warna teks label */
+    margin-bottom: 5px; /* Jarak antara label dan input */
+}
+
+/* Atur input untuk berada di bawah label */
+input {
+    width: 100%; /* Memastikan input memenuhi lebar yang diinginkan */
+    padding: 10px; /* Padding dalam input */
+    border: 1px solid #D5D3D3; /* Garis batas */
+    border-radius: 4px; /* Sudut melengkung */
+}
+
+
+/* Mengatur panjang field dengan lebar tetap */
+.form-control {
+    width: 300px; /* Atur lebar tetap untuk select */
+    box-sizing: border-box; /* Memastikan padding dan border dihitung dalam lebar total */
+    padding: 10px; /* Memberikan padding */
+    border-radius: 4px; /* Membuat sudut melengkung */
+    
+}
+
+/* Mengatur panjang field dalam persentase relatif ke kontainer induknya */
+.form-control-relative {
+    width: 50%; /* Menggunakan lebar relatif 50% */
+    box-sizing: border-box; /* Memastikan padding dan border dihitung dalam lebar total */
+    padding: 10px; /* Memberikan padding */
+    border-radius: 4px; /* Membuat sudut melengkung */
+}
+
+
+
+/* CSS untuk submenu */
+.submenu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.profile-menu:hover .submenu {
+    display: block;
+}
+
+/* CSS untuk tampilan submenu */
+.profile-menu {
+    position: relative;
+}
+
+.profile-menu a {
+    color: #333;
+    text-decoration: none;
+}
+
+.profile-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.profile-menu .submenu li {
+    padding: 10px;
+}
+
+.profile-menu .submenu li a {
+    color: #333;
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.profile-menu .submenu li a:hover {
+    background-color: #f4f4f4;
+}
+
+.imgal {
+    margin-left: 70px; /* Menggeser gambar 10px ke kanan */
+    height:30px;
+    
+}
+
+
+/* Form group sebagai container untuk menempatkan elemen di sebelahnya */
+.form-group {
+    display: flex; /* Susun elemen dalam satu baris */
+    gap: 20px; /* Jarak antara elemen */
+    align-items: center; /* Menjaga keselarasan vertikal */
+}
+
+
+
+/* Atur input dan select untuk keseragaman */
+.form-control {
+    padding: 10px; /* Tambahkan padding */
+    border: 1px solid #ccc; /* Tambahkan border */
+    border-radius: 4px; /* Tambahkan sudut melengkung */
+    font-size: 14px; /* Ukuran teks */
+    flex: 1; /* Pastikan elemen mengisi ruang */
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column; /* Ubah ke tata letak vertikal */
+        align-items: stretch; /* Pastikan elemen memenuhi lebar */
+    }
+}
+
+.romu{
+    background-image: url('img/background.svg'); 
+}
+.form-horizontal {
+    display: flex; /* Menggunakan flexbox */
+    flex-direction: row; /* Menyusun elemen secara horizontal */
+    gap: 20px; /* Ruang antara elemen */
+    align-items: flex-start; /* Selaraskan di bagian atas */
+}
+
+.form-vertical {
+    display: flex; /* Menggunakan flexbox */
+    flex-direction: column; /* Menyusun elemen secara vertikal */
+    gap: 10px; /* Ruang antara elemen */
+}
+
+label {
+            margin-bottom: 5px; /* Memberikan jarak antara label dan elemen select */
+        }
+
+        /* Gaya untuk elemen select */
+        select {
+            padding: 5px; /* Memberikan sedikit padding */
+            border: 1px solid #ccc; /* Memberikan batas yang jelas */
+            border-radius: 4px; /* Memberikan tepi melengkung */
+            width: 100%; 
+        }
+
+/* Kontainer formulir dengan tata letak vertikal */
+.form-container {
+    display: flex; /* Menggunakan flexbox */
+    flex-direction: column; /* Tata letak vertikal */
+    justify-content: flex-start; /* Tetap di atas jika tidak ada elemen lain */
+    padding: 20px; /* Ruang dalam */
+    background-color: #f9f9f9; /* Warna latar belakang */
+    border: 1px solid #ccc; /* Batas kontainer */
+    border-radius: 5px; /* Tepi melengkung */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); /* Bayangan */
+    margin-bottom: 20px; /* Memberikan jarak dari elemen lain di bawah */
+}
+
+
+.submit-button {
+ 
+  
+    width: 900px; 
+  height: 40px; 
+ 
+  font-size: 16px; 
+    background: #0071CC; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    text-align: center; 
+    cursor: pointer; 
+
+    align-self: flex-end; 
+
+
+
+}
+
+.submit-button:hover {
+    background: #0056b3; 
+}
+
+
+.form-group {
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+}
 
 
 
@@ -148,10 +573,6 @@ h1 {
     color:black;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-}
 
 
 
@@ -439,11 +860,7 @@ main{
             background-color: #007bff; 
         }
 
-        body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-}
+     
 
 .containerfaj {
     width: 600px;
@@ -477,7 +894,9 @@ textarea {
 }
 
 input[type="radio"] {
-    margin-right: 5px;
+    position:absolute;
+    margin-left: -500px;
+    margin-top:5px;
 }
 
 textarea {
@@ -510,7 +929,7 @@ button:hover {
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php#pesawat-form">Home</a></li>
+                <li><a href="index.php#pesawat-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
                 <li><a href="faq.html">FAQ</a></li>

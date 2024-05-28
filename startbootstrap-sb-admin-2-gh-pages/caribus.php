@@ -30,7 +30,7 @@ include 'session.php';
     <title>PACK N GO</title>
     <style>
 
-        /* Styling untuk navbar */
+       
         body {
             font-family: Poppins;
             background-color: #F6F7F8;
@@ -41,9 +41,9 @@ include 'session.php';
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    position: sticky; /* Buat header menjadi sticky */
-    top: 0;           /* Header tetap berada di bagian atas saat digulir */
-    z-index: 1000;    /* Pastikan header berada di atas konten lainnya */
+    position: sticky; 
+    top: 0;           
+    z-index: 1000;    
         }
 
         .logo img {
@@ -51,18 +51,18 @@ include 'session.php';
             width: 250px;
         }
         .square {
-            width: 514px; /* Lebar persegi */
-            height: 283px; /* Tinggi persegi */
-            border-radius: 20px; /* Sudut melengkung */
-            background-color: #0071CC; /* Warna persegi */
-            display: inline-block; /* Pastikan bentuk persegi */
-            margin: 50px; /* Ruang antar-persegi */
+            width: 514px; 
+            height: 283px; 
+            border-radius: 20px;
+            background-color: #0071CC; 
+            display: inline-block; 
+            margin: 50px; 
         }
 
-        /* Atur carousel item */
+       
         .carousel-item {
-            text-align: center; /* Menyelaraskan konten ke tengah */
-            padding: 20px; /* Memberikan ruang dalam */
+            text-align: center; 
+            padding: 20px; 
         }
         nav {
             display: flex;
@@ -100,50 +100,50 @@ include 'session.php';
         }
 
         .content img {
-            max-width: 40%; /* Membuat gambar lebih besar */
+            max-width: 40%; 
             height: auto;
-            margin-right: 20px; /* Beri jarak antara gambar dan formulir */
+            margin-right: 20px; 
         }
 
         .form-container {
-            width: 50%; /* Menambah lebar formulir */
+            width: 50%; 
             padding: 20px;
-            position: relative; /* Mengatur konteks posisi untuk elemen di dalamnya */
+            position: relative;
             padding-bottom: 40px;
-            margin-top: 0px; /* Tambah jarak antara kontainer dan heading */
+            margin-top: 0px; 
         }
 
         .form-container h2 {
             font-size: 40px;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 80px; /* Memberikan jarak antara h2 dan form */
+            margin-bottom: 80px; 
         }
 
         .form-container form {
             display: flex;
             flex-direction: column;
-            gap: 30px; /* Jarak antar elemen dalam form */
+            gap: 30px; 
         }
 
         .form-container .form-group {
             display: flex;
-            align-items: center; /* Posisikan elemen dalam satu baris */
-            gap: 10px; /* Jarak antar elemen dalam form */
+            align-items: center; 
+            gap: 10px; 
         }
 
         .form-container label {
             font-weight: bold;
-            font-size: 18px; /* Membuat teks label lebih besar */
-            width: 100px; /* Memberikan lebar tetap untuk label */
+            font-size: 18px; 
+            width: 100px; 
         }
 
         .form-container input {
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px; /* Membuat teks input lebih besar */
-            flex: 1; /* Memperpanjang field input */
+            font-size: 16px; 
+            flex: 1; 
         }
 
         .form-container button {
@@ -172,39 +172,39 @@ include 'session.php';
             }
 
             .content img {
-                max-width: 70%; /* Menyesuaikan ukuran gambar */
+                max-width: 70%; 
             }
 
             .form-container {
-                width: 100%; /* Formulir memenuhi lebar layar */
+                width: 100%; 
             }
 
             .form-container .form-group {
                 flex-direction: column;
-                align-items: stretch; /* Berubah ke tata letak vertikal */
+                align-items: stretch; 
             }
 
             .form-container label {
-                width: auto; /* Tidak ada batasan lebar */
+                width: auto; 
             }
         }
 
         .text {
-            color: #0071CC; /* Warna Merah */
+            color: #0071CC; 
         }
 
         ul {
-    padding: 0; /* Menghilangkan padding default */
-    margin: 0;  /* Menghilangkan margin default */
+    padding: 0; 
+    margin: 0;  
 }
 
 li {
-    list-style: none; /* Menghilangkan bullet */
+    list-style: none; 
 }
 
 a {
-    text-decoration: none; /* Hilangkan garis bawah */
-    color: #333; /* Warna teks */
+    text-decoration: none; 
+    color: #333; 
 }
 
         h1 {
@@ -225,12 +225,12 @@ a {
 
 
 
-/* Steps Progress bar */
 
 
 
 
-/* Tombol Beli */
+
+
 .button-beli {
     background-color: #007bff;
     color: #ffffff;
@@ -251,16 +251,15 @@ a {
   padding: 10px;
   border-radius: 4px;
   display: inline-block;
-  margin-left: 50px; /* Menggeser ke kanan */
-  width: auto; /* Mengatur lebar otomatis sesuai dengan konten */
-}
+  margin-left: 50px; 
+  width: auto;}
 
 .keberangkatan {
     display: flex;
     justify-content: center;
     background-color: #0071CC;
-    padding: 20px; /* Atur sesuai kebutuhan */
-    border-radius: 8px; /* Atur sesuai kebutuhan */
+    padding: 20px; 
+    border-radius: 8px; 
 }
 
 .DaftarKeberangkatan {
@@ -270,34 +269,34 @@ a {
     font-family: 'Poppins', sans-serif;
 }
 table {
-  width: 80%; /* Sesuaikan dengan lebar yang diinginkan */
-  margin: 0 auto; /* Menggeser tabel ke tengah */
+  width: 80%; 
+  margin: 0 auto; 
   border-collapse: collapse;
 }
 
  td {
-  border: 1px solid #FFFFFF; /* Garis pembatas antar sel */
-  background-color: #FFFFFF; /* Latar belakang warna abu-abu */
-  padding: 19px; /* Ruang di dalam sel */
-  text-align: center; /* Penyusunan teks dalam sel */
+  border: 1px solid #FFFFFF; 
+  background-color: #FFFFFF; 
+  padding: 19px; 
+  text-align: center; 
 }
 
 th {
-  background-color: #FFFFFF; /* Latar belakang warna abu-abu */
-  color: #333; /* Warna teks */
+  background-color: #FFFFFF; 
+  color: #333; 
   border-bottom: 3px solid #0071CC; 
   padding:15px;
  
   
-  text-align: center; /* Penyusunan teks dalam sel */
+  text-align: center; 
 
 }
 
 .waktu-keberangkatan {
     font-size:25px;
   color: #212529;
-  text-align: center; /* Penulisan yang benar adalah text-align, bukan text-allign */
-  font-family: "Poppins", sans-serif; /* Penulisan yang benar adalah font-family */
+  text-align: center; 
+  font-family: "Poppins", sans-serif; 
 }
 
 
@@ -327,10 +326,10 @@ nav ul li a.login {
     border-radius: 5px; 
     padding: 10px;
 }
-/* Hover effect untuk tautan "Login" dan "Daftar" */
+
 nav ul li a.login:hover,
 nav ul li a.register:hover {
-    background-color: #2980b9; /* Warna lebih gelap untuk "Login" saat di-hover */
+    background-color: #2980b9; 
 }
 .route{
     margin-left:140px;
@@ -350,10 +349,10 @@ main{
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php">Home</a></li>
+                <li><a href="index.php#bus-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.php">FAQ</a></li>
 
                 <?php
                 // Periksa apakah pengguna sudah login
@@ -466,14 +465,14 @@ echo "</table>";
             echo "Tidak ada jadwal tiket bus yang sesuai dengan pencarian Anda.";
         }
 
-        // Tutup koneksi database
+  
         mysqli_close($conn);
     } else {
-        // Jika tidak semua field diisi, berikan pesan kesalahan
+     
         echo "Mohon lengkapi semua field.";
     }
 } else {
-    // Jika metode permintaan bukan POST, mungkin Anda ingin memberikan tindakan alternatif atau hanya mengabaikannya
+
     echo "Metode permintaan yang diterima bukan metode POST.";
 }
 ?>

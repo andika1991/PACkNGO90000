@@ -453,7 +453,7 @@ main{
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php#pesawat-form">Home</a></li>
+                <li><a href="index.php#pesawat-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
                 <li><a href="faq.html">FAQ</a></li>
@@ -957,7 +957,7 @@ main{
         <div class="footer-copyright mt-2 pt-2">
 
        
-            <p class="copyright-text text-1">Copyright <i class="far fa-copyright"></i> 2024 <a href="https://faiztravel.co.id/tentang-kami">PACK N GO</a> All Rights Reserved.</p><span class="copyright-text text-1"><em>~ powered by </em>PACK N GO ~</span>	</div>
+            <p class="copyright-text text-1">Copyright <i class="far fa-copyright"></i> 2024 <a href="tentangkami.php">PACK N GO</a> All Rights Reserved.</p><span class="copyright-text text-1"><em>~ powered by </em>PACK N GO ~</span>	</div>
     </div>
 </div>
 </footer>

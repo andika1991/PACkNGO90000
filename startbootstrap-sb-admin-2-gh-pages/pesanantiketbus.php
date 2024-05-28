@@ -72,7 +72,7 @@
             </button>
             
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                <img src="PACKNGO.png" width="30px" height="50px">
                 <div class="sidebar-brand-text mx-3">PACK N GO</div>
             </a>
@@ -82,18 +82,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Userr
-            </div>
 
            <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
@@ -253,8 +248,8 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Jadwal Tiket Bus</h1>
-                        <a href="csvjadwalpswt.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download CSV Jadwal pesawat</a>
+                     
+                        
 
                     </div>
 

@@ -1,6 +1,6 @@
 <?php
 require_once 'TCPDF/tcpdf.php'; // Path ke file tcpdf.php
-
+require 'phpqrcode/qrlib.php';
 // Koneksi ke database
 include 'koneksi.php';
 
@@ -23,6 +23,29 @@ if (isset($_GET['invoice_id'])) {
 
         if ($result->num_rows > 0) {
             $pdf = new TCPDF();
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('Pack N GO');
+            $pdf->SetTitle('E-Ticket');
+            $pdf->SetSubject('Bus E-Ticket');
+            $pdf->SetKeywords('TCPDF, PDF, ticket, bus, e-ticket');
+
+            // Set default monospaced font
+            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+            // Set margins
+            $pdf->SetMargins(10, 10, 10);
+            $pdf->SetHeaderMargin(10);
+            $pdf->SetFooterMargin(10);
+
+            // Set auto page breaks
+            $pdf->SetAutoPageBreak(TRUE, 10);
+
+            // Set image scale factor
+            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+            // Set font
+            $pdf->SetFont('helvetica', '', 12);
+
             $pdf->AddPage();
 
             // CSS styling
@@ -36,48 +59,147 @@ if (isset($_GET['invoice_id'])) {
                         padding: 20px;
                         border: 1px solid #ccc;
                         border-radius: 10px;
-                        background-color: #f9f9f9;
+                        background-color: #fff;
                     }
-                    .logo {
+                    .header, .footer {
+                        background-color: #f0f0f0;
+                        padding: 10px;
+                        text-align: center;
+                        font-weight: bold;
+                    }
+                    .header img {
                         max-width: 100px;
-                    }
-                    h1 {
-                        font-size: 24px;
+                        margin: 0 auto;
+                        display: block;
                     }
                     .details {
                         margin-top: 20px;
+                        border-top: 1px solid #ccc;
+                        padding-top: 20px;
                     }
                     .details p {
-                        margin: 0;
+                        margin: 5px 0;
                         padding: 5px 0;
                     }
+                    .details .section {
+                        margin-bottom: 20px;
+                    }
+                    .details .section-title {
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                        color: #007bff;
+                    }
+                    .table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 10px;
+                    }
+                    .table th, .table td {
+                        border: 1px solid #ccc;
+                        padding: 10px;
+                        text-align: left;
+                    }
+                    .table th {
+                        background-color: #f0f0f0;
+                    }
 
+                    .qrcode {
+                        text-align: center;
+                        margin-top: 20px;
+                    }
+                    
+                    .qrcode p {
+                        margin-bottom: 5px;
+                    }
+                    
+                    .qrcode-img {
+                        max-width: 100px;
+                    }
                     
                 </style>
             ";
 
-            $html = $css . '<div class="invoice">';
-            $html .= '<h1>E-Ticket</h1>';
-
+            $html = '<div class="invoice">';
+            $html .= '<div class="header"><h1>E-Ticket PACKNGO</h1></div>';
+       
             while ($row = $result->fetch_assoc()) {
                 $html .= '<div class="details">';
+                $html .= '<div class="section">';
+                $html .= '<img src="' . $row['logo_vendor'] . '" class="logo">';
                 $html .= '<p>Status Tiket: ' . $row['status_pembayaran'] . '</p>';
                 $html .= '<p>Nama PO: ' . $row['nama_vendor'] . '</p>';
-                $html .= '<img src="' . $row['logo_vendor'] . '" class="logo">';
                 $html .= '<p>Kelas: ' . $row['kelas'] . '</p>';
                 $html .= '<p>Nomor Kendaraan: ' . $row['no_kendaraan'] . '</p>';
+                $html .= '</div>';
+
+                $html .= '<div class="section">';
+                $html .= '<p class="section-title">Informasi Keberangkatan dan Kedatangan</p>';
                 $html .= '<p>Keberangkatan: ' . $row['terminal_keberangkatan'] . ' - ' . date('d/m/Y H:i', strtotime($row['waktu_keberangkatan'])) . '</p>';
                 $html .= '<p>Kedatangan: ' . $row['terminal_kedatangan'] . ' - ' . date('d/m/Y H:i', strtotime($row['waktu_kedatangan'])) . '</p>';
-                $html .= '<p>Kursi: ' . $row['kursi'] . '</p>';
-                $html .= '<p>Nama Penumpang: ' . $row['nama_lengkap'] . '</p>';
-                $html .= '<p>NIK: ' . $row['nik'] . '</p>';
-                $html .= '<p>Jenis Kelamin: ' . $row['jenis_kelamin'] . '</p>';
-                $html .= '<p>No HP: ' . $row['no_hp'] . '</p>';
-                $html .= '<p>Email: ' . $row['email'] . '</p>';
                 $html .= '</div>';
+
+                $html .= '<div class="section">';
+                $html .= '<p class="section-title">Informasi Penumpang</p>';
+                $html .= '<table class="table">';
+                $html .= '<tr><th>Nama Penumpang</th><td>' . $row['nama_lengkap'] . '</td></tr>';
+                $html .= '<tr><th>NIK</th><td>' . $row['nik'] . '</td></tr>';
+                $html .= '<tr><th>Jenis Kelamin</th><td>' . $row['jenis_kelamin'] . '</td></tr>';
+                $html .= '<tr><th>No HP</th><td>' . $row['no_hp'] . '</td></tr>';
+                $html .= '<tr><th>Email</th><td>' . $row['email'] . '</td></tr>';
+                $html .= '<tr><th>Kursi</th><td>' . $row['kursi'] . '</td></tr>';
+                $html .= '</table>';
+                $html .= '</div>';
+
+                $html .= '<div class="section">';
+            
+                $html .= '<p>Petunjuk Checkin</p>';
+                $html .= '<p>1. Beli Tiket<br>
+                Online: Beli melalui situs web atau aplikasi.<br>
+                Loket: Beli di terminal atau agen resmi.<br>
+                2. Persiapan<br>
+                Waktu Kedatangan: Datang 30 menit sebelum jadwal.<br>
+                Dokumen: Bawa KTP atau identitas lainnya.<br>
+                Barang Bawaan: Pastikan sesuai batasan bagasi.<br>
+                3. Check-In<br>
+                Loket Check-In: Tunjukkan tiket dan identitas.<br>
+                Boarding Pass: Dapatkan untuk naik ke bus.<br>
+                4. Naik ke Bus<br>
+                Zona Boarding: Pergi ke area keberangkatan.<br>
+                Pemeriksaan Boarding Pass: Tunjukkan kepada petugas saat naik.<br>
+                5. Di Dalam Bus<br>
+                Temukan Kursi: Duduk sesuai nomor tiket.<br>
+                Keamanan: Kenakan sabuk pengaman, jika tersedia.<br>
+                6. Turun dari Bus<br>
+                Pengumuman Tujuan: Dengarkan pemberitahuan mendekati tujuan.<br>
+                Periksa Barang Bawaan: Jangan tinggalkan barang pribadi.<br>
+                Petunjuk Keluar: Ikuti arah petugas untuk keluar terminal.<br>
+                7. Bantuan<br>
+                Bantuan Khusus: Informasikan kepada petugas jika diperlukan.<br>
+                Layanan Pelanggan: Hubungi nomor yang tertera pada tiket jika ada masalah.</p>';
+
+                   
+$html .= '</div>';
+
+$html .= '<div class="qrcode">';
+$tempDir = 'qrcodes/';
+if (!file_exists($tempDir)) {
+    mkdir($tempDir);
+}
+$qrFile = $tempDir . 'qrcode_' . $row['invoice_id'] . '.png';
+QRcode::png($verify_url, $qrFile, QR_ECLEVEL_L, 10);
+$html .= '<p>QR Code:</p>';
+$html .= '<img src="' . $qrFile . '" class="qrcode-img">';
+$html .= '</div>';
+
+
+           
             }
 
-            $html .= '</div>';
+ 
+
+            $html .= '</div>'; // End of details
+            $html .= '<div class="footer">Terima Kasih telah menggunakan layanan kami.</div>';
+            $html .= '</div>'; // End of invoice
 
             // Write HTML to PDF
             $pdf->writeHTML($html, true, false, true, false, '');

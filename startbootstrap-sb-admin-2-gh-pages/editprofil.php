@@ -114,7 +114,9 @@ html, body {
 
 
 
-
+main {
+    margin-bottom:50px;
+}
 
 
 
@@ -324,7 +326,8 @@ main{
                     echo "<label for='email'>Email:</label>";
                     echo "<input type='email' name='email' value='$user_email' required>";
                     echo "<label for='password'>Password:</label>";
-                    echo "<input type='password' name='password' placeholder='Enter new password'>";
+                    echo "<input type='password' name='password' placeholder='Kosongkan Jika Anda tidak Ingin merubah password'>";
+                 
                     echo "<input type='submit' value='Update Profil'>";
                     echo "</form>";
                     echo "</div>";

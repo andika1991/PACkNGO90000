@@ -305,20 +305,20 @@ nav ul li a.login {
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php">Home</a></li>
+                <li><a href="index.php#kereta-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="faq.php">FAQ</a></li>
 
                 <?php
-                // Periksa apakah pengguna sudah login
+           
                 if (isset($_SESSION['username_pengguna'])) {
-                    // Jika sudah login, tampilkan nama pengguna dan opsi logout
+                
                     $username = $_SESSION['username_pengguna'];
                     echo "<li><a href='akun.php' class='login'><img src='img/Group.jpg' alt='User Icon'> $username</a></li>";
     
                 } else {
-                    // Jika belum login, tampilkan opsi login
+                
                     echo "<li><a href='loginuser.html' class='login'><i class='fas fa-lock'></i> Login</a></li>";
                 }
                 ?>
@@ -332,29 +332,29 @@ nav ul li a.login {
             </div>
 <main>
 <?php
-// Include file koneksi.php untuk menghubungkan ke database
+
 include 'koneksi.php';
 
-// Periksa apakah parameter id tiket ada dalam URL
+
 if(isset($_GET['id'])) {
-    // Ambil ID tiket dari URL
+
     $id_tiket = $_GET['id'];
 
-    // Buat query untuk mengambil detail tiket berdasarkan ID
+   
     $query = "SELECT j.*, v.nama_vendor, v.logo_vendor, v.alamat_vendor
     FROM jadwal_tiket_kereta AS j
     JOIN vendor_kereta AS v ON j.id_vendorkrta = v.id_vendorkrta
     WHERE j.id_jadwaltiketkereta = '$id_tiket'
     ";
     
-    // Eksekusi query
+
     $result = mysqli_query($conn, $query);
 
-    // Periksa apakah query berhasil dieksekusi
+  
     if(mysqli_num_rows($result) > 0) {
-        // Tampilkan detail tiket
+       
         while($row = mysqli_fetch_assoc($result)) {
-            // Tampilkan detail tiket sesuai kebutuhan
+          
        ;
        echo "<div class='StatusTiketTersedia' style='color: #0071CC; font-size: 24px; font-family: Poppins; font-weight: 500; line-height: 21.60px; word-wrap: break-word; margin-left:60px;margin-top:20px;'>Status Tiket: " . $row['status_jadwal'] . "</div>";
        echo "<div class='Maskapai' style='width: 99px; height: 22px; color: black; font-size: 18px; font-family: Poppins; font-weight: 700; line-height: 22px; word-wrap: break-word; margin-left:80px;'><p>Penyedia</p></div>";

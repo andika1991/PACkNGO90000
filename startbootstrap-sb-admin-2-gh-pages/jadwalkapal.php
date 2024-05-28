@@ -72,7 +72,7 @@
             </button>
             
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                <img src="PACKNGO.png" width="30px" height="50px">
                 <div class="sidebar-brand-text mx-3">PACK N GO</div>
             </a>
@@ -82,7 +82,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -90,10 +90,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Userr
-            </div>
 
            <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
@@ -318,6 +314,7 @@
         jtp.id_vendor = vp.id_vendor
     WHERE 
         DATE(jtp.waktu_keberangkatan) = CURDATE();
+        
     ";
         $result = mysqli_query($conn, $query);
 
@@ -374,8 +371,9 @@
 
         $query = "SELECT jadwal_tiket_kapal.id_jadwaltiketkapal, jadwal_tiket_kapal.waktu_keberangkatan, jadwal_tiket_kapal.waktu_kedatangan, jadwal_tiket_kapal.pelabuhan_keberangkatan, jadwal_tiket_kapal.deskripsi_jadwal, jadwal_tiket_kapal.pelabuhan_kedatangan, jadwal_tiket_kapal.harga, jadwal_tiket_kapal.kelas, jadwal_tiket_kapal.kapasitas_stok_tiket, jadwal_tiket_kapal.status_jadwal, vendor_kapal.nama_vendor 
         FROM jadwal_tiket_kapal 
-        JOIN vendor_kapal ON jadwal_tiket_kapal.id_vendor = vendor_kapal.id_vendor;
-        ";
+        JOIN vendor_kapal ON jadwal_tiket_kapal.id_vendor = vendor_kapal.id_vendor
+        ORDER BY jadwal_tiket_kapal.waktu_keberangkatan DESC;";
+
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {

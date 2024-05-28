@@ -72,7 +72,7 @@
             </button>
             
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                <img src="PACKNGO.png" width="30px" height="50px">
                 <div class="sidebar-brand-text mx-3">PACK N GO</div>
             </a>
@@ -82,7 +82,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -90,10 +90,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Userr
-            </div>
+
 
            <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
@@ -390,7 +387,7 @@
                 echo "<td>" . $row["nomor_penerbangan"] . "</td>";
                 echo "<td>" . $row["nama_vendor"] . "</td>";
                 echo "<td>
-                <a href='detailjadwalpswt.php?id=" . $row["id_jadwaltiketpesawat"] . "' class='btn btn-primary btn-sm edit-btn'>Detail</a>
+               
                 <a href='editjadwalpswt.php?id=" . $row["id_jadwaltiketpesawat"] . "' class='btn btn-primary btn-sm edit-btn'>Edit</a>
                 <button class='btn btn-danger btn-sm delete-btn' data-id_jadwaltiketpesawat='" . $row["id_jadwaltiketpesawat"] . "' data-toggle='modal' data-target='#deleteModal'>Delete</button>
 

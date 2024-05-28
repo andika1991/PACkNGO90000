@@ -72,7 +72,7 @@
             </button>
             
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                <img src="PACKNGO.png" width="30px" height="50px">
                 <div class="sidebar-brand-text mx-3">PACK N GO</div>
             </a>
@@ -82,18 +82,13 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Userr
-            </div>
 
            <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
@@ -377,7 +372,7 @@
         <?php
         include 'koneksi.php';
 
-        $query = "SELECT id_jadwaltiketkereta,waktu_keberangkatan,waktu_kedatangan,stasiun_keberangkatan,deskripsi_jadwal,stasiun_kedatangan,harga,kelas ,kapasitas_stok_tiket,status_jadwal,vendor_kereta.nama_vendor FROM `jadwal_tiket_kereta`,vendor_kereta;";
+        $query = "SELECT id_jadwaltiketkereta,waktu_keberangkatan,waktu_kedatangan,stasiun_keberangkatan,deskripsi_jadwal,stasiun_kedatangan,harga,kelas ,kapasitas_stok_tiket,status_jadwal,vendor_kereta.nama_vendor FROM `jadwal_tiket_kereta`,vendor_kereta ORDER BY waktu_keberangkatan DESC; ";
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) > 0) {

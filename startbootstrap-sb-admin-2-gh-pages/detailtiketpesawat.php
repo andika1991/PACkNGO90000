@@ -90,7 +90,10 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                
+            </div>
 
            <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
@@ -180,7 +183,7 @@
     </div>
 </li>
 </ul>
-
+        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -244,7 +247,6 @@
 
                     </ul>
 
-
                 </nav>
                 <!-- End of Topbar -->
 
@@ -253,248 +255,128 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Manajemen Pengguna</h1>
-                        
-
+                        <h1 class="h3 mb-0 text-gray-800">Jadwal Tiket Bus</h1>
+                     
                     </div>
 
-              
-                
+                  
 
-                    <!-- Main Content -->
-             <!-- Table Pengguna -->
-   <!-- Tambah Data Button -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">
-    Tambah Data
-</button>
+                    <!DOCTYPE html>
+<html lang="en">
 
-<!-- Modal -->
-<div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahModalLabel">Tambah Data Pengguna</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Form Tambah Data -->
-                <form method="POST" action="tambahpengguna.php">
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-        <table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        include 'koneksi.php';
-
-        $query = "SELECT * FROM pengguna";
-        $result = mysqli_query($conn, $query);
-
-        if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-                echo "<tr>";
-                echo "<td>" . $row["id_pengguna"] . "</td>";
-                echo "<td>" . $row["username_pengguna"] . "</td>";
-                echo "<td>" . $row["email"] . "</td>";
-                echo "<td>********</td>";
-                echo "<td>
-                        <button class='btn btn-primary btn-sm edit-btn' data-id='" . $row["id_pengguna"] . "' data-username='" . $row["username_pengguna"] . "' data-email='" . $row["email"] . "' data-toggle='modal' data-target='#editModal'>Edit</button>
-                        <button class='btn btn-danger btn-sm delete-btn' data-id='" . $row["id_pengguna"] . "' data-toggle='modal' data-target='#deleteModal'>Delete</button>
-                      </td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='5'>0 results</td></tr>";
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail pesanan Tiket Bus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin-bottom: 20px;
         }
-        ?>
-    </tbody>
-</table>
 
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    </div>
+        .card-text {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
 
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Data Pengguna</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <input type="hidden" id="editId" name="edit-id">
-                        <div class="form-group">
-                            <label for="editUsername">Username:</label>
-                            <input type="text" class="form-control" id="editUsername" name="edit-username" >
-                        </div>
-                        <div class="form-group">
-                            <label for="editEmail">Email:</label>
-                            <input type="email" class="form-control" id="editEmail" name="edit-email" >
-                        </div>
-                        <div class="form-group">
-                            <label for="password">password:</label>
-                            <input type="password" class="form-control" id="password" name="password" >
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+    <h3 class="text-center mt-4 mb-5">Detail Pesanan Tiket Kereta</h3>
+    <div class="container">
+        <div class="row">
+            <?php
+            include 'koneksi.php';
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        // Fill modal fields with user data when the edit button is clicked
-        $('.edit-btn').click(function() {
-            var id = $(this).data('id');
-            var username = $(this).data('username');
-            var email = $(this).data('email');
-            var password = $(this).data('password');
-            $('#editId').val(id);
-            $('#editUsername').val(username);
-            $('#editEmail').val(email);
-            $('#password').val(password);
-        });
-
-        // Handle form submission for editing user data
-        $('#editForm').submit(function(e) {
-            e.preventDefault();
-            var formData = $(this).serialize();
-            $.ajax({
-                type: "POST",
-                url: "proses_edit_pengguna.php",
-                data: formData,
-                success: function(response) {
-                    // Close modal and reload page
-                    $('#editModal').modal('hide');
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
-
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete this user?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a id="deleteUserBtn" class="btn btn-danger">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // JavaScript to set href attribute of delete button
-    $(document).ready(function() {
-        $('.delete-btn').click(function() {
-            var userId = $(this).data('id');
-            $('#deleteUserBtn').attr('href', 'deletepengguna.php?id=' + userId);
-        });
-    });
-</script>
-
-
-                 
-
+            // Periksa apakah parameter 'id' ada dalam URL
+            if(isset($_GET['id'])) {
+                // Tangkap nilai 'id' dari URL
+                $id_pesanantiketpesawat = $_GET['id'];
+                
+                // Buat kueri SQL untuk mendapatkan data tiket bus berdasarkan ID
+                $query = "SELECT 
+                            pb.invoice_id, 
+                            jtb.bandara_keberangkatan, 
+                            jtb.bandara_kedatangan, 
+                            jtb.kelas, 
+                            jtb.nomor_penerbangan,
+                            vb.nama_vendor, 
+                            mp.nama_metode, 
+                            pb.bukti_bayar, 
+                            pb.status_pembayaran, 
+                            jtb.harga, 
+                            uo.username_pengguna, 
+                            pb.TIMEORDER,
+                            dpb.jenis_kelamin,
+                            dpb.nama_lengkap,
+                            dpb.no_hp,
+                            dpb.email,
+                            dpb.nik
                          
-             
+                        FROM 
+                            pesanantiketpesawat pb 
+                        JOIN 
+                            jadwal_tiket_pesawat jtb ON pb.id_jadwaltiketpesawat = jtb.id_jadwaltiketpesawat
+                        JOIN 
+                            vendor_pesawat vb ON jtb.id_vendorpesawat = vb.id_vendorpesawat
+                        JOIN 
+                            metodepembayaran mp ON pb.id_metode = mp.id_metode 
+                        JOIN 
+                            pengguna uo ON pb.id_pengguna = uo.id_pengguna
+                        JOIN
+                            datapenumpangpesawat dpb ON pb.id_datapenumpang = dpb.id_datapenumpang
+                        WHERE
+                            pb.id_pesanantiket = $id_pesanantiketpesawat";
+                
+                // Eksekusi kueri SQL
+                $result = mysqli_query($conn, $query);
 
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Pack N Go 2024</span>
+                // Periksa apakah ada hasil dari kueri
+                if (mysqli_num_rows($result) > 0) {
+                    // Ambil satu baris data dari hasil kueri
+                    $row = mysqli_fetch_assoc($result);
+            ?>
+                       <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Invoice ID: <?php echo $row["invoice_id"]; ?></h5>
+                                <p class="card-text"><strong>Terminal Keberangkatan:</strong> <?php echo $row["bandara_keberangkatan"]; ?></p>
+                                <p class="card-text"><strong>Terminal Kedatangan:</strong> <?php echo $row["bandara_kedatangan"]; ?></p>
+                                <p class="card-text"><strong>Nama Vendor:</strong> <?php echo $row["nama_vendor"]; ?></p>
+                                <p class="card-text"><strong>Nama Metode:</strong> <?php echo $row["nama_metode"]; ?></p>
+                                <p class="card-text"><strong>Bukti Bayar:</strong> <a href="<?php echo $row["bukti_bayar"]; ?>" target="_blank">Lihat Bukti Bayar</a></p>
+                                <p class="card-text"><strong>Status Pembayaran:</strong> <?php echo $row["status_pembayaran"]; ?></p>
+                                <p class="card-text"><strong>Harga:</strong> <?php echo $row["harga"]; ?></p>
+                                <p class="card-text"><strong>Username Pengguna:</strong> <?php echo $row["username_pengguna"]; ?></p>
+                                <p class="card-text"><strong>Waktu Pesanan:</strong> <?php echo $row["TIMEORDER"]; ?></p>
+                                <p class="card-text"><strong>NIK:</strong> <?php echo $row["nik"]; ?></p>
+                                <p class="card-text"><strong>Jenis Kelamin:</strong> <?php echo $row["jenis_kelamin"]; ?></p>
+                                <p class="card-text"><strong>Nama Lengkap:</strong> <?php echo $row["nama_lengkap"]; ?></p>
+                                <p class="card-text"><strong>No. HP:</strong> <?php echo $row["no_hp"]; ?></p>
+                                <p class="card-text"><strong>Email:</strong> <?php echo $row["email"]; ?></p>
+                              
+                                <p class="card-text"><strong>kelas:</strong> <?php echo $row["kelas"]; ?></p>
+                                <p class="card-text"><strong>kelas:</strong> <?php echo $row["nomor_penerbangan"]; ?></p>
+         
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
+            <?php
+                }
+            } else {
+                echo "<p class='col'>Tidak ada pesanan tiket bus.</p>";
+            }
+            ?>
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+</body>
+<script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -506,9 +388,8 @@
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const sidebarToggler = document.querySelector(".sidebar-toggler");
@@ -519,6 +400,4 @@
             });
         });
     </script>
-</body>
-
 </html>

@@ -439,11 +439,7 @@ main{
             background-color: #007bff; 
         }
 
-        body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-}
+   
 
 .containerfa {
     width: 500px;
@@ -453,10 +449,6 @@ main{
     padding: 20px;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
 
 .input-group {
     margin-bottom: 15px;
@@ -510,7 +502,7 @@ button:hover {
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php#pesawat-form">Home</a></li>
+                <li><a href="index.php#pesawat-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
                 <li><a href="faq.html">FAQ</a></li>
@@ -533,8 +525,8 @@ button:hover {
 
 <main>
 
-<h2>FeedBack Telah Terkirim</h2>
-<h2>Terimakasih atas Feedback yang telah dikirim</h2>
+<h2 style="text-align:center; padding:20px;">FeedBack Telah Terkirim</h2>
+<h2 style="text-align:center;">Terimakasih atas Feedback yang telah dikirim</h2>
 </main>
 
    
@@ -682,7 +674,7 @@ button:hover {
         <div class="footer-copyright mt-2 pt-2">
 
        
-            <p class="copyright-text text-1">Copyright <i class="far fa-copyright"></i> 2024 <a href="https://faiztravel.co.id/tentang-kami">PACK N GO</a> All Rights Reserved.</p><span class="copyright-text text-1"><em>~ powered by </em>PACK N GO ~</span>	</div>
+            <p class="copyright-text text-1">Copyright <i class="far fa-copyright"></i> 2024 <a href="tantangkami.php"><em>~ powered by </em>PACK N GO ~</span>	</div>
     </div>
 </div>
 </footer>

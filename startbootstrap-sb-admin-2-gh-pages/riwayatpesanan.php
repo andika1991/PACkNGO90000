@@ -335,7 +335,7 @@ a.batalkan:hover {
         </div>
         <nav>
             <ul>
-                <li><a href="homeakun.php#pesawat-form">Home</a></li>
+                <li><a href="index.php#pesawat-form">Home</a></li>
                 <li><a href="kirimfeedback.php">Kirim Feedback</a></li>
                 <li><a href="tentangkami.php">Tentang Kami</a></li>
                 <li><a href="faq.html">FAQ</a></li>
@@ -407,7 +407,23 @@ while ($row = mysqli_fetch_assoc($result_pesawat)):
             </td>
         </tr>
         <?php
-    } else {
+    }   
+    if ($row['status_pembayaran'] == "Refunded" || $row['status_pembayaran'] == "Belum Lunas") {
+        ?>
+        <tr>
+        <td>Tiket Pesawat</td>
+                        <td><?php echo $row['invoice_id']; ?></td>
+                        <td><?php echo $row['bandara_keberangkatan']; ?></td>
+                        <td><?php echo $row['bandara_kedatangan']; ?></td>
+                        <td><?php echo $row['TIMEORDER']; ?></td>
+                        <td><?php echo $row['status_pembayaran']; ?></td>
+            <td>
+                
+            </td>
+        </tr>
+        <?php
+    }
+    else {
         ?>
         <tr>
         <td>Tiket Pesawat</td>
@@ -418,7 +434,7 @@ while ($row = mysqli_fetch_assoc($result_pesawat)):
                         <td><?php echo $row['status_pembayaran']; ?></td>
             <td>
            
-            
+            <a class="detail" href="tiketpesawatterbit.php?invoice_id=<?= $row['invoice_id'] ?>">Unduh-E Tiket</a>
             </td>
         </tr>
         <?php
@@ -448,7 +464,8 @@ endwhile;
                         </td>
                     </tr>
                     <?php
-                } else {
+                } 
+                if ($row['status_pembayaran'] == "Refunded" || $row['status_pembayaran'] == "Belum Lunas") {
                     ?>
                     <tr>
                         <td>Tiket Kapal</td>
@@ -457,7 +474,25 @@ endwhile;
                         <td><?= $row['pelabuhan_kedatangan'] ?></td>
                         <td><?= $row['TIMEORDER'] ?></td>
                         <td><?= $row['status_pembayaran'] ?></td>
-                        <td></td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <?php
+                }
+                
+                else {
+                    ?>
+                    <tr>
+                        <td>Tiket Kapal</td>
+                        <td><?= $row['invoice_id'] ?></td>
+                        <td><?= $row['pelabuhan_keberangkatan'] ?></td>
+                        <td><?= $row['pelabuhan_kedatangan'] ?></td>
+                        <td><?= $row['TIMEORDER'] ?></td>
+                        <td><?= $row['status_pembayaran'] ?></td>
+                        <td>
+                        <a class="detail" href="tiketpesawatterbit.php?invoice_id=<?= $row['invoice_id'] ?>">Unduh-E Tiket</a>
+                        </td>
                     </tr>
                     <?php
                 }
@@ -529,6 +564,21 @@ while ($row = mysqli_fetch_assoc($result_bus)):
             </td>
         </tr>
         <?php
+    }
+    if ($row['status_pembayaran'] == "Refunded" || $row['status_pembayaran'] == "Belum Lunas") {
+        ?>
+        <tr>
+        <td>Tiket Bus</td>
+                        <td><?php echo $row['invoice_id']; ?></td>
+                        <td><?php echo $row['terminal_keberangkatan']; ?></td>
+                        <td><?php echo $row['terminal_kedatangan']; ?></td>
+                        <td><?php echo $row['TIMEORDER']; ?></td>
+                        <td><?php echo $row['status_pembayaran']; ?></td>
+            <td>
+                
+            </td>
+        </tr>
+        <?php
     } else {
         ?>
         <tr>
@@ -539,7 +589,7 @@ while ($row = mysqli_fetch_assoc($result_bus)):
                         <td><?php echo $row['TIMEORDER']; ?></td>
                         <td><?php echo $row['status_pembayaran']; ?></td>
             <td>
-              
+            <a class="detail" href="tiketbusterbit.php?invoice_id=<?= $row['invoice_id'] ?>">Unduh-E Tiket</a>
             
             </td>
         </tr>
@@ -573,7 +623,23 @@ while ($row = mysqli_fetch_assoc($result_kereta)):
             </td>
         </tr>
         <?php
-    } else {
+    } 
+    if ($row['status_pembayaran'] == "Refunded" || $row['status_pembayaran'] == "Belum Lunas") {
+        ?>
+        <tr>
+        <td>Tiket Kereta</td>
+                        <td><?php echo $row['invoice_id']; ?></td>
+                        <td><?php echo $row['stasiun_keberangkatan']; ?></td>
+                        <td><?php echo $row['stasiun_kedatangan']; ?></td>
+                        <td><?php echo $row['TIMEORDER']; ?></td>
+                        <td><?php echo $row['status_pembayaran']; ?></td>
+            <td>
+                
+            </td>
+        </tr>
+        <?php
+    }
+    else {
         ?>
         <tr>
         <td>Tiket Kereta</td>
@@ -584,7 +650,7 @@ while ($row = mysqli_fetch_assoc($result_kereta)):
                         <td><?php echo $row['status_pembayaran']; ?></td>
             <td>
             
-            
+            <a class="detail" href="tiketkeretaterbit.php?id=<?= $row['invoice_id'] ?>">Unduh E-Tiket</a>
             </td>
         </tr>
         <?php
